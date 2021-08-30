@@ -1,0 +1,78 @@
+Table enderecos {
+  id int [pk]
+  pais varchar
+  cep varchar
+  rua varchar
+  numero int
+  timestamp date
+  
+}
+Table usuarios {
+  id int [pk]
+  nome varchar
+  email varchar
+  senha varchar
+  sexo varchar
+  dataNascimento date
+}
+
+
+Table instituicoes {
+  id int [pk]
+  nome  varchar
+  enderecoId int
+}
+Ref: instituicoes.enderecoId > enderecos.id
+
+Table abrigos {
+  id int [pk]
+  nome varchar
+  capacidadeDePessoas int
+  enderecoId int
+}
+Ref: abrigos.enderecoId > enderecos.id
+
+
+Table vulnerabilidades {
+  id int [pk]
+  name varchar
+  descricao varchar
+}
+
+
+Table abrigos_vulnerabilidades {
+  abrigoId int [pk]
+  vulnerabilidadeId int [pk]
+}
+Ref: abrigos_vulnerabilidades.abrigoId > abrigos.id
+Ref: abrigos_vulnerabilidades.vulnerabilidadeId > vulnerabilities.id
+
+
+Table estadias {
+  id int [pk]
+  dataInicio date
+  dataEstimadaSaida date
+  usuarioId int
+  abrigoId int
+}
+Ref: estadias.usuarioId > usuarios.id
+Ref: estadias.abrigoId > abrigos.id
+
+Table evento {
+    id int [pk]
+    estadiaId id
+}
+Ref: evento.estadiaId > estadias.id
+
+
+
+
+
+
+
+
+
+
+
+
+
