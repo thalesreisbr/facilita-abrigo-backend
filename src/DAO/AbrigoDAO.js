@@ -3,8 +3,8 @@
 const status = require("http-status");
 const { Op } = require("sequelize");
 const database = require("../config/database");
-const entity = require("../models/Abrigos");
-const Quartos = require('../models/Quartos')
+const entity = require("../models/Abrigo");
+const Quarto = require('../models/Quarto')
 
 //Busca por uma instancia da entidade.
 exports.buscarUm = async (id) => {
@@ -12,7 +12,7 @@ exports.buscarUm = async (id) => {
 
 		const instancia = await entity.findByPk(id,{
 			include: {
-				model: Quartos,
+				model: Quarto,
 				as:"quartos"
 			}
 		});

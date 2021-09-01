@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Instituicao', {
+    return queryInterface.createTable('Usuario', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -13,21 +13,47 @@ module.exports = {
         allowNull: true,
         type: Sequelize.STRING,
       },
-      cep: {
+      email: {
         allowNull: true,
         type: Sequelize.STRING,
       },
-      bairro: {
+      senha: {
         allowNull: true,
         type: Sequelize.STRING,
       },
-      rua: {
+      cpf: {
         allowNull: true,
         type: Sequelize.STRING,
       },
-      numero: {
+      sexo: {
         allowNull: true,
+        type: Sequelize.STRING,
+      },
+      data_de_nascimento: {
+        allowNull: true,
+        type: Sequelize.DATE,
+      },
+      token: {
+        allowNull: true,
+        type: Sequelize.STRING,
+      },
+      token_recuperar_senha: {
+        allowNull: true,
+        type: Sequelize.STRING,
+      },
+      abrigo_id: {
         type: Sequelize.INTEGER,
+        allowNull: true,
+        references: { model: 'Abrigo', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      instituicao_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: { model: 'Instituicao', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       created_at: {
         allowNull: true,
@@ -48,7 +74,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Instituicao');
+    return queryInterface.dropTable('Usuario');
 
   }
 };

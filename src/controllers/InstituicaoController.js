@@ -1,6 +1,7 @@
+
 const status = require("http-status");
 const GenericServices = require('../services/GenericService');
-const entity = require("../models/Quartos");
+const entity = require("../models/Instituicao");
 
 //Adiciona uma nova instancia da entidade.
 exports.create = async (request, response, next) => {

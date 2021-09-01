@@ -6,31 +6,12 @@ const {getPrivateKey,getRecoveryKey,getRefreshKey} = require("../config/keys");
 const DAO = require('../DAO/UsuarioDAO');
 const mailer= require('../helpers/Mailer');
 const {cpf} = require('cpf-cnpj-validator');
+const usuarioService = require('../services/UsuarioService');
 
 //Adiciona uma nova instancia da entidade.
-exports.cadastrar = async (request, response, next) => {
-	const credenciais = request.body;
-    console.log(cpf.generate());
-    if(!cpf.isValid(credenciais.cpf)){
-        return response.status(status.BAD_REQUEST).send({msg: 'Cpf inválido.'});
-    }
-
-
-    //Verifica se os dados de cadastro estão completos
-	if (!credenciais || !credenciais.nome || !credenciais.email || !credenciais.senha || !credenciais.cpf || !credenciais.sexo || !credenciais.data_de_nascimento)
-        return response.status(status.BAD_REQUEST).send({msg: 'Dados insuficientes.'});
-
-    const salt = await bcrypt.genSalt();
-    credenciais.senha = await bcrypt.hash(credenciais.senha, salt);
-
-	try {
-
-		const instancia = await DAO.cadastrar(credenciais);
-		return (instancia ? response.status(status.CREATED).send({usuario_id:instancia.id}) : response.status(status.BAD_REQUEST).send());
-
-	} catch (error) { 
-		next(error);  
-	}
+exports.create = async (request, response, next) => {
+	response =  usuarioService.create(request, response, next);
+    return response;
 };
 
 //Realiza o autencicação do usuário, fornecendo-lhe o token caso seja um usuário autêntico.

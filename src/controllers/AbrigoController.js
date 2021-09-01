@@ -1,7 +1,8 @@
 
 const status = require("http-status");
 const GenericServices = require('../services/GenericService');
-const entity = require("../models/Instituicoes");
+const AbrigoServices = require('../services/AbrigoService');
+const entity = require("../models/Abrigo");
 
 //Adiciona uma nova instancia da entidade.
 exports.create = async (request, response, next) => {
@@ -19,7 +20,7 @@ exports.create = async (request, response, next) => {
 exports.findByPk = async (request, response, next) => {
 	try {
 
-		const instancia = await GenericServices.findByPk(entity,request.params.id)
+		const instancia = await AbrigoServices.findByPk(request.params.id)
 		return (instancia ? response.status(status.OK).send(instancia) : response.status(status.NOT_FOUND).send());
 
 	} catch (error) { 
