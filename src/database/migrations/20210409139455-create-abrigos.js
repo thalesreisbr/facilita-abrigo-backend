@@ -18,7 +18,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       aprovado :{
-        allowNull: true,
+        defaultValue: false,
         type: Sequelize.BOOLEAN,
       },
       cep: {

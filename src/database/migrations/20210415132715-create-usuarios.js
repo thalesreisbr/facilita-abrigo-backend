@@ -41,6 +41,14 @@ module.exports = {
         allowNull: true,
         type: Sequelize.STRING,
       },
+      role: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        defaultValue: 0
+        // references: { model: 'Abrigo', key: 'id' },
+        // onUpdate: 'CASCADE',
+        // onDelete: 'CASCADE',
+      },
       abrigo_id: {
         type: Sequelize.INTEGER,
         allowNull: true,

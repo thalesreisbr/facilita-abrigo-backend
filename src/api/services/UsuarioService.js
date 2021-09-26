@@ -8,8 +8,9 @@ const GenericDAO = require('../DAO/GenericDAO');
 const UsuarioDAO = require('../DAO/UsuarioDAO');
 const {getPrivateKey,getRefreshKey,getRecoveryKey} = require('../../config/keys');
 const entity = require('../models/Usuario')
+const Role = require('../../helpers/enums/Role');
 
-exports.create = async (request, response, next) => {  
+exports.create = async (request, response) => {  
     const credenciais = request.body;
     if(!cpf.isValid(credenciais.cpf)){
         throw {status:status.BAD_REQUEST, msg:"Cpf inválido."};
@@ -23,6 +24,8 @@ exports.create = async (request, response, next) => {
     const salt = await bcrypt.genSalt();
     credenciais.senha = await bcrypt.hash(credenciais.senha, salt);
 
+    credenciais.role = Role.NOTHING;
+
 	try {
 
 		const instancia = await GenericDAO.create(entity,credenciais);
@@ -33,7 +36,7 @@ exports.create = async (request, response, next) => {
 	}
     
 };
-exports.login = async (request, response, next) => {  
+exports.login = async (request, response) => {  
     const { email, senha } = request.body;
     let  refresh_token  = request.refresh_token;
     let credenciais;
@@ -59,7 +62,7 @@ exports.login = async (request, response, next) => {
         //Insere o id do operador na carga do token
 		const payload = { 
             usuario_id: credenciais.id,
-            role_id:false,
+            role:credenciais.role,
         };
 
         //Busca a chave para gerar o token

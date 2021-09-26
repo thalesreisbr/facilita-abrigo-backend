@@ -57,6 +57,19 @@ exports.findAll = async (request, response, next) => {
 };
 
 //Atualiza uma instancia da entidade.
+exports.aprovar = async (request, response, next) => {
+	try {
+			
+		const result = await AbrigoServices.aprovar(request.body.id)
+
+		return (result ? response.status(status.OK).send( {updated_id:result[0]} ) : response.status(status.NOT_FOUND).send());
+		
+	} catch (error) {
+		next(error);
+	}
+};
+
+//Atualiza uma instancia da entidade.
 exports.update = async (request, response, next) => {
 	try {
 

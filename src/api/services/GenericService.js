@@ -21,9 +21,7 @@ exports.findByPk = async (model, id) => {
 };
 exports.findAll = async (model) => {
     return GenericDAO.findAll(model);
-    
 };
-
 exports.delete = async (model) => {
     return GenericDAO.delete(model, id);
 }

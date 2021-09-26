@@ -17,7 +17,7 @@ exports.cadastrar = async (credenciais) => {
 exports.buscarCredenciais = async (email) => {
 	try {
 
-		const instancia = await Usuario.findOne({attributes: ['id', 'senha'], where: { email }});
+		const instancia = await Usuario.findOne({attributes: ['id', 'senha', 'role'], where: { email }});
 		return (instancia ? instancia : null);
 
 	} catch (error) { 

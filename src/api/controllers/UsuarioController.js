@@ -9,7 +9,7 @@ const {cpf} = require('cpf-cnpj-validator');
 const usuarioService = require('../services/UsuarioService');
 
 //Adiciona uma nova instancia da entidade.
-exports.create = async (request, response, next) => {
+exports.create = async (request, response) => {
     try {
         response =  await usuarioService.create(request, response, next);
 

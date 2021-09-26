@@ -1,7 +1,9 @@
 
 const status = require("http-status");
 const GenericServices = require('../services/GenericService');
+const InstituicaoService = require("../services/InstituicaoService");
 const entity = require("../models/Instituicao");
+
 
 //Adiciona uma nova instancia da entidade.
 exports.create = async (request, response, next) => {
@@ -36,7 +38,7 @@ exports.findAllWithPagination = async (request, response, next) => {
 		
 		return response.status(status.OK).send(instancias);
 	} catch (error) {
-		next(error);
+		throw  error;
 	}
 };
 
@@ -48,14 +50,26 @@ exports.findAll = async (request, response, next) => {
 		return response.status(status.OK).send(instancias);
 
 	} catch (error) {
-		next(error);
+		throw  error;
 	}
 };
+
+//Busca todas as instancias da entidade sem paginação.
+exports.findInstituicoesNotAprove = async (request, response, next) => {
+	try {
+
+		const instancias = await InstituicaoService.findInstituicoesNotAprove();
+		return response.status(status.OK).send(instancias);
+
+	} catch (error) {
+		throw error;
+	}
+};
+
 
 //Atualiza uma instancia da entidade.
 exports.update = async (request, response, next) => {
 	try {
-
 		const result = await GenericServices.update(entity, request.body,request.params.id)
 		return (result ? response.status(status.OK).send( {updated_id:result[0]} ) : response.status(status.NOT_FOUND).send());
 		
@@ -63,6 +77,20 @@ exports.update = async (request, response, next) => {
 		next(error);
 	}
 };
+
+//Atualiza uma instancia da entidade.
+exports.aprovar = async (request, response, next) => {
+	try {
+			
+		const result = await InstituicaoService.aprovar(request.body.id)
+
+		return (result ? response.status(status.OK).send( {updated_id:result[0]} ) : response.status(status.NOT_FOUND).send());
+		
+	} catch (error) {
+		next(error);
+	}
+};
+
 
 //Exclui uma instancia da entidade.
 exports.delete = async (request, response, next) => {

@@ -1,7 +1,12 @@
 const GenericDAO = require('../DAO/GenericDAO');
-const AbrigosDAO = require('../DAO/AbrigoDAO');
-const Instituicao = require('../models/Instituicao');
-const entity = require("../models/Abrigo");
+const InstituicaoDAO = require('../DAO/InstituicaoDAO');
+const entity = require("../models/Instituicao");
+
+
+exports.findInstituicoesNotAprove = async() =>{
+    return InstituicaoDAO.findInstituicoesNotAprove();
+}
+
 
 exports.create = async (model, object) => {  
     return GenericDAO.create(model,object);
@@ -10,9 +15,9 @@ exports.create = async (model, object) => {
 
 exports.aprovar = async (id) => {  
     try {
-		abrigo = await GenericDAO.findByPk(entity, id);
+		instituicao = await GenericDAO.findByPk(entity, id);
 
-		return await AbrigosDAO.aprovar(id, !abrigo.aprovado);
+		return await InstituicaoDAO.aprovar(id, !instituicao.aprovado)
 		
 	} catch (error) {
 		throw error;
@@ -20,11 +25,11 @@ exports.aprovar = async (id) => {
     
 };
 
+
 exports.update = async (model, object, id) => {
     return GenericDAO.update(model,object,id);
     
 };
-
 exports.delete = async (model, id) => {
     return GenericDAO.destroy(model,id);
     
@@ -34,7 +39,6 @@ exports.findByPk = async (id) => {
     return AbrigosDAO.buscarUm(id);
     
 };
-
 exports.findAll = async (model) => {
     return GenericDAO.findAll(model);
     
