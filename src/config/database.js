@@ -6,11 +6,11 @@ const environment = process.env.NODE_ENV || 'development';
 const config = require('./config.json')[environment];
 const connection = new Sequelize(config);
 
-const Exemplo = require('../models/Exemplo');
-const Instituicao = require('../models/Instituicao');
-const Abrigo = require('../models/Abrigo');
-const Quarto = require('../models/Quarto');
-const Usuario = require('../models/Usuario')
+const Exemplo = require('../api/models/Exemplo');
+const Instituicao = require('../api/models/Instituicao');
+const Abrigo = require('../api/models/Abrigo');
+const Quarto = require('../api/models/Quarto');
+const Usuario = require('../api/models/Usuario')
 
 Exemplo.init(connection);
 Instituicao.init(connection);

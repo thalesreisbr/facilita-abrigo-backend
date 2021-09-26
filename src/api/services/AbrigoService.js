@@ -1,10 +1,19 @@
 const GenericDAO = require('../DAO/GenericDAO');
 const AbrigosDAO = require('../DAO/AbrigoDAO');
 
+
 exports.create = async (model, object) => {  
     return GenericDAO.create(model,object);
     
 };
+
+
+
+exports.create = async (model, object) => {  
+    return GenericDAO.create(model,object);
+    
+};
+
 
 exports.update = async (model, object, id) => {
     return GenericDAO.update(model,object,id);

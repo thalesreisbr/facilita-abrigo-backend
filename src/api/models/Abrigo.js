@@ -6,6 +6,7 @@ class Abrigo extends Model {
     super.init({
         nome: DataTypes.STRING,
         descricao: DataTypes.STRING,
+        aprovado: DataTypes.BOOLEAN,
         cep: DataTypes.STRING,
         bairro: DataTypes.STRING,
         rua: DataTypes.STRING,

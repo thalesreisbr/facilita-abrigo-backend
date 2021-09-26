@@ -2,7 +2,7 @@
 
 const status = require("http-status");
 const { Op } = require("sequelize");
-const database = require("../config/database");
+const database = require("../../config/database");
 const entity = require("../models/Abrigo");
 const Quarto = require('../models/Quarto')
 

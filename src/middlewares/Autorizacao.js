@@ -26,9 +26,8 @@ exports.AUTH = async (request, response, next) => {
 
     try {
         let decoded = JWT.verify(token, privateKey, { algorithms: ['ES256'] });
-        request.administrador_id = decoded.administrador_id;
-        request.is_administrador = decoded.is_administrador;
-        request.perfil_id = decoded.perfil_id;
+        request.usuario_id = decoded.usuario_id;
+        request.role_id = decoded.role_id;
         return next();
     } catch (error) {
         return response.status(status.UNAUTHORIZED).send({ msg: 'Token Invalido!', error });

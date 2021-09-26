@@ -7,6 +7,9 @@ const entity = require("../models/Abrigo");
 //Adiciona uma nova instancia da entidade.
 exports.create = async (request, response, next) => {
 	try {
+		abrigo = request.body;
+		donoAbrigo = request.usuario_id
+		
 
 		const instancia = await GenericServices.create(entity,request.body);
 		return (instancia ? response.status(status.CREATED).send(instancia) : response.status(status.BAD_REQUEST).send());

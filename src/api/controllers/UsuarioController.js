@@ -2,72 +2,32 @@ const status = require("http-status");
 const JWT = require('jsonwebtoken');
 const bcrypt = require("bcryptjs");
 const { default: SignJWT } = require('jose/jwt/sign')
-const {getPrivateKey,getRecoveryKey,getRefreshKey} = require("../config/keys");
+const {getPrivateKey,getRecoveryKey,getRefreshKey} = require("../../config/keys");
 const DAO = require('../DAO/UsuarioDAO');
-const mailer= require('../helpers/Mailer');
+const mailer= require('../../helpers/Mailer');
 const {cpf} = require('cpf-cnpj-validator');
 const usuarioService = require('../services/UsuarioService');
 
 //Adiciona uma nova instancia da entidade.
 exports.create = async (request, response, next) => {
-	response =  usuarioService.create(request, response, next);
-    return response;
+    try {
+        response =  await usuarioService.create(request, response, next);
+
+        return response;
+    } catch (error) {
+        next(error)
+    }
+	
 };
 
 //Realiza o autencicação do usuário, fornecendo-lhe o token caso seja um usuário autêntico.
-exports.autenticar = async (request, response, next) => {
-    const { email, senha } = request.body;
-    let  refresh_token  = request.refresh_token;
-    let credenciais;
-
-	try {
-        if(!refresh_token){
-            //Busca pelas credenciais de um operador e verifica se foi encontrado. 
-            credenciais = await DAO.buscarCredenciais(email);
-            if(!credenciais) return response.status(status.NOT_FOUND).send({ msg: 'Credenciais incorretas.' }); 
-
-            //Compara a senha preenchidas com a senha cadastrada
-            const isValid = await bcrypt.compare(senha, credenciais.senha);
-            if(!isValid) return response.status(status.NOT_FOUND).send({ msg: 'Credenciais incorretas...' });
-        }else{
-            //Busca, usando o refresh_token, pelas credenciais de um operador ativo e verifica se foi encontrado. 
-            credenciais = await DAO.buscarCredenciaisPorRefreshToken(refresh_token);
-            if(!credenciais) return response.status(status.UNAUTHORIZED).send({ msg: 'refresh_token inválido' });
-        }
-        
-
-        //Esta inserido perfil_id =0 porque nao existe perfil para usuario, permissoes estao relacionada mais direta com administradores
-        //Insere o id do operador na carga do token
-		const payload = { 
-            administrador_id: credenciais.id,
-            is_administrador:false,
-            perfil_id:0
-        };
-
-        //Busca a chave para gerar o token
-		const privateKey = await getPrivateKey();
-        const refreshKey = await getRefreshKey();
-
-		const token = await new SignJWT(payload)
-		.setProtectedHeader({alg: 'ES256'})
-		.setExpirationTime('1h')
-		.sign(privateKey);
-
-        refresh_token = await new SignJWT({})
-		.setProtectedHeader({alg: 'ES256'})
-		.setExpirationTime( '1h') //1 hora de validade
-		.sign(refreshKey);
-
-        //Atualiza o refresh_token do operador
-        await DAO.atualizarRefreshToken(credenciais.id, refresh_token);
-
-        //Responde a requisição de autenticação com o token de acesso
-		return response.status(status.ACCEPTED).send({ token, refresh_token });
-
-
-	} catch (error) {
-		next(error);
-	}
+exports.login = async (request, response, next) => {
+    try {
+        await usuarioService.login(request, response, next);
+    } catch (error) {
+        next(error);
+    }
+   
 };
 
 //Busca por uma instancia da entidade.
@@ -84,7 +44,7 @@ exports.buscarUm = async (request, response, next) => {
 		return (instancia ? response.status(status.OK).send(instancia) : response.status(status.NOT_FOUND).send());
 
 	} catch (error) { 
-		next(error);
+		throw error;
 	}
 };
 //Busca por uma instancia da entidade.
@@ -96,7 +56,7 @@ exports.buscarPeloEmail = async (request, response, next) => {
 		return (instancia ? response.status(status.OK).send(instancia) : response.status(status.NOT_FOUND).send());
 
 	} catch (error) { 
-		next(error);
+		throw error;
 	}
 };
 
@@ -109,7 +69,7 @@ exports.buscarTudo = async (request, response, next) => {
 		return response.status(status.OK).send(instancias);
 
 	} catch (error) {
-		next(error);
+		throw error;
 	}
 };
 
@@ -121,7 +81,7 @@ exports.buscarTudoSemPaginacao = async (request, response, next) => {
 		return response.status(status.OK).send(instancias);
 
 	} catch (error) {
-		next(error);
+		throw error;
 	}
 };
 
@@ -149,7 +109,7 @@ exports.atualizar = async (request, response, next) => {
         return (updated_id ? response.status(status.OK).send( updated_id ) : response.status(status.NOT_FOUND).send());
 		
 	} catch (error) {
-		next(error);
+		throw error;
 	}
 };
 
@@ -161,7 +121,7 @@ exports.excluir = async (request, response, next) => {
 		return (deleted_id ? response.status(status.OK).send( deleted_id ) : response.status(status.NOT_FOUND).send());
 		
 	} catch (error) {
-		next(error);
+		throw error;
 	}
 };
 //Apagar apenas alguns campos.
@@ -172,7 +132,7 @@ exports.excluirParcialmente = async (request, response, next) => {
 		return (deleted_id ? response.status(status.OK).send( deleted_id ) : response.status(status.NOT_FOUND).send());
 		
 	} catch (error) {
-		next(error);
+		throw error;
 	}
 };
 
@@ -221,7 +181,7 @@ exports.recuperarSenha =  (request, response, next) => {
             })
             .catch((error) => next(error));
     } catch (error) {
-        response.status(status.BAD_REQUEST).send({ error: 'Erro ao recuperar senha. Por favor, tente novamente.' })
+        throw {status:status.BAD_REQUEST, msg:'Erro ao recuperar senha. Por favor, tente novamente.'};
     }
 }
  

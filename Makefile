@@ -17,7 +17,7 @@ build:
 	docker build -t tfg-backend-img .
 
 runSonar:
-	docker run -d --name sonarqube -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true -p 9000:9000 sonarqube:latest
+	docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
 
 stopSonar:
 	docker stop sonarqube

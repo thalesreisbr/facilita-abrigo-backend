@@ -2,15 +2,15 @@ const express = require("express");
 const routes = express.Router();
 const { AUTH,ADM,REFRESH, RECOVERY } = require('./middlewares/Autorizacao');
 const {UPLOAD} = require('./middlewares/UploadFiles');
-const Exemplo = require("./controllers/ExemploController");
-const Usuario = require('./controllers/UsuarioController');
-const InstituicaoController = require('./controllers/InstituicaoController');
-const Abrigo = require('./controllers/AbrigoController');
-const QuartoController = require('./controllers/QuartoController');
+const Exemplo = require("./api/controllers/ExemploController");
+const Usuario = require('./api/controllers/UsuarioController');
+const InstituicaoController = require('./api/controllers/InstituicaoController');
+const Abrigo = require('./api/controllers/AbrigoController');
+const QuartoController = require('./api/controllers/QuartoController');
 
 
 
-routes.post("/api/instituicoes", InstituicaoController.create);
+routes.post("/api/instituicoes", AUTH, InstituicaoController.create);
 routes.get("/api/instituicoes/:id", InstituicaoController.findByPk);
 routes.get("/api/instituicoes/paginate", InstituicaoController.findAllWithPagination);
 routes.get("/api/instituicoes", InstituicaoController.findAll);
@@ -19,7 +19,7 @@ routes.delete("/api/instituicoes/:id", InstituicaoController.delete);
 
 
 
-routes.post("/api/abrigos", Abrigo.create);
+routes.post("/api/abrigos", AUTH, Abrigo.create);
 routes.get("/api/abrigo/:id", Abrigo.findByPk);
 routes.get("/api/abrigo/paginate", Abrigo.findAllWithPagination);
 routes.get("/api/abrigo", Abrigo.findAll);
@@ -47,7 +47,7 @@ routes.delete("/api/quartos/:id", QuartoController.delete);
 
 
 routes.post("/api/usuario", Usuario.create);
-// routes.post("/api/usuario/login",REFRESH, Usuario.autenticar);
+routes.post("/api/usuario/login",REFRESH, Usuario.login);
 // routes.post("/api/usuario/recuperar_senha", Usuario.recuperarSenha);
 // routes.post("/api/usuario/redefinir_renha",RECOVERY, Usuario.redefinirSenha);
 // routes.get("/api/usuario/all", Usuario.buscarTudoSemPaginacao);
