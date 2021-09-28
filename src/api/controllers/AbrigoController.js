@@ -3,6 +3,7 @@ const status = require("http-status");
 const GenericServices = require('../services/GenericService');
 const AbrigoServices = require('../services/AbrigoService');
 const entity = require("../models/Abrigo");
+const UsuarioServices = require('../services/UsuarioService');
 
 //Adiciona uma nova instancia da entidade.
 exports.create = async (request, response, next) => {
@@ -29,6 +30,18 @@ exports.solicitarMembro = async (request, response, next) => {
 		next(error);  
 	}
 };
+
+exports.findUsuariosNaoAprovadosById = async (request, response, next) => {
+	try {
+
+		const instancia = await AbrigoServices.findUsuariosNaoAprovadosById(request.query.abrigo_id)
+		return (instancia ? response.status(status.OK).send(instancia) : response.status(status.NOT_FOUND).send());
+
+	} catch (error) { 
+		next(error);
+	}
+};
+
 
 //Busca por uma instancia da entidade.
 exports.findByPk = async (request, response, next) => {
@@ -68,10 +81,11 @@ exports.findAll = async (request, response, next) => {
 };
 
 //Atualiza uma instancia da entidade.
-exports.aprovarCriacao = async (request, response, next) => {
+exports.aprovarUsuario = async (request, response, next) => {
 	try {
-			
-		const result = await AbrigoServices.aprovarCriacao(request.body.id)
+		
+		
+		const result = await AbrigoServices.aprovarUsuario(request.usuario_id, request.body.usuario_id)
 
 		return (result ? response.status(status.OK).send( {updated_id:result[0]} ) : response.status(status.NOT_FOUND).send());
 		
@@ -79,6 +93,23 @@ exports.aprovarCriacao = async (request, response, next) => {
 		next(error);
 	}
 };
+
+
+//Atualiza uma instancia da entidade.
+exports.aprovarCriacao = async (request, response, next) => {
+	try {
+		
+		
+		const result = await AbrigoServices.aprovarCriacao(request.body.usuario_id)
+
+		return (result ? response.status(status.OK).send( {updated_id:result[0]} ) 
+		: response.status(status.NOT_FOUND).send());
+		
+	} catch (error) {
+		next(error);
+	}
+};
+
 
 //Atualiza uma instancia da entidade.
 exports.update = async (request, response, next) => {

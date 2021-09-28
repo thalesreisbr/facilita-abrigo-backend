@@ -20,12 +20,13 @@ routes.put("/api/instituicoes/:id", AUTH, InstituicaoController.update);
 routes.delete("/api/instituicoes/:id", AUTH, InstituicaoController.delete);
 
 
-
 routes.post("/api/abrigo", AUTH, Abrigo.create);
-routes.get("/api/abrigo/:id",AUTH, Abrigo.findByPk);
+routes.get("/api/abrigo/usuarioNaoAprovados", AUTH, Abrigo.findUsuariosNaoAprovadosById)
 routes.get("/api/abrigo/paginate", AUTH, Abrigo.findAllWithPagination);
+routes.get("/api/abrigo/:id",AUTH, Abrigo.findUsuariosNaoAprovadosById);
 routes.get("/api/abrigo", AUTH, Abrigo.findAll);
 routes.patch("/api/abrigo/aprovar", AUTH, Abrigo.aprovarCriacao);
+routes.patch("/api/abrigo/aprovarUsuario", AUTH, Abrigo.aprovarUsuario);
 routes.patch("/api/abrigo/solicitar",AUTH, Abrigo.solicitarMembro);
 routes.put("/api/abrigo/:id",AUTH, Abrigo.update);
 routes.delete("/api/abrigo/:id",AUTH, Abrigo.delete);

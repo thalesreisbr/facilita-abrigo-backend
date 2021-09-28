@@ -95,7 +95,7 @@ exports.login = async (request, response) => {
 
 exports.update = async (object, id) => {
     
-    return await GenericDAO.update(Usuario, object,id);
+    return await UsuarioDAO.atualizar(id, object);
     
 };
 
