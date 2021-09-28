@@ -25,7 +25,8 @@ routes.post("/api/abrigo", AUTH, Abrigo.create);
 routes.get("/api/abrigo/:id",AUTH, Abrigo.findByPk);
 routes.get("/api/abrigo/paginate", AUTH, Abrigo.findAllWithPagination);
 routes.get("/api/abrigo", AUTH, Abrigo.findAll);
-routes.patch("/api/abrigo/aprovar", AUTH, Abrigo.aprovar);
+routes.patch("/api/abrigo/aprovar", AUTH, Abrigo.aprovarCriacao);
+routes.patch("/api/abrigo/solicitar",AUTH, Abrigo.solicitarMembro);
 routes.put("/api/abrigo/:id",AUTH, Abrigo.update);
 routes.delete("/api/abrigo/:id",AUTH, Abrigo.delete);
 

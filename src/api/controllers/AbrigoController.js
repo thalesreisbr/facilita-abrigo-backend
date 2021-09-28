@@ -19,6 +19,17 @@ exports.create = async (request, response, next) => {
 	}
 };
 
+//Adiciona uma nova instancia da entidade.
+exports.solicitarMembro = async (request, response, next) => {
+	try {
+		const instancia = await AbrigoServices.solicitarMembro(request.usuario_id, request.body.abrigo_id);
+		console.log(instancia);
+		return (instancia ? response.status(status.OK).send(instancia) : response.status(status.NOT_FOUND).send());
+	} catch (error) { 
+		next(error);  
+	}
+};
+
 //Busca por uma instancia da entidade.
 exports.findByPk = async (request, response, next) => {
 	try {
@@ -48,7 +59,7 @@ exports.findAllWithPagination = async (request, response, next) => {
 exports.findAll = async (request, response, next) => {
 	try {
 
-		const instancias = await GenericServices.findAll(entity);
+		const instancias = await AbrigoServices.findAbrigosAprovados();
 		return response.status(status.OK).send(instancias);
 
 	} catch (error) {
@@ -57,10 +68,10 @@ exports.findAll = async (request, response, next) => {
 };
 
 //Atualiza uma instancia da entidade.
-exports.aprovar = async (request, response, next) => {
+exports.aprovarCriacao = async (request, response, next) => {
 	try {
 			
-		const result = await AbrigoServices.aprovar(request.body.id)
+		const result = await AbrigoServices.aprovarCriacao(request.body.id)
 
 		return (result ? response.status(status.OK).send( {updated_id:result[0]} ) : response.status(status.NOT_FOUND).send());
 		

@@ -7,7 +7,7 @@ const entity = require("../models/Abrigo");
 const Quarto = require('../models/Quarto')
 
 //Busca por uma instancia da entidade.
-exports.buscarUm = async (id) => {
+exports.findByPk = async (id) => {
 	try {
 
 		const instancia = await entity.findByPk(id,{
@@ -23,6 +23,29 @@ exports.buscarUm = async (id) => {
 		throw error;
 	}
 };
+
+exports.findAbrigosNaoAprovados = async (id) => {
+	try {
+        return await entity.findAll({
+            where: {"aprovado": false}
+        })
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
+};
+exports.findAbrigosAprovados = async (id) => {
+	try {
+        return await entity.findAll({
+            where: {"aprovado": true}
+        })
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
+};
+
+
 exports.aprovar = async (id, valor) => {
 	try{
 		entity.update({"aprovado":valor}, {

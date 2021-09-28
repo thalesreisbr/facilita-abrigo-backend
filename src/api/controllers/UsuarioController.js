@@ -9,7 +9,7 @@ const {cpf} = require('cpf-cnpj-validator');
 const usuarioService = require('../services/UsuarioService');
 
 //Adiciona uma nova instancia da entidade.
-exports.create = async (request, response) => {
+exports.create = async (request, response, next) => {
     try {
         response =  await usuarioService.create(request, response, next);
 
@@ -40,7 +40,7 @@ exports.buscarUm = async (request, response, next) => {
 
 	try {
 
-		const instancia = await DAO.buscarUm(request.params.id)
+		const instancia = await DAO.findByPk(request.params.id)
 		return (instancia ? response.status(status.OK).send(instancia) : response.status(status.NOT_FOUND).send());
 
 	} catch (error) { 

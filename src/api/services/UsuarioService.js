@@ -9,6 +9,7 @@ const UsuarioDAO = require('../DAO/UsuarioDAO');
 const {getPrivateKey,getRefreshKey,getRecoveryKey} = require('../../config/keys');
 const entity = require('../models/Usuario')
 const Role = require('../../helpers/enums/Role');
+const Usuario = require("../models/Usuario");
 
 exports.create = async (request, response) => {  
     const credenciais = request.body;
@@ -92,18 +93,24 @@ exports.login = async (request, response) => {
     
 };
 
-exports.update = async (model, object, id) => {
+exports.update = async (object, id) => {
     
-    return GenericDAO.update(model,object,id);
-    
-};
-exports.delete = async (model, id) => {
-    return GenericDAO.destroy(model,id);
+    return await GenericDAO.update(Usuario, object,id);
     
 };
 
-exports.findByPk = async (model, id) => {
-    return GenericDAO.findByPk(model,id);
+exports.setAbrigo = async (usuario_id, abrigo_id) => {
+    
+    return await UsuarioDAO.setAbrigo(usuario_id, abrigo_id);
+    
+};
+exports.delete = async (id) => {
+    return GenericDAO.destroy(Usuario,id);
+    
+};
+
+exports.findByPk = async (id) => {
+    return UsuarioDAO.findByPk(id);
     
 };
 exports.findAll = async (model) => {
