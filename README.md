@@ -12,7 +12,10 @@ Após este passo crie um banco no postgres com o nome facilita_abrigo
 
 Agora é necessário rodar o comando:
 
+Se estiver no linux:
 npm run db
+Windows:
+npx sequelize-cli db:migrate
 
 Deste modo pode-se executar o projeto
 
