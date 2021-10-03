@@ -35,13 +35,37 @@ exports.findAbrigosNaoAprovados = async (id) => {
 		throw error;
 	}
 };
-exports.findAbrigosAprovados = async (id) => {
+exports.findAbrigosAprovados = async (limit, page, filter) => {
+	limit = parseInt(limit || 0);
+	page = parseInt(page || 0);
+
+	if (!Number.isInteger(limit) || !Number.isInteger(page)) {
+		throw  new Error("Invalid Parameters: " + 404);
+	}
+
+	const ITENS_PER_PAGE = 100;
+	limit = limit > ITENS_PER_PAGE || limit <= 0 ? ITENS_PER_PAGE : limit;
+	const offset = page <= 0 ? 0 : page * limit;
+
 	try {
-        return await entity.findAll({
-            where: {"aprovado": true}
-        })
+		let instancias;
+		if(filter)
+			instancias = await entity.findAll({
+				where: filter,
+				limit: limit,offset: offset });	
+		
+		else{
+			instancias = await entity.findAll({limit: limit,offset: offset });	
+		}
+			
+		const quantityTotalObjects = await entity.count({});
+		
+		const quantityPages = quantityTotalObjects > limit ? parseInt(quantityTotalObjects / limit) : 1;	
+
+		return { quantityTotalObjects, page, quantityPages, limit, offset, instancias };
+
 	} catch (error) {
-		console.log(error);
+    	console.log(error);
 		throw error;
 	}
 };
@@ -65,7 +89,7 @@ exports.findUsuariosNaoAprovadosById = async (id) => {
 
 exports.aprovar = async (id, valor) => {
 	try{
-		entity.update({"aprovado":valor}, {
+		return await entity.update({"aprovado":valor}, {
 			where:{"id":id}
 		})
 	}catch (error) {

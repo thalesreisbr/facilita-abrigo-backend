@@ -57,10 +57,10 @@ exports.findByPk = async (request, response, next) => {
 
 //Busca todas as instancias da entidade.
 exports.findAllWithPagination = async (request, response, next) => {
-	let { limit, page } = request.query;
+	let { limit, page} = request.query;
 
 	try {
-		const instancias = await GenericServices.findAllWithPagination(entity,limit, page);
+		const instancias = await GenericServices.findAllWithPagination(entity,limit, page,);
 		
 		return response.status(status.OK).send(instancias);
 	} catch (error) {
@@ -71,8 +71,13 @@ exports.findAllWithPagination = async (request, response, next) => {
 //Busca todas as instancias da entidade sem paginação.
 exports.findAll = async (request, response, next) => {
 	try {
-
-		const instancias = await AbrigoServices.findAbrigosAprovados();
+		let {limit, page, filter, value} = request.query;
+		if(filter){
+			value = (value == "true"? true: value=="false"?false : value)
+			filter = { filter : value}
+		}
+		
+		const instancias = await AbrigoServices.findAbrigosAprovados(limit, page, filter, value);
 		return response.status(status.OK).send(instancias);
 
 	} catch (error) {
@@ -100,7 +105,7 @@ exports.aprovarCriacao = async (request, response, next) => {
 	try {
 		
 		
-		const result = await AbrigoServices.aprovarCriacao(request.body.usuario_id)
+		const result = await AbrigoServices.aprovarCriacao(request.body.abrigo_id, request.role)
 
 		return (result ? response.status(status.OK).send( {updated_id:result[0]} ) 
 		: response.status(status.NOT_FOUND).send());

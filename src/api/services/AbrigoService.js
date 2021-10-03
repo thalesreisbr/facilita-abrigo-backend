@@ -1,3 +1,4 @@
+const status = require("http-status");
 const GenericDAO = require('../DAO/GenericDAO');
 const AbrigosDAO = require('../DAO/AbrigoDAO');
 const entity = require("../models/Abrigo");
@@ -41,15 +42,20 @@ exports.solicitarMembro = async(usuario_id) =>{
 exports.findAbrigosNaoAprovados = async() =>{
     return AbrigosDAO.findAbrigosNaoAprovados();
 }
-exports.findAbrigosAprovados = async() =>{
-    return AbrigosDAO.findAbrigosAprovados();
+
+exports.findAbrigosAprovados = async(limit, page, filter) =>{
+    return AbrigosDAO.findAbrigosAprovados(limit, page, filter);
 }
 
-exports.aprovarCriacao = async (id) => {  
+exports.aprovarCriacao = async (id, role_id) => {  
     try {
-		abrigo = await GenericDAO.findByPk(entity, id);
+        if(role_id == Role.ADM){
+            abrigo = await GenericDAO.findByPk(entity, id);
 
-		return await AbrigosDAO.aprovar(id, !abrigo.aprovado);
+		    return await AbrigosDAO.aprovar(id, !abrigo.aprovado);
+        }else
+            throw {status:status.NOT_FOUND, msg:"Crendencias Invalidas"};
+		
 		
 	} catch (error) {
 		throw error;
