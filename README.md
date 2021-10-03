@@ -1,22 +1,37 @@
 # facilita-abrigo-backend
 
-É necessário para execução desse projeto ter:
+## Pré requisitos
+- Node
+- Nodemon
+- Postgres
 
-Node
+---
+## Como executar 
+Na pasta raiz do projeto execute o comando: 
+```
+npm i
+```
 
-Postgres
+Crie um banco no postgres com o nome:
+```
+ facilita_abrigo
+```
 
-Tendo estas ferramentas na pasta raiz execute o comando: npm i
+Rode o comando:
 
-Após este passo crie um banco no postgres com o nome facilita_abrigo
-
-Agora é necessário rodar o comando:
-
-Se estiver no linux:
+```
+// Linux
 npm run db
-Windows:
+
+// Windows
 npx sequelize-cli db:migrate
+```
 
-Deste modo pode-se executar o projeto
-
+Por fim, execute o projeto:
+```
 npm start
+
+// ou
+
+nodemon src/index.js
+```
