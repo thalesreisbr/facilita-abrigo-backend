@@ -1,4 +1,6 @@
 const Usuario = require("../models/Usuario")
+const Abrigo = require("../models/Abrigo");
+const Instituicao = require("../models/Instituicao");
 
 //Adiciona uma nova instancia da entidade.
 exports.cadastrar = async (credenciais) => {
@@ -17,7 +19,7 @@ exports.cadastrar = async (credenciais) => {
 exports.buscarCredenciais = async (email) => {
 	try {
 
-		const instancia = await Usuario.findOne({attributes: ['id', 'senha'], where: { email }});
+		const instancia = await Usuario.findOne({attributes: ['id', 'senha', 'role'], where: { email }});
 		return (instancia ? instancia : null);
 
 	} catch (error) { 
@@ -52,10 +54,13 @@ exports.atualizarRefreshToken = async (id, refresh_token) => {
 };
 
 //Busca por uma instancia da entidade.
-exports.buscarUm = async (id) => {
+exports.findByPk = async (id) => {
 	try {
 
-		const instancia = await Usuario.findByPk(id,{attributes: {exclude: ['senha']},include:[enderecos]});
+		const instancia = await Usuario.findByPk(id,{attributes: {exclude: ['senha']},
+		include:[
+			{model: Abrigo, as: "abrigo"},
+			{model: Instituicao, as: "instituicao"}]});
 		return (instancia ? instancia : null);
 
 	} catch (error) { 
@@ -130,6 +135,23 @@ exports.atualizar = async (id, body) => {
 					}
 				});
 			return { updated_id: instancia.id };
+		}else{
+			return null;
+		}
+
+	} catch (error) {
+		throw error;
+	}
+};
+
+exports.setAbrigo = async (usuario_id, abrigo_id) => {
+	try {
+
+		const instancia = await Usuario.findByPk(usuario_id);
+		if(instancia){
+			const updated = await Usuario.update({"abrigo_id":abrigo_id}, { where: { id: instancia.id }});
+				return { updated_id: instancia.id }
+		
 		}else{
 			return null;
 		}

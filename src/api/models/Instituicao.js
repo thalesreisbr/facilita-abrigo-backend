@@ -8,8 +8,8 @@ class Instituicao extends Model {
         cep: DataTypes.STRING,
         bairro: DataTypes.STRING,
         rua: DataTypes.STRING,
-        numero: DataTypes.INTEGER
-        
+        numero: DataTypes.INTEGER,
+        aprovado: DataTypes.BOOLEAN,
     },{
       sequelize,
     });

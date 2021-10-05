@@ -11,26 +11,31 @@ const QuartoController = require('./api/controllers/QuartoController');
 
 
 routes.post("/api/instituicoes", AUTH, InstituicaoController.create);
-routes.get("/api/instituicoes/:id", InstituicaoController.findByPk);
-routes.get("/api/instituicoes/paginate", InstituicaoController.findAllWithPagination);
-routes.get("/api/instituicoes", InstituicaoController.findAll);
-routes.put("/api/instituicoes/:id", InstituicaoController.update);
-routes.delete("/api/instituicoes/:id", InstituicaoController.delete);
+routes.get("/api/instituicoes/notAproved", AUTH, ADM, InstituicaoController.findInstituicoesNotAprove);
+routes.get("/api/instituicoes/paginate", AUTH, InstituicaoController.findAllWithPagination);
+routes.get("/api/instituicoes/:id",AUTH, InstituicaoController.findByPk);
+routes.get("/api/instituicoes", AUTH, InstituicaoController.findAll);
+routes.patch("/api/instituicoes/aprovar", AUTH, ADM, InstituicaoController.aprovar);
+routes.put("/api/instituicoes/:id", AUTH, InstituicaoController.update);
+routes.delete("/api/instituicoes/:id", AUTH, InstituicaoController.delete);
 
 
+routes.post("/api/abrigo", AUTH, Abrigo.create);
+routes.get("/api/abrigo/usuarioNaoAprovados", AUTH, Abrigo.findUsuariosNaoAprovadosById)
+routes.get("/api/abrigo/paginate", AUTH, Abrigo.findAllWithPagination);
+routes.get("/api/abrigo/:id",AUTH, Abrigo.findUsuariosNaoAprovadosById);
+routes.get("/api/abrigo", AUTH, Abrigo.findAll);
+routes.patch("/api/abrigo/aprovar", AUTH, Abrigo.aprovarCriacao);
+routes.patch("/api/abrigo/aprovarUsuario", AUTH, Abrigo.aprovarUsuario);
+routes.patch("/api/abrigo/solicitar",AUTH, Abrigo.solicitarMembro);
+routes.put("/api/abrigo/:id",AUTH, Abrigo.update);
+routes.delete("/api/abrigo/:id",AUTH, Abrigo.delete);
 
-routes.post("/api/abrigos", AUTH, Abrigo.create);
-routes.get("/api/abrigo/:id", Abrigo.findByPk);
-routes.get("/api/abrigo/paginate", Abrigo.findAllWithPagination);
-routes.get("/api/abrigo", Abrigo.findAll);
-routes.put("/api/abrigo/:id", Abrigo.update);
-routes.delete("/api/abrigo/:id", Abrigo.delete);
 
-
-routes.post("/api/quartos", QuartoController.create);
-routes.get("/api/quartos/:id", QuartoController.findByPk);
-routes.get("/api/quartos/paginate", QuartoController.findAllWithPagination);
-routes.get("/api/quartos", QuartoController.findAll);
+routes.post("/api/quartos", AUTH, QuartoController.create);
+routes.get("/api/quartos/:id", AUTH, QuartoController.findByPk);
+routes.get("/api/quartos/paginate", AUTH, QuartoController.findAllWithPagination);
+routes.get("/api/quartos", AUTH, QuartoController.findAll);
 routes.put("/api/quartos/:id", QuartoController.update);
 routes.delete("/api/quartos/:id", QuartoController.delete);
 

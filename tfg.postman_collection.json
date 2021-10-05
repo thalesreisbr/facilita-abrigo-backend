@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3e421c15-5b5c-4867-958a-e003c72beaee",
+		"_postman_id": "0445391e-de91-4ae9-85e9-2cd389d84619",
 		"name": "tfg",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -177,7 +177,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\":\"Thales Augusto Reis\",\n    \"email\":\"thales.reis@unifei.edu\",\n    \"senha\": \"senha123\",\n    \"sexo\": \"masculino\",\n    \"cpf\": \"133.730.856-08\",    \n    \"data_de_nascimento\": \"2021-09-01 01:24:55.90\"\n}",
+							"raw": "{\n    \"nome\":\"Thales Augusto Reis\",\n    \"email\":\"thal.reis@unifei.edu\",\n    \"senha\": \"senha123\",\n    \"sexo\": \"masculino\",\n    \"cpf\": \"133.730.856-08\",    \n    \"data_de_nascimento\": \"2021-09-01 01:24:55.90\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -223,7 +223,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\":\"thales.reis@unifei.edu\",\n    \"senha\": \"senha123\"\n}",
+							"raw": "{\n    \"email\":\"thal.reis@unifei.edu\",\n    \"senha\": \"senha123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -407,7 +407,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3001/api/instituicoes/1",
+							"raw": "localhost:3001/api/instituicoes/1?authorization=Bearer {{token_usuario}}",
 							"host": [
 								"localhost"
 							],
@@ -416,6 +416,12 @@
 								"api",
 								"instituicoes",
 								"1"
+							],
+							"query": [
+								{
+									"key": "authorization",
+									"value": "Bearer {{token_usuario}}"
+								}
 							]
 						}
 					},
@@ -451,19 +457,27 @@
 					"response": []
 				},
 				{
-					"name": "find all",
+					"name": "find all not aproved",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text",
+								"equals": true
+							}
+						],
 						"url": {
-							"raw": "localhost:3000/api/ex",
+							"raw": "localhost:3001/api/instituicoes/notAproved",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3001",
 							"path": [
 								"api",
-								"ex"
+								"instituicoes",
+								"notAproved"
 							]
 						}
 					},
@@ -473,7 +487,14 @@
 					"name": "update",
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text",
+								"equals": true
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"nome\":\"Hospital Qscola\",\n    \"cep\": \"37500200\",\n    \"bairro\": \"BPS\",\n    \"rua\": \"Bps\",\n    \"numero\":1\n}",
@@ -499,6 +520,60 @@
 					"response": []
 				},
 				{
+					"name": "aprovar",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/api/instituicoes/aprovar",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"instituicoes",
+								"aprovar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/ex",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"ex"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "deletar",
 					"request": {
 						"method": "DELETE",
@@ -517,6 +592,15 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "aprovar",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": null
+					},
+					"response": []
 				}
 			]
 		},
@@ -530,7 +614,7 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "Bearer {{token_operador}}",
+								"value": "Bearer {{token_usuario}}",
 								"type": "text"
 							}
 						],
@@ -544,14 +628,163 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3001/api/abrigos",
+							"raw": "localhost:3001/api/abrigo",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
 								"api",
-								"abrigos"
+								"abrigo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "aprovar abrigo",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"abrigo_id\":2   \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/api/abrigo/aprovar",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"abrigo",
+								"aprovar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "solicitar ser mebro",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"usuario_id\":2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/api/abrigo/solicitar",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"abrigo",
+								"solicitar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "aprovar Usuario",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"usuario_id\":2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/api/abrigo/aprovarUsuario",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"abrigo",
+								"aprovarUsuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find all not aproved",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find all users not approved",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text",
+								"equals": true
+							}
+						],
+						"url": {
+							"raw": "localhost:3001/api/abrigo/usuarioNaoAprovados?abrigo_id",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"abrigo",
+								"usuarioNaoAprovados"
+							],
+							"query": [
+								{
+									"key": "abrigo_id",
+									"value": null
+								}
 							]
 						}
 					},
@@ -563,14 +796,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3001/api/abrigos/1",
+							"raw": "localhost:3001/api/abrigo/1",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
 								"api",
-								"abrigos",
+								"abrigo",
 								"1"
 							]
 						}
@@ -581,16 +814,22 @@
 					"name": "find all paginate",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "localhost:3001/api/abrigos?limit=5&page=0",
+							"raw": "localhost:3001/api/abrigo?limit=5&page=0",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
 								"api",
-								"abrigos"
+								"abrigo"
 							],
 							"query": [
 								{
@@ -610,16 +849,32 @@
 					"name": "find all",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "localhost:3000/api/abrigos",
+							"raw": "localhost:3001/api/abrigo?filter=aprovado&value=true",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3001",
 							"path": [
 								"api",
-								"abrigos"
+								"abrigo"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "aprovado"
+								},
+								{
+									"key": "value",
+									"value": "true"
+								}
 							]
 						}
 					},
@@ -640,14 +895,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/api/abrigos/1",
+							"raw": "localhost:3000/api/abrigo/1",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
 								"api",
-								"abrigos",
+								"abrigo",
 								"1"
 							]
 						}
@@ -671,6 +926,15 @@
 								"3"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
 					},
 					"response": []
 				}

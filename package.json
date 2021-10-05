@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --inspect src/index.js",
-    "sonar": "sonar-scanner -Dsonar.projectKey=tfg-backend -Dsonar.sources=.  -Dsonar.host.url=http://localhost:9000  -Dsonar.login=1577d5464023834b9dae47a1f5cf5fe6e26ff16c",
+    "sonar": "sonar-scanner -Dsonar.projectKey=Facilita_abrigo -Dsonar.sources=.  -Dsonar.host.url=http://localhost:9000  -Dsonar.login=b88561e6276b079c8f6bd3782619cd80feb4d67a",
     "db": "sequelize db:migrate:undo:all;sequelize db:migrate;sequelize db:seed:all",
     "swagger-autogen": "node swagger.js",
     "test": "echo \"Error: no test specified\" && exit 1"

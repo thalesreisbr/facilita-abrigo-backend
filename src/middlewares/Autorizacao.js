@@ -1,7 +1,7 @@
 const status = require('http-status');
 const JWT = require('jsonwebtoken');
 const {getPrivateKey,getRefreshKey,getRecoveryKey} = require('../config/keys');
-
+const Role = require('../helpers/enums/Role');
 
 //Realiza a checagem da validade do token
 exports.AUTH = async (request, response, next) => {
@@ -27,7 +27,7 @@ exports.AUTH = async (request, response, next) => {
     try {
         let decoded = JWT.verify(token, privateKey, { algorithms: ['ES256'] });
         request.usuario_id = decoded.usuario_id;
-        request.role_id = decoded.role_id;
+        request.role = decoded.role;
         return next();
     } catch (error) {
         return response.status(status.UNAUTHORIZED).send({ msg: 'Token Invalido!', error });
@@ -80,7 +80,7 @@ exports.RECOVERY = async (request, response, next) => {
     }
 };
 exports.ADM = async (request, response, next) => {
-    if(request.is_administrador){
+    if(request.role = Role.ADM){
         return next();
     }else{
         return response.status(status.UNAUTHORIZED).send({ msg: 'Este Usuario Não pode ter acesso a essa rota'});

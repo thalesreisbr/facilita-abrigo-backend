@@ -29,6 +29,10 @@ module.exports = {
         allowNull: true,
         type: Sequelize.INTEGER,
       },
+      aprovado :{
+        defaultValue: false,
+        type: Sequelize.BOOLEAN,
+      },
       created_at: {
         allowNull: true,
         type: Sequelize.DATE,

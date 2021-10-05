@@ -11,9 +11,11 @@ exports.create = async (model, object) => {
 
 exports.update = async (model, object, id) => {
   try {
-    return await model.update(object, {
+    test =  await model.update(object, {
       where: {id:id},
     });
+
+    return test
   } catch (e) {
     console.log(e);
     throw e;
