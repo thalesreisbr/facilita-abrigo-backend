@@ -7,6 +7,7 @@
     "start": "nodemon --inspect src/index.js",
     "sonar": "sonar-scanner -Dsonar.projectKey=tfg-backend -Dsonar.sources=.  -Dsonar.host.url=http://localhost:9000  -Dsonar.login=1577d5464023834b9dae47a1f5cf5fe6e26ff16c",
     "db": "sequelize db:migrate:undo:all;sequelize db:migrate;sequelize db:seed:all",
+    "swagger-autogen": "node swagger.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -36,6 +37,8 @@
     "sequelize": "^6.4.0",
     "sequelize-cli": "^6.2.0",
     "sonarqube-scanner": "^2.8.0",
+    "swagger-autogen": "^2.6.3",
+    "swagger-ui-express": "^4.1.4",
     "uuid": "^8.3.2"
   },
   "bugs": {
