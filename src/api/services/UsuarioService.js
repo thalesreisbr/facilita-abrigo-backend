@@ -22,6 +22,7 @@ exports.create = async (request, response) => {
         throw {status:status.BAD_REQUEST, msg:"Dados insuficientes."};
 
 
+    let senha = credenciais.senha;
     const salt = await bcrypt.genSalt();
     credenciais.senha = await bcrypt.hash(credenciais.senha, salt);
 
@@ -30,7 +31,9 @@ exports.create = async (request, response) => {
 	try {
 
 		const instancia = await GenericDAO.create(entity,credenciais);
-		return (instancia ? response.status(status.CREATED).send({usuario_id:instancia.id}) : response.status(status.BAD_REQUEST).send());
+
+        credenciais.senha = senha;
+		return this.login(request, response);
 
 	} catch (error) { 
 		throw error;  
@@ -83,11 +86,16 @@ exports.login = async (request, response) => {
         //Atualiza o refresh_token do operador
         await UsuarioDAO.atualizarRefreshToken(credenciais.id, refresh_token);
 
+
+
+        let usuario = await UsuarioDAO.findByPk(credenciais.id)
+
         //Responde a requisição de autenticação com o token de acesso
-		return response.status(status.ACCEPTED).send({ token, refresh_token });
+		return response.status(status.ACCEPTED).send({ usuario, token, refresh_token });
 
 
 	} catch (error) {
+        console.log(error);
 		throw error;
 	}
     

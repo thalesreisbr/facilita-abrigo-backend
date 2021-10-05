@@ -6,7 +6,7 @@
     "schema": "public",
     "database": "facilita_abrigo",
     "username": "postgres",
-    "password": "root",
+    "password": "postgres",
     "define": {
       "timestamps": true,
       "underscored": true,
