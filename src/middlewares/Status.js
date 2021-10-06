@@ -1,16 +1,19 @@
 const status = require('http-status');
 
-exports.status404 = (req, res, next) => {
-    res.status(status.NOT_FOUND).send(); 
+exports.status404 = (error,req, res, next) => {
+    res.status(status.NOT_FOUND).send(error); 
 }
 
 exports.status500 = (error, req, res, next) => {
+   
     
-    if(error.message){
-        res.status(status.INTERNAL_SERVER_ERROR).json({message}); 
-    }else{
-        res.status(error.status).json({msg:error.msg}); 
-    }
+    res.status(status.INTERNAL_SERVER_ERROR).json({error})
+
+    // if(error.message){
+    //     res.status(status.INTERNAL_SERVER_ERROR).json({}); 
+    // }else{
+    //     res.status(error.status).json({msg:error.msg}); 
+    // }
     
         
      

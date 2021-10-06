@@ -35,11 +35,6 @@ exports.login = async (request, response, next) => {
 //Busca por uma instancia da entidade.
 exports.buscarUm = async (request, response, next) => {
     //Essa comparação é que caso seja um usuario ele pode buscar só por ele mesmo e nao outros usuarios do sistema
-
-    if(request.usuario_id != request.params.id && request.role!=Role.ADM){
-        return response.status(status.BAD_REQUEST).send({msg: 'Usuário só pode pesquisar ele mesmo'});
-    }
-
 	try {
 
 		const instancia = await DAO.findByPk(request.params.id)

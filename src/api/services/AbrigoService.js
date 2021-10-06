@@ -17,9 +17,11 @@ exports.solicitarMembro = async(usuario_id, abrigo_id) =>{
         if(usuario.role == Role.NOTHING && usuario.abrigo_id == null && usuario.instituicao_id == null){
             abrigo = await AbrigosDAO.findByPk(abrigo_id);
             if(abrigo == null)
-                throw new Error("Abrigo não existe");
+                throw {status:status.INTERNAL_SERVER_ERROR, msg:"Abrigo não existe"};
+            
             if(!abrigo.aprovado)
-                throw new Error("Abrigo ainda não esta aprovado");
+                throw {status:status.INTERNAL_SERVER_ERROR, msg:"Abrigo ainda não esta aprovado"};
+                
 
             usuario.abrigo_id = abrigo.id;
 
@@ -68,7 +70,8 @@ exports.aprovarUsuario = async (usuarioAprovador_id, usuario_id) => {
 		let usuario = await UsuarioService.findByPk(usuario_id);
 
         if(!(usuarioAprovador.role > Role.NOTHING && usuarioAprovador.abrigo_id == usuario.abrigo_id))
-            throw new Error("Este Usuario de nome"+usuarioAprovador.nome+" nao pode aprovor"+usuario.nome)
+            throw {status:status.INTERNAL_SERVER_ERROR, msg:"Este Usuario de nome"+usuarioAprovador.nome+" nao pode aprovor"+usuario.nome};
+            
 
 		
         if(usuario.role == Role.NOTHING){
