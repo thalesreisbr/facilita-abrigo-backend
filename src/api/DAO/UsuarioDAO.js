@@ -27,22 +27,22 @@ exports.buscarCredenciais = async (email) => {
 	}
 };
 //Busca por uma instancia da entidade.
-exports.buscarCredenciaisPorRefreshToken = async (refresh_token) => {
+exports.buscarCredenciaisPorRefreshToken = async (token_recuperar_senha) => {
 	try {
 
-		const instancia = await Usuario.findOne({attributes: ['id'], where: { refresh_token}});
+		const instancia = await Usuario.findOne({attributes: ['id'], where: { token_recuperar_senha}});
 		return (instancia ? instancia : null);
 
 	} catch (error) { 
 		throw error;
 	}
 };;
-exports.atualizarRefreshToken = async (id, refresh_token) => {
+exports.atualizarRefreshToken = async (id, token_recuperar_senha) => {
 	try {
 
 		const instancia = await Usuario.findByPk(id);
 		if(instancia){
-			const updated = await Usuario.update({refresh_token:refresh_token}, { where: { id: instancia.id }});
+			const updated = await Usuario.update({token_recuperar_senha:token_recuperar_senha}, { where: { id: instancia.id }});
 			return { updated_id: instancia.id };
 		}else{
 			return null;

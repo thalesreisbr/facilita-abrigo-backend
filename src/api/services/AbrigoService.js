@@ -10,7 +10,7 @@ exports.create = async (model, object) => {
     
 };
 
-exports.solicitarMembro = async(usuario_id) =>{
+exports.solicitarMembro = async(usuario_id, abrigo_id) =>{
     try {
         let usuario = await UsuarioService.findByPk(usuario_id);
 
@@ -79,7 +79,7 @@ exports.aprovarUsuario = async (usuarioAprovador_id, usuario_id) => {
             }
             const result = await UsuarioService.update(usuarioUpdate, usuario.id);
 
-            return result;
+            return {"msg":usuario.nome+" foi aprovado"};
         }
 		
 		throw new Error("Usuario já é funcionario ou dono");

@@ -92,7 +92,7 @@ exports.aprovarUsuario = async (request, response, next) => {
 		
 		const result = await AbrigoServices.aprovarUsuario(request.usuario_id, request.body.usuario_id)
 
-		return (result ? response.status(status.OK).send( {updated_id:result[0]} ) : response.status(status.NOT_FOUND).send());
+		return (result ? response.status(status.OK).send( {result} ) : response.status(status.NOT_FOUND).send());
 		
 	} catch (error) {
 		next(error);

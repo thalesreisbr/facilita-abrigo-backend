@@ -12,10 +12,16 @@ exports.findByPk = async (id) => {
 	try {
 
 		const instancia = await entity.findByPk(id,{
-			include: {
-				model: Quarto,
-				as:"quartos"
-			}
+			include: 
+				[{
+					model: Quarto,
+					as:"quartos"
+				},
+				{
+					model: Usuario,
+					as: "funcionarios",
+				}]
+			
 		});
 		return (instancia ? instancia : null);
 

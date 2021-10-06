@@ -7,6 +7,8 @@ const DAO = require('../DAO/UsuarioDAO');
 const mailer= require('../../helpers/Mailer');
 const {cpf} = require('cpf-cnpj-validator');
 const usuarioService = require('../services/UsuarioService');
+const Role = require("../../helpers/enums/Role");
+
 
 //Adiciona uma nova instancia da entidade.
 exports.create = async (request, response, next) => {
@@ -34,7 +36,7 @@ exports.login = async (request, response, next) => {
 exports.buscarUm = async (request, response, next) => {
     //Essa comparação é que caso seja um usuario ele pode buscar só por ele mesmo e nao outros usuarios do sistema
 
-    if(request.administrador_id != request.params.id && !request.is_administrador){
+    if(request.usuario_id != request.params.id && request.role!=Role.ADM){
         return response.status(status.BAD_REQUEST).send({msg: 'Usuário só pode pesquisar ele mesmo'});
     }
 

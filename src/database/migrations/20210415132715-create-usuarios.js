@@ -15,15 +15,15 @@ module.exports = {
       },
       email: {
         unique: true,
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.STRING,
       },
       senha: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.STRING,
       },
       cpf: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.STRING,
       },
       sexo: {
@@ -46,9 +46,6 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: true,
         defaultValue: 0
-        // references: { model: 'Abrigo', key: 'id' },
-        // onUpdate: 'CASCADE',
-        // onDelete: 'CASCADE',
       },
       abrigo_id: {
         type: Sequelize.INTEGER,
