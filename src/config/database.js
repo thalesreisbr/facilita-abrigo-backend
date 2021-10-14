@@ -22,6 +22,7 @@ Exemplo.associate(connection.models);
 Abrigo.associate(connection.models);
 Quarto.associate(connection.models);
 Usuario.associate(connection.models);
+Instituicao.associate(connection.models);
 
 
 module.exports = connection;

@@ -9,10 +9,11 @@ const UsuarioServices = require('../services/UsuarioService');
 exports.create = async (request, response, next) => {
 	try {
 		abrigo = request.body;
-		donoAbrigo = request.usuario_id
-		
 
 		const instancia = await GenericServices.create(entity,request.body);
+		if(instancia){
+			const usuario = UsuarioServices.setAbrigo(request.usuario_id, instancia.id);
+		}
 		return (instancia ? response.status(status.CREATED).send(instancia) : response.status(status.BAD_REQUEST).send());
 
 	} catch (error) { 

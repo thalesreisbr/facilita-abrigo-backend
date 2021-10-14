@@ -11,9 +11,11 @@ class Usuario extends Model {
         sexo: DataTypes.STRING,
         data_de_nascimento: DataTypes.DATE,
         token: DataTypes.STRING,
+        token_refresh: DataTypes.STRING,
         token_recuperar_senha: DataTypes.STRING,
         role: DataTypes.INTEGER,
-        abrigo_id: DataTypes.INTEGER
+        abrigo_id: DataTypes.INTEGER,
+        instituicao_id: DataTypes.INTEGER,
         
     }, {
       sequelize,

@@ -16,6 +16,7 @@ routes.get("/api/instituicoes/paginate", AUTH, InstituicaoController.findAllWith
 routes.get("/api/instituicoes/:id",AUTH, InstituicaoController.findByPk);
 routes.get("/api/instituicoes", AUTH, InstituicaoController.findAll);
 routes.patch("/api/instituicoes/aprovar", AUTH, ADM, InstituicaoController.aprovar);
+routes.patch("/api/instituicoes/solicitar",AUTH, InstituicaoController.solicitarMembro)
 routes.put("/api/instituicoes/:id", AUTH, InstituicaoController.update);
 routes.delete("/api/instituicoes/:id", AUTH, InstituicaoController.delete);
 
@@ -60,7 +61,7 @@ routes.post("/api/usuario/login",REFRESH, Usuario.login);
 // routes.get("/api/usuario/email", Usuario.buscarPeloEmail);
 routes.get("/api/usuario/:id",AUTH, Usuario.buscarUm);
 // routes.get("/api/usuario", Usuario.buscarTudo);
-// routes.put("/api/usuario/:id",AUTH, Usuario.atualizar);
+routes.put("/api/usuario/:id",AUTH, Usuario.atualizar);
 // routes.delete("/api/usuario/:id", Usuario.excluir);
 // routes.delete("/api/usuario/parcialmente/:id", Usuario.excluirParcialmente);
 

@@ -16,7 +16,7 @@ class Instituicao extends Model {
 
   }
   static associate(models){
-    this.hasMany(models.Usuario, {foreignKey:"instituicao_id", as :"usuario"});
+    this.hasMany(models.Usuario, {foreignKey:"instituicao_id", as :"funcionarios"});
   }
 }
 module.exports = Instituicao;

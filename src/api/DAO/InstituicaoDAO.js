@@ -3,6 +3,7 @@
 const status = require("http-status");
 const { Op } = require("sequelize");
 const database = require("../../config/database");
+const Usuario = require('../models/Usuario');
 const entity = require("../models/Instituicao");
 const Quarto = require('../models/Quarto')
 
@@ -27,4 +28,24 @@ exports.aprovar = async (id, valor) => {
 	}
 };
 
+
+//Busca por uma instancia da entidade.
+exports.findByPk = async (id) => {
+	try {
+
+		const instancia = await entity.findByPk(id,{
+			include: [
+				{
+					model: Usuario,
+					as: "funcionarios",
+				}]
+			
+		});
+		return (instancia ? instancia : null);
+
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
+};
 

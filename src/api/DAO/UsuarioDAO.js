@@ -27,22 +27,22 @@ exports.buscarCredenciais = async (email) => {
 	}
 };
 //Busca por uma instancia da entidade.
-exports.buscarCredenciaisPorRefreshToken = async (token_recuperar_senha) => {
+exports.buscarCredenciaisPorRefreshToken = async (token_refresh) => {
 	try {
 
-		const instancia = await Usuario.findOne({attributes: ['id'], where: { token_recuperar_senha}});
+		const instancia = await Usuario.findOne({attributes: ['id'], where: { token_refresh}});
 		return (instancia ? instancia : null);
 
 	} catch (error) { 
 		throw error;
 	}
 };;
-exports.atualizarRefreshToken = async (id, token_recuperar_senha) => {
+exports.atualizarRefreshToken = async (id, token_refresh) => {
 	try {
 
 		const instancia = await Usuario.findByPk(id);
 		if(instancia){
-			const updated = await Usuario.update({token_recuperar_senha:token_recuperar_senha}, { where: { id: instancia.id }});
+			const updated = await Usuario.update({token_refresh:token_refresh}, { where: { id: instancia.id }});
 			return { updated_id: instancia.id };
 		}else{
 			return null;
@@ -128,12 +128,7 @@ exports.atualizar = async (id, body) => {
 
 		const instancia = await Usuario.findByPk(id);
 		if(instancia){
-			const updated = await Usuario.update(body, { where: { id: instancia.id }}).then(
-				async (updated)=>{
-					if(body.endereco){
-						await enderecos.update(body.endereco,{where:{id:instancia.endereco_id}});
-					}
-				});
+			const updated = await Usuario.update(body, { where: { id: instancia.id }})
 			return { updated_id: instancia.id };
 		}else{
 			return null;
@@ -150,6 +145,22 @@ exports.setAbrigo = async (usuario_id, abrigo_id) => {
 		const instancia = await Usuario.findByPk(usuario_id);
 		if(instancia){
 			const updated = await Usuario.update({"abrigo_id":abrigo_id}, { where: { id: instancia.id }});
+				return { updated_id: instancia.id }
+		
+		}else{
+			return null;
+		}
+
+	} catch (error) {
+		throw error;
+	}
+};
+exports.setInstituicao = async (usuario_id, instituicao_id) => {
+	try {
+
+		const instancia = await Usuario.findByPk(usuario_id);
+		if(instancia){
+			const updated = await Usuario.update({"instituicao_id":instituicao_id}, { where: { id: instancia.id }});
 				return { updated_id: instancia.id }
 		
 		}else{

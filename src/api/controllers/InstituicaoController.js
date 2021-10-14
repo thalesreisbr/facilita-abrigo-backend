@@ -3,13 +3,17 @@ const status = require("http-status");
 const GenericServices = require('../services/GenericService');
 const InstituicaoService = require("../services/InstituicaoService");
 const entity = require("../models/Instituicao");
-
+const UsuarioServices = require('../services/UsuarioService');
 
 //Adiciona uma nova instancia da entidade.
 exports.create = async (request, response, next) => {
 	try {
 
 		const instancia = await GenericServices.create(entity,request.body);
+
+		if(instancia){
+			const usuario = UsuarioServices.setInstituicao(request.usuario_id, instancia.id);
+		}
 		return (instancia ? response.status(status.CREATED).send(instancia) : response.status(status.BAD_REQUEST).send());
 
 	} catch (error) { 
@@ -21,7 +25,7 @@ exports.create = async (request, response, next) => {
 exports.findByPk = async (request, response, next) => {
 	try {
 
-		const instancia = await GenericServices.findByPk(entity,request.params.id)
+		const instancia = await InstituicaoService.findByPk(request.params.id)
 		return (instancia ? response.status(status.OK).send(instancia) : response.status(status.NOT_FOUND).send());
 
 	} catch (error) { 
@@ -66,7 +70,29 @@ exports.findInstituicoesNotAprove = async (request, response, next) => {
 	}
 };
 
+//Adiciona uma nova instancia da entidade.
+exports.solicitarMembro = async (request, response, next) => {
+	try {
+		const instancia = await InstituicaoService.solicitarMembro(request.usuario_id, request.body.instituicao_id);
+		
+		return (instancia ? response.status(status.OK).send(instancia) : response.status(status.NOT_FOUND).send());
+	} catch (error) { 
+		next(error);  
+	}
+};
+//Atualiza uma instancia da entidade.
+exports.aprovarUsuario = async (request, response, next) => {
+	try {
+		
+		
+		const result = await InstituicaoService.aprovarUsuario(request.usuario_id, request.body.usuario_id)
 
+		return (result ? response.status(status.OK).send( {result} ) : response.status(status.NOT_FOUND).send());
+		
+	} catch (error) {
+		next(error);
+	}
+};
 //Atualiza uma instancia da entidade.
 exports.update = async (request, response, next) => {
 	try {

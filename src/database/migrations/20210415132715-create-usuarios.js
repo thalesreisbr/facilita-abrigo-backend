@@ -38,6 +38,10 @@ module.exports = {
         allowNull: true,
         type: Sequelize.STRING,
       },
+      token_refresh: {
+        allowNull: true,
+        type: Sequelize.STRING,
+      },
       token_recuperar_senha: {
         allowNull: true,
         type: Sequelize.STRING,

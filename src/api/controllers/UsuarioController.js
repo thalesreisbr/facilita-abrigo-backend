@@ -87,26 +87,22 @@ exports.atualizar = async (request, response, next) => {
 	const credenciais = request.body;
     let updated_id;
     
-    if(cpf.isValid(credenciais.cpf))
+    if(!cpf.isValid(credenciais.cpf))
         return response.status(status.BAD_REQUEST).send({msg: 'Cpf inválido.'});
 
-    if(request.administrador_id != request.params.id && !request.is_administrador){
+    if(request.usuario_id != request.params.id && request.role == Role.ADM){
         return response.status(status.BAD_REQUEST).send({msg: 'Usuário só pode pesquisar ele mesmo'});
     }
     if(request.body.senha){
         return response.status(status.BAD_REQUEST).send({msg: 'Não é permetido atualizar a senha por aqui'});
     }
     try {
-        
-    	if (!credenciais || !credenciais.nome || !credenciais.email || !credenciais.senha || !credenciais.cpf || !credenciais.sexo || !credenciais.data_de_nascimento){
-            return response.status(status.BAD_REQUEST).send({msg: 'Dados insuficientes.'});
-        }
         updated_id = await DAO.atualizar(request.params.id,credenciais)
 
         return (updated_id ? response.status(status.OK).send( updated_id ) : response.status(status.NOT_FOUND).send());
 		
 	} catch (error) {
-		throw error;
+		next(error);
 	}
 };
 
