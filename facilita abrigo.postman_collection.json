@@ -10,6 +10,18 @@
 			"item": [
 				{
 					"name": "create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"token_usuario\", pm.response.json().token);",
+									"pm.environment.set(\"refresh_token_usuario\", pm.response.json().refresh_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -68,7 +80,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\":\"tales.reis@unifei.edu\",\n    \"senha\": \"senha123\"\n}",
+							"raw": "{\n    \"email\":\"adm@email.com\",\n    \"senha\": \"senha123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -85,6 +97,13 @@
 								"api",
 								"usuario",
 								"login"
+							],
+							"query": [
+								{
+									"key": "refresh_token",
+									"value": null,
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -109,7 +128,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:3001/api/usuario/3",
+							"raw": "localhost:3001/api/usuario/4",
 							"host": [
 								"localhost"
 							],
@@ -117,7 +136,42 @@
 							"path": [
 								"api",
 								"usuario",
-								"3"
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\":\"Thales Augusto Reis\",\n    \"email\":\"tales.reis@unifei.edu\",\n    \"sexo\": \"masculino\",\n    \"cpf\": \"133.730.856-08\",\n    \"data_de_nascimento\": \"2021-09-01 01:24:55.90\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/api/usuario/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"usuario",
+								"1"
 							]
 						}
 					},
@@ -379,6 +433,259 @@
 								"ex",
 								"3"
 							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "insituicoes",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\":\"Hospital escola\",\n    \"cep\": \"37500200\",\n    \"bairro\": \"BPS\",\n    \"rua\": \"Bps\",\n    \"numero\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/api/instituicoes",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"instituicoes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find by pk",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3001/api/instituicoes/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"instituicoes",
+								"1"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find all paginate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/instituicoes?limit=5&page=0",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"instituicoes"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "aprovar instituicao",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/api/instituicoes/aprovar",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"instituicoes",
+								"aprovar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "solicitar ser mebro",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"instituicao_id\":2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/api/instituicoes/solicitar",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"instituicoes",
+								"solicitar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "aprovar Usuario",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"usuario_id\":4\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/api/instituicoes/aprovarUsuario",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"instituicoes",
+								"aprovarUsuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text",
+								"equals": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\":\"Hospital Qscola\",\n    \"cep\": \"37500200\",\n    \"bairro\": \"BPS\",\n    \"rua\": \"Bps\",\n    \"numero\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/api/instituicoes/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"instituicoes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "aprovar",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": ""
 						}
 					},
 					"response": []

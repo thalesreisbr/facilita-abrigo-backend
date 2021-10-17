@@ -16,6 +16,7 @@ routes.get("/api/instituicoes/paginate", AUTH, InstituicaoController.findAllWith
 routes.get("/api/instituicoes/:id",AUTH, InstituicaoController.findByPk);
 routes.get("/api/instituicoes", AUTH, InstituicaoController.findAll);
 routes.patch("/api/instituicoes/aprovar", AUTH, ADM, InstituicaoController.aprovar);
+routes.patch("/api/instituicoes/aprovarUsuario", AUTH, InstituicaoController.aprovarUsuario);
 routes.patch("/api/instituicoes/solicitar",AUTH, InstituicaoController.solicitarMembro)
 routes.put("/api/instituicoes/:id", AUTH, InstituicaoController.update);
 routes.delete("/api/instituicoes/:id", AUTH, InstituicaoController.delete);

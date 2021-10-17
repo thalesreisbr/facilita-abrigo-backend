@@ -67,7 +67,7 @@ exports.aprovarUsuario = async (usuarioAprovador_id, usuario_id) => {
         let usuarioAprovador = await UsuarioService.findByPk(usuarioAprovador_id);
 		let usuario = await UsuarioService.findByPk(usuario_id);
 
-        if(!(usuarioAprovador.role > Role.NOTHING && usuarioAprovador.abrigo_id == usuario.abrigo_id))
+        if(!((usuarioAprovador.role == Role.MEMBER && usuarioAprovador.instituicao_id == usuario.instituicao_id) || (usuarioAprovador.role  == Role.ADM)))
             throw {status:status.INTERNAL_SERVER_ERROR, msg:"Este Usuario de nome"+usuarioAprovador.nome+" nao pode aprovor"+usuario.nome};
             
 
