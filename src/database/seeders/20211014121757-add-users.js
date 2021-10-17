@@ -22,7 +22,7 @@ module.exports = {
           senha: senha,
           role: 2,
           sexo: "masculino",
-          cpf: "133.730.856-08",    
+          cpf: "481.361.510-40",    
           data_de_nascimento: "2021-09-01 01:24:55.90"
         },
         {
@@ -31,7 +31,7 @@ module.exports = {
           senha: senha,
           role: 2,
           sexo: "masculino",
-          cpf: "133.730.856-08",    
+          cpf: "271.628.400-86",    
           data_de_nascimento: "2021-09-01 01:24:55.90"
         },
         {
@@ -40,7 +40,7 @@ module.exports = {
           senha: senha,
           role: 0,
           sexo: "masculino",
-          cpf: "133.730.856-08",    
+          cpf: "139.328.320-94",    
           data_de_nascimento: "2021-09-01 01:24:55.90"
         },
         {
@@ -49,7 +49,7 @@ module.exports = {
           senha: senha,
           role: 0,
           sexo: "masculino",
-          cpf: "133.730.856-08",    
+          cpf: "647.622.600-29",    
           data_de_nascimento: "2021-09-01 01:24:55.90"
         },
         {
@@ -58,7 +58,7 @@ module.exports = {
           senha: senha,
           role: 0,
           sexo: "masculino",
-          cpf: "133.730.856-08",    
+          cpf: "486.663.080-95",    
           data_de_nascimento: "2021-09-01 01:24:55.90"
         }
     ]);
