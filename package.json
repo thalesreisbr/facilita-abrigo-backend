@@ -7,6 +7,7 @@
     "start": "nodemon --inspect src/index.js",
     "sonar": "sonar-scanner -Dsonar.projectKey=Facilita_abrigo -Dsonar.sources=.  -Dsonar.host.url=http://localhost:9000  -Dsonar.login=b88561e6276b079c8f6bd3782619cd80feb4d67a",
     "db": "sequelize db:migrate:undo:all;sequelize db:migrate;sequelize db:seed:all",
+    "dbWindows": "npx sequelize-cli db:migrate:undo:all;npx sequelize-cli db:migrate;npx sequelize-cli db:seed:all",
     "swagger-autogen": "node swagger.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
