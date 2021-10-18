@@ -515,14 +515,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/api/instituicoes?limit=5&page=0",
+							"raw": "localhost:3000/api/instituicoes/paginate?limit=5&page=0",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
 								"api",
-								"instituicoes"
+								"instituicoes",
+								"paginate"
 							],
 							"query": [
 								{
