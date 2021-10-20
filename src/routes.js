@@ -7,6 +7,7 @@ const Usuario = require('./api/controllers/UsuarioController');
 const InstituicaoController = require('./api/controllers/InstituicaoController');
 const Abrigo = require('./api/controllers/AbrigoController');
 const QuartoController = require('./api/controllers/QuartoController');
+const CaracteristicaController = require('./api/controllers/CaracteristicaController');
 
 
 
@@ -43,6 +44,13 @@ routes.put("/api/quartos/:id", QuartoController.update);
 routes.delete("/api/quartos/:id", QuartoController.delete);
 
 
+//Rotas para o controlador exemplo
+routes.post("/api/caracteristica", CaracteristicaController.create);
+routes.get("/api/caracteristica/:id", CaracteristicaController.findByPk);
+routes.get("/api/caracteristica/paginate", CaracteristicaController.findAllWithPagination);
+routes.get("/api/caracteristica", CaracteristicaController.findAll);
+routes.put("/api/caracteristica/:id", CaracteristicaController.update);
+routes.delete("/api/caracteristica/:id", CaracteristicaController.delete);
 
 
 // //Rotas para o controlador exemplo

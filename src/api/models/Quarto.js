@@ -16,6 +16,7 @@ class Quarto extends Model {
   }
   static associate(models){
     this.belongsTo(models.Abrigo, { foreignKey:"abrigo_id", as :"abrigo"});
+    this.belongsToMany(models.Caracteristica, { through: 'Caracteristica_Quartos' });
   }
 }
 module.exports = Quarto;

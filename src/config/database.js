@@ -11,18 +11,21 @@ const Instituicao = require('../api/models/Instituicao');
 const Abrigo = require('../api/models/Abrigo');
 const Quarto = require('../api/models/Quarto');
 const Usuario = require('../api/models/Usuario')
+const Caracteristica = require('../api/models/Caracteristica');
 
 Exemplo.init(connection);
 Instituicao.init(connection);
 Abrigo.init(connection);
 Quarto.init(connection);
 Usuario.init(connection);
+Caracteristica.init(connection);
 
 Exemplo.associate(connection.models);
 Abrigo.associate(connection.models);
 Quarto.associate(connection.models);
 Usuario.associate(connection.models);
 Instituicao.associate(connection.models);
+Caracteristica.associate(connection.models);
 
 
 module.exports = connection;
