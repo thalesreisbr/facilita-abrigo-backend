@@ -58,19 +58,6 @@ exports.findByPk = async (request, response, next) => {
 
 //Busca todas as instancias da entidade.
 exports.findAllWithPagination = async (request, response, next) => {
-	let { limit, page} = request.query;
-
-	try {
-		const instancias = await GenericServices.findAllWithPagination(entity,limit, page,);
-		
-		return response.status(status.OK).send(instancias);
-	} catch (error) {
-		next(error);
-	}
-};
-
-//Busca todas as instancias da entidade sem paginação.
-exports.findAll = async (request, response, next) => {
 	try {
 		let {limit, page, filter, value} = request.query;
 		if(filter){
@@ -83,6 +70,18 @@ exports.findAll = async (request, response, next) => {
 
 	} catch (error) {
 		next(error);
+	}
+};
+
+//Busca todas as instancias da entidade sem paginação.
+exports.findAll = async (request, response, next) => {
+	try {
+
+		const instancias = await GenericServices.findAll(entity);
+		return response.status(status.OK).send(instancias);
+
+	} catch (error) {
+		throw  error;
 	}
 };
 

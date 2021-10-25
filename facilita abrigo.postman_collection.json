@@ -243,7 +243,7 @@
 					"response": []
 				},
 				{
-					"name": "find all paginate",
+					"name": "find all",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -254,7 +254,7 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:3001/api/abrigo?limit=6&page=0",
+							"raw": "localhost:3001/api/abrigo",
 							"host": [
 								"localhost"
 							],
@@ -262,6 +262,32 @@
 							"path": [
 								"api",
 								"abrigo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find all paginate",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"type": "text",
+								"value": "Bearer {{token_usuario}}"
+							}
+						],
+						"url": {
+							"raw": "localhost:3001/api/abrigo/paginate?limit=6&page=0",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"abrigo",
+								"paginate"
 							],
 							"query": [
 								{
@@ -503,6 +529,41 @@
 									"key": "",
 									"value": "",
 									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3001/api/instituicoes?limit=5&page=0",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"instituicoes"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "page",
+									"value": "0"
 								}
 							]
 						}
