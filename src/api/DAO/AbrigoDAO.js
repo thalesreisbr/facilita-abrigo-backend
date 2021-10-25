@@ -41,7 +41,7 @@ exports.findAbrigosNaoAprovados = async (id) => {
 		throw error;
 	}
 };
-exports.findAbrigosAprovados = async (limit, page, filter) => {
+exports.findAbrigos = async (limit, page, filter) => {
 	limit = parseInt(limit || 0);
 	page = parseInt(page || 0);
 

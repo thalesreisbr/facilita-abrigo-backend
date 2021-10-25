@@ -8,7 +8,8 @@ const InstituicaoController = require('./api/controllers/InstituicaoController')
 const Abrigo = require('./api/controllers/AbrigoController');
 const QuartoController = require('./api/controllers/QuartoController');
 const CaracteristicaController = require('./api/controllers/CaracteristicaController');
-
+const ImagensController = require('./api/controllers/ImagensController');
+const EstadiaController = require('./api/controllers/EstadiaController');
 
 
 routes.post("/api/instituicoes", AUTH, InstituicaoController.create);
@@ -37,20 +38,41 @@ routes.delete("/api/abrigo/:id",AUTH, Abrigo.delete);
 
 
 routes.post("/api/quartos", AUTH, QuartoController.create);
-routes.get("/api/quartos/:id", AUTH, QuartoController.findByPk);
+routes.post("/api/quartos/:id/caracteristica", AUTH, QuartoController.addCaracteristica);
+routes.delete("/api/quartos/:id/caracteristica", AUTH, QuartoController.deleteCaracteristica);
 routes.get("/api/quartos/paginate", AUTH, QuartoController.findAllWithPagination);
+routes.get("/api/quartos/filtrar", AUTH, QuartoController.filtrar);
+routes.get("/api/quartos/:id", AUTH, QuartoController.findByPk);
 routes.get("/api/quartos", AUTH, QuartoController.findAll);
 routes.put("/api/quartos/:id", QuartoController.update);
 routes.delete("/api/quartos/:id", QuartoController.delete);
 
 
 //Rotas para o controlador exemplo
-routes.post("/api/caracteristica", CaracteristicaController.create);
-routes.get("/api/caracteristica/:id", CaracteristicaController.findByPk);
-routes.get("/api/caracteristica/paginate", CaracteristicaController.findAllWithPagination);
-routes.get("/api/caracteristica", CaracteristicaController.findAll);
-routes.put("/api/caracteristica/:id", CaracteristicaController.update);
-routes.delete("/api/caracteristica/:id", CaracteristicaController.delete);
+routes.post("/api/caracteristica", AUTH, CaracteristicaController.create);
+routes.get("/api/caracteristica/:id",AUTH, CaracteristicaController.findByPk);
+routes.get("/api/caracteristica/paginate",AUTH, CaracteristicaController.findAllWithPagination);
+routes.get("/api/caracteristica", AUTH, CaracteristicaController.findAll);
+routes.put("/api/caracteristica/:id", AUTH, CaracteristicaController.update);
+routes.delete("/api/caracteristica/:id", AUTH, CaracteristicaController.delete);
+
+//Rotas para o controlador exemplo
+routes.post("/api/imagens",UPLOAD, ImagensController.create);
+routes.get("/api/imagens/:id", ImagensController.findByPk);
+routes.get("/api/imagens/paginate", ImagensController.findAllWithPagination);
+routes.get("/api/imagens", ImagensController.findAll);
+routes.put("/api/imagens/:id", ImagensController.update);
+routes.delete("/api/imagens/:id", ImagensController.delete);
+
+
+//Rotas para o controlador exemplo
+routes.post("/api/estadia", EstadiaController.create);
+routes.get("/api/estadia/paginate", EstadiaController.findAllWithPagination);
+routes.get("/api/estadia", EstadiaController.findAll);
+routes.get("/api/estadia/:id", EstadiaController.findByPk);
+routes.put("/api/estadia/:id", EstadiaController.update);
+routes.delete("/api/estadia/:id", EstadiaController.delete);
+
 
 
 // //Rotas para o controlador exemplo

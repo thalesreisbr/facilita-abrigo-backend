@@ -78,7 +78,7 @@ exports.findAll = async (request, response, next) => {
 			filter = { filter : value}
 		}
 		
-		const instancias = await AbrigoServices.findAbrigosAprovados(limit, page, filter, value);
+		const instancias = await AbrigoServices.findAbrigos(limit, page, filter, value);
 		return response.status(status.OK).send(instancias);
 
 	} catch (error) {

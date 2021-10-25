@@ -45,8 +45,8 @@ exports.findAbrigosNaoAprovados = async() =>{
     return AbrigosDAO.findAbrigosNaoAprovados();
 }
 
-exports.findAbrigosAprovados = async(limit, page, filter) =>{
-    return AbrigosDAO.findAbrigosAprovados(limit, page, filter);
+exports.findAbrigos = async(limit, page, filter) =>{
+    return AbrigosDAO.findAbrigos(limit, page, filter);
 }
 
 exports.aprovarCriacao = async (id, role_id) => {  

@@ -1,16 +1,18 @@
 const status = require("http-status");
 const GenericServices = require('../services/GenericService');
-const QuartoServices = require('../services/QuartoService');
-const entity = require("../models/Quarto");
+const entity = require("../models/Imagens");
+const ImagensService = require("../services/ImagensService");
 
 //Adiciona uma nova instancia da entidade.
 exports.create = async (request, response, next) => {
 	try {
 
-		const instancia = await GenericServices.create(entity,request.body);
+		let files = request.files;
+		const instancia = await ImagensService.adicionarImagens(files, request.query.quarto_id);
 		return (instancia ? response.status(status.CREATED).send(instancia) : response.status(status.BAD_REQUEST).send());
 
-	} catch (error) { 
+	} catch (error) {
+		console.log(error)
 		next(error);  
 	}
 };
@@ -19,39 +21,13 @@ exports.create = async (request, response, next) => {
 exports.findByPk = async (request, response, next) => {
 	try {
 
-		const instancia = await QuartoServices.findByPk(request.params.id)
+		const instancia = await GenericServices.findByPk(entity,request.params.id)
 		return (instancia ? response.status(status.OK).send(instancia) : response.status(status.NOT_FOUND).send());
 
 	} catch (error) { 
 		next(error);
 	}
 };
-
-//Busca por uma instancia da entidade.
-exports.addCaracteristica = async (request, response, next) => {
-	try {
-
-		const instancia = await QuartoServices.addCaracteristica(request.usuario_id, request.params.id, request.body.caracteristica_id);
-		return (instancia ? response.status(status.OK).send(instancia) : response.status(status.NOT_FOUND).send());
-
-	} catch (error) { 
-		next(error);
-	}
-};
-
-exports.deleteCaracteristica = async (request, response, next) => {
-	try {
-
-		const instancia = await QuartoServices.deleteCaracteristica(request.usuario_id, request.params.id, request.body.caracteristica_id);
-		return (instancia ? response.status(status.OK).send(instancia) : response.status(status.NOT_FOUND).send());
-
-	} catch (error) { 
-		next(error);
-	}
-};
-
-
-
 
 //Busca todas as instancias da entidade.
 exports.findAllWithPagination = async (request, response, next) => {
@@ -65,19 +41,6 @@ exports.findAllWithPagination = async (request, response, next) => {
 		next(error);
 	}
 };
-//Busca todas as instancias da entidade.
-exports.filtrar = async (request, response, next) => {
-	let { limit, data_inicial } = request.query;
-
-	try {
-		const instancias = await QuartoServices.filtrar(data_inicial);
-		
-		return response.status(status.OK).send(instancias);
-	} catch (error) {
-		next(error);
-	}
-};
-
 
 //Busca todas as instancias da entidade sem paginação.
 exports.findAll = async (request, response, next) => {
