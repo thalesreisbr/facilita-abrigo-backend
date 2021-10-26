@@ -110,7 +110,7 @@ exports.aprovar = async (request, response, next) => {
 			
 		const result = await InstituicaoService.aprovar(request.body.id)
 
-		return (result ? response.status(status.OK).send( {updated_id:result[0]} ) : response.status(status.NOT_FOUND).send());
+		return (result ? response.status(status.OK).send( {updated_id:result} ) : response.status(status.NOT_FOUND).send());
 		
 	} catch (error) {
 		next(error);

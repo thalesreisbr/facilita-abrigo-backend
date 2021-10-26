@@ -25,8 +25,9 @@ exports.aprovar = async (id) => {
         usuario_aprovado = await UsuarioService.setInstituicao( user_owner.id,instituicao.id);
 
 
-		return await InstituicaoDAO.aprovar(id, !instituicao.aprovado)
+		await InstituicaoDAO.aprovar(id, !instituicao.aprovado)
 		
+        return id;
 	} catch (error) {
         console.log(error);
 		throw error;

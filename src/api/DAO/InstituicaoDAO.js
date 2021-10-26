@@ -20,7 +20,7 @@ exports.findInstituicoesNotAprove = async (id) => {
 };
 exports.aprovar = async (id, valor) => {
 	try{
-		entity.update({"aprovado":valor}, {
+		return await entity.update({"aprovado":valor}, {
 			where:{"id":id}
 		})
 	}catch (error) {
