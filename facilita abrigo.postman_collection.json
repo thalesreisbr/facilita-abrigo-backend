@@ -128,7 +128,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:3001/api/usuario/4",
+							"raw": "localhost:3001/api/usuario/3",
 							"host": [
 								"localhost"
 							],
@@ -136,7 +136,7 @@
 							"path": [
 								"api",
 								"usuario",
-								"4"
+								"3"
 							]
 						}
 					},
@@ -316,7 +316,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"abrigo_id\":2   \n}",
+							"raw": "{\n    \"abrigo_id\":1\n       \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -577,19 +577,20 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "Bearer {{token_usuario}}",
-								"type": "text"
+								"type": "text",
+								"value": "Bearer {{token_usuario}}"
 							}
 						],
 						"url": {
-							"raw": "localhost:3001/api/instituicoes?limit=5&page=0",
+							"raw": "localhost:3001/api/instituicoes/paginate?limit=5&page=0",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
 								"api",
-								"instituicoes"
+								"instituicoes",
+								"paginate"
 							],
 							"query": [
 								{
@@ -618,7 +619,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\":1\n}",
+							"raw": "{\n    \"id\":2\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1047,7 +1048,7 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "Bearer {{token_operador}}",
+								"value": "Bearer {{token_usuario}}",
 								"type": "text"
 							}
 						],
@@ -1078,16 +1079,22 @@
 					"name": "find by pk",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "localhost:3000/api/ex/1",
+							"raw": "localhost:3001/api/caracteristica/1",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3001",
 							"path": [
 								"api",
-								"ex",
+								"caracteristica",
 								"1"
 							]
 						}
@@ -1098,16 +1105,23 @@
 					"name": "find all paginate",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "localhost:3000/api/ex?limit=5&page=0",
+							"raw": "localhost:3001/api/caracteristica/paginate?limit=5&page=0",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3001",
 							"path": [
 								"api",
-								"ex"
+								"caracteristica",
+								"paginate"
 							],
 							"query": [
 								{
@@ -1127,16 +1141,22 @@
 					"name": "find all",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "localhost:3000/api/ex",
+							"raw": "localhost:3001/api/caracteristica",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3001",
 							"path": [
 								"api",
-								"ex"
+								"caracteristica"
 							]
 						}
 					},
@@ -1149,7 +1169,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\":\"Pomada\"\n}",
+							"raw": "{\n    \"nome\":\"Tuberculose\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
