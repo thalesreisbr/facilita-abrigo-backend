@@ -6,7 +6,7 @@ const UsuarioService = require("../services/UsuarioService");
 
 const Role = require('../../helpers/enums/Role');
 
-exports.addCaracteristica = async (usuario_id, quarto_id, caracteristica_id) => {
+exports.addCaracteristica = async (usuario_id, quarto_id, caracteristicas_ids) => {
     try{
         let usuario = await UsuarioService.findByPk(usuario_id);
 
@@ -16,14 +16,18 @@ exports.addCaracteristica = async (usuario_id, quarto_id, caracteristica_id) => 
             throw {status:status.INTERNAL_SERVER_ERROR, msg:"sem permissao"};
         }
 
-        quarto.Caracteristicas.map(function(item){
-            if(item.id == caracteristica_id){
-                throw {status:status.INTERNAL_SERVER_ERROR, msg:"Já existe essa caracteristica cadastrada neste quarto"};
-            }
+        await quarto.Caracteristicas.map(function(item){
+            caracteristicas_ids.map(async function(caract){
+                if(item.id == caract){
+                    throw {status:status.INTERNAL_SERVER_ERROR, msg:"Já existe essa caracteristica de id "+ caract+"cadastrada neste quarto"};
+                }else{
+                    await QuartoDAO.addCaracteristica(quarto_id, caract);
+                }
+            });    
             
-         })
+         });
 
-        return await QuartoDAO.addCaracteristica(quarto_id, caracteristica_id);
+        return await caracteristicas_ids;
         
     } catch (error) {
         console.log(error);

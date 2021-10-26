@@ -66,9 +66,9 @@ exports.addCaracteristica = async (quarto_id, caracteristica_id) => {
 			INSERT INTO "Caracteristica_Quartos" (quarto_id, caracteristica_id, created_at, updated_at)
 			VALUES ('${quarto_id}', '${caracteristica_id}', now(), now());
 		`
-		return sequelize.query(sql, {
+		return await sequelize.query(sql, {
 			type: sequelize.QueryTypes.INSERT
-		})
+		});
 	} catch (error) {
 		console.log(error);
 		throw error;

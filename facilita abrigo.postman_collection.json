@@ -836,7 +836,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"caracteristica_id\": 2\n}",
+							"raw": "{\n    \"caracteristicas_ids\": [1,2]\n}",
 							"options": {
 								"raw": {
 									"language": "json"

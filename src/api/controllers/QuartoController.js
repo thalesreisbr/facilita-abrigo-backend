@@ -31,8 +31,8 @@ exports.findByPk = async (request, response, next) => {
 exports.addCaracteristica = async (request, response, next) => {
 	try {
 
-		const instancia = await QuartoServices.addCaracteristica(request.usuario_id, request.params.id, request.body.caracteristica_id);
-		return (instancia ? response.status(status.OK).send(instancia) : response.status(status.NOT_FOUND).send());
+		const instancia = await QuartoServices.addCaracteristica(request.usuario_id, request.params.id, request.body.caracteristicas_ids);
+		return (instancia ? response.status(status.OK).send({novas_caracteristica:instancia}) : response.status(status.NOT_FOUND).send());
 
 	} catch (error) { 
 		next(error);

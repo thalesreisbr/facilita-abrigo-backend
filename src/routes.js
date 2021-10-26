@@ -58,8 +58,8 @@ routes.delete("/api/caracteristica/:id", AUTH, CaracteristicaController.delete);
 
 //Rotas para o controlador exemplo
 routes.post("/api/imagens",UPLOAD, ImagensController.create);
-routes.get("/api/imagens/:id", ImagensController.findByPk);
 routes.get("/api/imagens/paginate", ImagensController.findAllWithPagination);
+routes.get("/api/imagens/:id", ImagensController.findByPk);
 routes.get("/api/imagens", ImagensController.findAll);
 routes.put("/api/imagens/:id", ImagensController.update);
 routes.delete("/api/imagens/:id", ImagensController.delete);
