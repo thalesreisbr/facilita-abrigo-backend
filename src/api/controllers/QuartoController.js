@@ -107,7 +107,7 @@ exports.update = async (request, response, next) => {
 exports.delete = async (request, response, next) => {
 	try {
 
-		const result = await GenericServices.excluir(request.params.id)
+		const result = await GenericServices.delete(entity,equest.params.id)
 		return (result ? response.status(status.OK).send( {deleted_id:result} ) : response.status(status.NOT_FOUND).send());
 		
 	} catch (error) {
