@@ -21,13 +21,13 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      // abrigado_id: {
-      //   type: Sequelize.INTEGER,
-      //   allowNull: true,
-      //   references: { model: 'Usuario', key: 'id' },
-      //   onUpdate: 'CASCADE',
-      //   onDelete: 'CASCADE',
-      // }, 
+      abrigado_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: { model: 'Usuario', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      }, 
       quarto_id: {
         type: Sequelize.INTEGER,
         allowNull: true,

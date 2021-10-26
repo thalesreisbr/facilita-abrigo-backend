@@ -42,7 +42,7 @@ exports.findByPk = async (id) => {
 exports.findByDisponibilidade = async (dataInicial) => {
 	try {
 		const sql = `
-		SELECT q*, a.*,  FROM "Quarto" as q 
+		SELECT q*, a.*, cq.*  FROM "Quarto" as q 
 		INNER JOIN "Abrigo" as a ON q.abrigo_id = a.id
 		INNER JOIN "Caracteristica_Quartos" as cq ON cq.quarto_id = q.id
 		WHERE (SELECT COUNT(id) FROM "Estadia" as e WHERE  e.data_saida >  '${dataInicial}' AND e.quarto_id = q.id ) < q.capacidade;

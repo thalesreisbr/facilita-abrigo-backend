@@ -1002,15 +1002,15 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/api/quartos/1",
+							"raw": "localhost:3001/api/quartos/3",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3001",
 							"path": [
 								"api",
 								"quartos",
-								"1"
+								"3"
 							]
 						}
 					},
@@ -1020,13 +1020,19 @@
 					"name": "deletar",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "localhost:3000/api/quartos/3",
+							"raw": "localhost:3001/api/quartos/3",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3001",
 							"path": [
 								"api",
 								"quartos",
@@ -1195,17 +1201,29 @@
 					"name": "deletar",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "localhost:3000/api/ex/3",
+							"raw": "localhost:3001/api/caracteristica/1?=",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3001",
 							"path": [
 								"api",
-								"ex",
-								"3"
+								"caracteristica",
+								"1"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": ""
+								}
 							]
 						}
 					},

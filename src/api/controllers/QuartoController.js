@@ -96,7 +96,7 @@ exports.update = async (request, response, next) => {
 	try {
 
 		const result = await GenericServices.update(entity, request.body,request.params.id)
-		return (result ? response.status(status.OK).send( {updated_id:result[0]} ) : response.status(status.NOT_FOUND).send());
+		return (result ? response.status(status.OK).send( {updated_id:request.params.id} ) : response.status(status.NOT_FOUND).send());
 		
 	} catch (error) {
 		next(error);

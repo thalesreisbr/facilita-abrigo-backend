@@ -11,7 +11,7 @@ exports.update = async (model, object, id) => {
     
 };
 exports.delete = async (model, id) => {
-    return GenericDAO.destroy(model,id);
+    return GenericDAO.delete(model,id);
     
 };
 
@@ -22,9 +22,6 @@ exports.findByPk = async (model, id) => {
 exports.findAll = async (model) => {
     return GenericDAO.findAll(model);
 };
-exports.delete = async (model) => {
-    return GenericDAO.delete(model, id);
-}
 
 exports.findAllWithPagination = async (model, limit, page) => {
     return GenericDAO.findAllWithPagination(model,limit, page);

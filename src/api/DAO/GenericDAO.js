@@ -23,12 +23,11 @@ exports.update = async (model, object, id) => {
 };
 
 exports.delete = async (model, id) => {
-
-
   try {
     return await model.destroy({
-      where: id,
-      force: true,});
+      where: {id:id},
+      force: true
+    });
   } catch (e) {
     console.log(e);
     throw e;
@@ -86,14 +85,7 @@ exports.findAllWithPagination = async (model,limit, page) => {
 };
     
 
-exports.delete = async (model, id) => {
-  try {
-    return await model.delete(id);
-  } catch (e) {
-    console.log(e);
-    throw e;
-  }
-};
+
 
 
 exports.verifyIfExistsById = async (model, id) => {
