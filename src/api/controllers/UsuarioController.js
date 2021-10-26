@@ -41,7 +41,7 @@ exports.buscarUm = async (request, response, next) => {
 		return (instancia ? response.status(status.OK).send(instancia) : response.status(status.NOT_FOUND).send());
 
 	} catch (error) { 
-		throw error;
+		next(error);
 	}
 };
 //Busca por uma instancia da entidade.
@@ -53,7 +53,7 @@ exports.buscarPeloEmail = async (request, response, next) => {
 		return (instancia ? response.status(status.OK).send(instancia) : response.status(status.NOT_FOUND).send());
 
 	} catch (error) { 
-		throw error;
+		next(error);
 	}
 };
 
@@ -66,7 +66,7 @@ exports.buscarTudo = async (request, response, next) => {
 		return response.status(status.OK).send(instancias);
 
 	} catch (error) {
-		throw error;
+		next(error);
 	}
 };
 
@@ -78,7 +78,7 @@ exports.buscarTudoSemPaginacao = async (request, response, next) => {
 		return response.status(status.OK).send(instancias);
 
 	} catch (error) {
-		throw error;
+		next(error);
 	}
 };
 
@@ -114,7 +114,7 @@ exports.excluir = async (request, response, next) => {
 		return (deleted_id ? response.status(status.OK).send( deleted_id ) : response.status(status.NOT_FOUND).send());
 		
 	} catch (error) {
-		throw error;
+		next(error);
 	}
 };
 //Apagar apenas alguns campos.
@@ -125,7 +125,7 @@ exports.excluirParcialmente = async (request, response, next) => {
 		return (deleted_id ? response.status(status.OK).send( deleted_id ) : response.status(status.NOT_FOUND).send());
 		
 	} catch (error) {
-		throw error;
+		next(error);
 	}
 };
 
@@ -174,7 +174,7 @@ exports.recuperarSenha =  (request, response, next) => {
             })
             .catch((error) => next(error));
     } catch (error) {
-        throw {status:status.BAD_REQUEST, msg:'Erro ao recuperar senha. Por favor, tente novamente.'};
+        next(error);
     }
 }
  

@@ -50,8 +50,8 @@ routes.delete("/api/quartos/:id", QuartoController.delete);
 
 //Rotas para o controlador exemplo
 routes.post("/api/caracteristica", AUTH, CaracteristicaController.create);
-routes.get("/api/caracteristica/:id",AUTH, CaracteristicaController.findByPk);
 routes.get("/api/caracteristica/paginate",AUTH, CaracteristicaController.findAllWithPagination);
+routes.get("/api/caracteristica/:id",AUTH, CaracteristicaController.findByPk);
 routes.get("/api/caracteristica", AUTH, CaracteristicaController.findAll);
 routes.put("/api/caracteristica/:id", AUTH, CaracteristicaController.update);
 routes.delete("/api/caracteristica/:id", AUTH, CaracteristicaController.delete);

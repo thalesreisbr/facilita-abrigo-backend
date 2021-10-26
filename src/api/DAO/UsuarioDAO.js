@@ -8,9 +8,10 @@ exports.cadastrar = async (credenciais) => {
 		
 		const instancia = await Usuario.create(credenciais,{include:[enderecos]});
 		
-		return (((instancia)) ? instancia : null);
+		return ((instancia) ? instancia : null);
 
-	} catch (error) { 
+	} catch (error) {
+		console.err(error); 
 		throw error; 
 	}
 };
@@ -23,6 +24,7 @@ exports.buscarCredenciais = async (email) => {
 		return (instancia ? instancia : null);
 
 	} catch (error) { 
+		console.err(error);
 		throw error;
 	}
 };
@@ -34,9 +36,11 @@ exports.buscarCredenciaisPorRefreshToken = async (token_refresh) => {
 		return (instancia ? instancia : null);
 
 	} catch (error) { 
+		console.log(error);
 		throw error;
 	}
-};;
+};
+
 exports.atualizarRefreshToken = async (id, token_refresh) => {
 	try {
 
@@ -49,6 +53,7 @@ exports.atualizarRefreshToken = async (id, token_refresh) => {
 		}
 
 	} catch (error) {
+		console.err(error);
 		throw error;
 	}
 };
@@ -64,6 +69,7 @@ exports.findByPk = async (id) => {
 		return (instancia ? instancia : null);
 
 	} catch (error) { 
+		console.err(error);
 		throw error;
 	}
 };
@@ -75,6 +81,7 @@ exports.buscarPeloEmail = async (email) => {
 		return (instancia ? instancia : null);
 
 	} catch (error) { 
+		console.err(error);
 		throw error;
 	}
 };
@@ -104,6 +111,7 @@ exports.buscarTudo = async (limite, pagina) => {
 		return { total, pagina, totalPaginas, limite, offset, instancias };
 
 	} catch (error) {
+		console.err(error);
 		throw error;
 	}
 };
@@ -118,6 +126,7 @@ exports.buscarTudoSemPaginacao = async () => {
 		return instancias;
 
 	} catch (error) {
+		console.log(error);
 		 throw error;
 	}
 };
@@ -128,13 +137,14 @@ exports.atualizar = async (id, body) => {
 
 		const instancia = await Usuario.findByPk(id);
 		if(instancia){
-			const updated = await Usuario.update(body, { where: { id: instancia.id }})
+			await Usuario.update(body, { where: { id: instancia.id }})
 			return { updated_id: instancia.id };
 		}else{
 			return null;
 		}
 
 	} catch (error) {
+		console.log(error);
 		throw error;
 	}
 };
@@ -152,6 +162,7 @@ exports.setAbrigo = async (usuario_id, abrigo_id) => {
 		}
 
 	} catch (error) {
+		console.log(error);
 		throw error;
 	}
 };
@@ -160,7 +171,7 @@ exports.setInstituicao = async (usuario_id, instituicao_id) => {
 
 		const instancia = await Usuario.findByPk(usuario_id);
 		if(instancia){
-			const updated = await Usuario.update({"instituicao_id":instituicao_id}, { where: { id: instancia.id }});
+			await Usuario.update({"instituicao_id":instituicao_id}, { where: { id: instancia.id }});
 				return { updated_id: instancia.id }
 		
 		}else{
@@ -168,6 +179,7 @@ exports.setInstituicao = async (usuario_id, instituicao_id) => {
 		}
 
 	} catch (error) {
+		console.log(error);
 		throw error;
 	}
 };
@@ -176,13 +188,14 @@ exports.atualizarSenha = async (id, senha) => {
 
 		const instancia = await Usuario.findByPk(id);
 		if(instancia){
-			const updated = await Usuario.update({senha:senha}, { where: { id: instancia.id }});
+			 await Usuario.update({senha:senha}, { where: { id: instancia.id }});
 			return { updated_id: instancia.id };
 		}else{
 			return null;
 		}
 
 	} catch (error) {
+		console.log(error);
 		throw error;
 	}
 };
@@ -193,12 +206,13 @@ exports.excluir = async (id) => {
 
 		const instancia = await Usuario.findByPk(id);
 		if(instancia){
-			const deleted = await Usuario.destroy({ where: { id: instancia.id } });
+			 await Usuario.destroy({ where: { id: instancia.id } });
 			return { deleted_id: instancia.id };
 		}else{
 			return null;
 		}
 	} catch (error) {
+		console.log(error);
 		throw error;
 	}
 };
@@ -230,6 +244,7 @@ exports.excluirParcialmente = async (id) => {
 			return null;
 		}
 	} catch (error) {
+		console.log(error);
 		throw error;
 	}
 };
@@ -239,13 +254,14 @@ exports.atualizarTokenRecuperacao = async (id, token_recuperacao) => {
 
 		const instancia = await Usuario.findByPk(id);
 		if(instancia){
-			const updated = await Usuario.update({token_recuperacao:token_recuperacao}, { where: { id: instancia.id }});
+			await Usuario.update({token_recuperacao:token_recuperacao}, { where: { id: instancia.id }});
 			return { updated_id: instancia.id };
 		}else{
 			return null;
 		}
 
 	} catch (error) {
+		console.log(error);
 		throw error;
 	}
 }

@@ -60,6 +60,7 @@ exports.aprovarCriacao = async (id, role_id) => {
 		
 		
 	} catch (error) {
+        console.log(error);
 		throw error;
 	}
     

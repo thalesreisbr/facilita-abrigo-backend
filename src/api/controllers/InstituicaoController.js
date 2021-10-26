@@ -12,7 +12,7 @@ exports.create = async (request, response, next) => {
 		const instancia = await GenericServices.create(entity,request.body);
 
 		if(instancia){
-			const usuario = UsuarioServices.setInstituicao(request.usuario_id, instancia.id);
+			await UsuarioServices.setInstituicao(request.usuario_id, instancia.id);
 		}
 		return (instancia ? response.status(status.CREATED).send(instancia) : response.status(status.BAD_REQUEST).send());
 
@@ -42,7 +42,7 @@ exports.findAllWithPagination = async (request, response, next) => {
 		
 		return response.status(status.OK).send(instancias);
 	} catch (error) {
-		throw  error;
+		next(error);
 	}
 };
 
@@ -54,7 +54,7 @@ exports.findAll = async (request, response, next) => {
 		return response.status(status.OK).send(instancias);
 
 	} catch (error) {
-		throw  error;
+		next(error);
 	}
 };
 
@@ -66,7 +66,7 @@ exports.findInstituicoesNotAprove = async (request, response, next) => {
 		return response.status(status.OK).send(instancias);
 
 	} catch (error) {
-		throw error;
+		next(error);
 	}
 };
 

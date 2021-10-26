@@ -8,9 +8,9 @@ const Role = require('../../helpers/enums/Role');
 
 exports.addCaracteristica = async (usuario_id, quarto_id, caracteristica_id) => {
     try{
-        usuario = await UsuarioService.findByPk(usuario_id);
+        let usuario = await UsuarioService.findByPk(usuario_id);
 
-        quarto = await this.findByPk(quarto_id);
+        let quarto = await this.findByPk(quarto_id);
 
         if(!((usuario.role == Role.OWNER && usuario.abrigo_id == quarto.abrigo.id) || (usuario.role  == Role.ADM))){
             throw {status:status.INTERNAL_SERVER_ERROR, msg:"sem permissao"};
@@ -23,13 +23,10 @@ exports.addCaracteristica = async (usuario_id, quarto_id, caracteristica_id) => 
             
          })
 
-        new_Caracteristica_Quartos = {
-            quarto_id: quarto_id,
-            caracteristica_id:caracteristica_id
-        };
         return await QuartoDAO.addCaracteristica(quarto_id, caracteristica_id);
         
     } catch (error) {
+        console.log(error);
         throw error;
     }
     
@@ -38,15 +35,15 @@ exports.addCaracteristica = async (usuario_id, quarto_id, caracteristica_id) => 
 
 exports.deleteCaracteristica = async (usuario_id, quarto_id, caracteristica_id) => {
     try{
-        usuario = await UsuarioService.findByPk(usuario_id);
+        let usuario = await UsuarioService.findByPk(usuario_id);
 
-        quarto = await this.findByPk(quarto_id);
+        let quarto = await this.findByPk(quarto_id);
 
         if(!((usuario.role == Role.OWNER && usuario.abrigo_id == quarto.abrigo.id) || (usuario.role  == Role.ADM))){
             throw {status:status.INTERNAL_SERVER_ERROR, msg:"Sem permissao"};
         }
 
-        caracteristicaExiste = quarto.Caracteristicas.filter(function(item){
+        let caracteristicaExiste = quarto.Caracteristicas.filter(function(item){
             return item.id == caracteristica_id;});
 
         if(caracteristicaExiste.length){
@@ -70,6 +67,7 @@ exports.findByPk = async (id) => {
     
 };
 exports.filtrar = async (data_inicial) => {
-    return QuartoDAO.findByDisponibilidade(data_inicial);
+    let quartosDisponiveis = await QuartoDAO.findByDisponibilidade(data_inicial);
+    console.log(quartosDisponiveis);
     
 };

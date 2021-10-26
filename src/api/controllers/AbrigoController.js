@@ -8,11 +8,11 @@ const UsuarioServices = require('../services/UsuarioService');
 //Adiciona uma nova instancia da entidade.
 exports.create = async (request, response, next) => {
 	try {
-		abrigo = request.body;
+		let abrigo = request.body;
 
-		const instancia = await GenericServices.create(entity,request.body);
+		const instancia = await GenericServices.create(entity,abrigo);
 		if(instancia){
-			const usuario = UsuarioServices.setAbrigo(request.usuario_id, instancia.id);
+			await UsuarioServices.setAbrigo(request.usuario_id, instancia.id);
 		}
 		return (instancia ? response.status(status.CREATED).send(instancia) : response.status(status.BAD_REQUEST).send());
 
@@ -25,7 +25,7 @@ exports.create = async (request, response, next) => {
 exports.solicitarMembro = async (request, response, next) => {
 	try {
 		const instancia = await AbrigoServices.solicitarMembro(request.usuario_id, request.body.abrigo_id);
-		console.log(instancia);
+		
 		return (instancia ? response.status(status.OK).send(instancia) : response.status(status.NOT_FOUND).send());
 	} catch (error) { 
 		next(error);  
@@ -81,7 +81,7 @@ exports.findAll = async (request, response, next) => {
 		return response.status(status.OK).send(instancias);
 
 	} catch (error) {
-		throw  error;
+		next(error);  
 	}
 };
 

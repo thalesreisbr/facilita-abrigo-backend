@@ -17,12 +17,12 @@ exports.create = async (model, object) => {
 
 exports.aprovar = async (id) => {  
     try {
-		instituicao = await InstituicaoDAO.findByPk(id);
+		let instituicao = await InstituicaoDAO.findByPk(id);
 
         let user_owner = instituicao.funcionarios[0];
 
         user_owner.role = Role.OWNER;
-        usuario_aprovado = await UsuarioService.setInstituicao( user_owner.id,instituicao.id);
+        let usuario_aprovado = await UsuarioService.setInstituicao( user_owner.id,instituicao.id);
 
 
 		await InstituicaoDAO.aprovar(id, !instituicao.aprovado)
@@ -79,7 +79,7 @@ exports.aprovarUsuario = async (usuarioAprovador_id, usuario_id) => {
             usuarioUpdate = {
                 role: Role.MEMBER
             }
-            const result = await UsuarioService.update(usuarioUpdate, usuario.id);
+            await UsuarioService.update(usuarioUpdate, usuario.id);
 
             return {"msg":usuario.nome+" foi aprovado"};
         }

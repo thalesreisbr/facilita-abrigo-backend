@@ -36,6 +36,7 @@ exports.create = async (request, response) => {
 		return this.login(request, response);
 
 	} catch (error) { 
+        console.log(error);
 		throw error;  
 	}
     

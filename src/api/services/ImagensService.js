@@ -21,6 +21,7 @@ exports.adicionarImagens = async (imagens, quarto_id) => {
         return await Imagens.bulkCreate(body);
         
     } catch (error) {
+        console.log(error);
         throw error;
     }
     

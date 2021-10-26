@@ -24,6 +24,7 @@ exports.aprovar = async (id, valor) => {
 			where:{"id":id}
 		})
 	}catch (error) {
+		console.log(error);
 		throw error;
 	}
 };
