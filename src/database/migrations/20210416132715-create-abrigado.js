@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Instituicao', {
+    return queryInterface.createTable('Abrigado', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -13,29 +13,21 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      telefone :{
+      telefone: {
+        allowNull: true,
+        type: Sequelize.STRING,
+      },
+      documento: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      cep: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
-      bairro: {
+      sexo: {
         allowNull: true,
         type: Sequelize.STRING,
       },
-      rua: {
+      data_de_nascimento: {
         allowNull: true,
-        type: Sequelize.STRING,
-      },
-      numero: {
-        allowNull: true,
-        type: Sequelize.INTEGER,
-      },
-      aprovado :{
-        defaultValue: false,
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.DATE,
       },
       created_at: {
         allowNull: true,
@@ -56,7 +48,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Instituicao');
+    return queryInterface.dropTable('Abrigado');
 
   }
 };

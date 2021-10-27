@@ -10,11 +10,15 @@ module.exports = {
         type: Sequelize.INTEGER,
       },  
       nome: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.STRING,
       },
       descricao :{
-        allowNull: true,
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      telefone :{
+        allowNull: false,
         type: Sequelize.STRING,
       },
       aprovado :{

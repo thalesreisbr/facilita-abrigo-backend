@@ -18,7 +18,7 @@ class Estadia extends Model {
   static associate(models){
     this.belongsTo(models.Quarto, { foreignKey:"quarto_id", as :"quarto"});
     this.belongsTo(models.Instituicao, { foreignKey:"instituicao_id", as :"insituicao"});
-    this.belongsTo(models.Usuario, { foreignKey:"abrigado_id", as :"abrigado"});
+    this.belongsTo(models.Abrigado, { foreignKey:"abrigado_id", as :"abrigado"});
   }
 }
 module.exports = Estadia;

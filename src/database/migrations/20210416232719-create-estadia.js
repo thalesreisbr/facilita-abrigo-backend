@@ -24,7 +24,7 @@ module.exports = {
       abrigado_id: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        references: { model: 'Usuario', key: 'id' },
+        references: { model: 'Abrigado', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       }, 

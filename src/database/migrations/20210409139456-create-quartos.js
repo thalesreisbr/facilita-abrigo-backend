@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },  
       nome: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.STRING,
       },
       descricao :{
@@ -18,11 +18,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       capacidade: {
-        allowNull: true,
-        type: Sequelize.INTEGER
-      },
-      vagas_preenchidas: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       abrigo_id: {

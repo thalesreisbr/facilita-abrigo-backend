@@ -8,6 +8,7 @@ class Usuario extends Model {
         email: DataTypes.STRING,
         senha: DataTypes.STRING,
         cpf: DataTypes.STRING,
+        telefone: DataTypes.STRING,
         sexo: DataTypes.STRING,
         data_de_nascimento: DataTypes.DATE,
         token: DataTypes.STRING,

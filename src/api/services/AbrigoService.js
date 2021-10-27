@@ -59,7 +59,7 @@ exports.aprovarCriacao = async (id) => {
             let user_owner = abrigo.funcionarios[0];
             await UsuarioService.setRole(user_owner.id, Role.OWNER);
 
-		    return await AbrigosDAO.aprovar(id, !abrigo.aprovado);
+		    return await AbrigosDAO.aprovar(id, !abrigo.aprovado);  
         
 		
 	} catch (error) {

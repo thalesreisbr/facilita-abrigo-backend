@@ -7,6 +7,7 @@ class Abrigo extends Model {
         nome: DataTypes.STRING,
         descricao: DataTypes.STRING,
         aprovado: DataTypes.BOOLEAN,
+        telefone: DataTypes.STRING,
         cep: DataTypes.STRING,
         bairro: DataTypes.STRING,
         rua: DataTypes.STRING,

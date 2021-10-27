@@ -10,6 +10,7 @@ const QuartoController = require('./api/controllers/QuartoController');
 const CaracteristicaController = require('./api/controllers/CaracteristicaController');
 const ImagensController = require('./api/controllers/ImagensController');
 const EstadiaController = require('./api/controllers/EstadiaController');
+const AbrigadoController = require('./api/controllers/AbrigadoController');
 
 
 routes.post("/api/instituicoes", AUTH, InstituicaoController.create);
@@ -57,22 +58,30 @@ routes.put("/api/caracteristica/:id", AUTH, CaracteristicaController.update);
 routes.delete("/api/caracteristica/:id", AUTH, CaracteristicaController.delete);
 
 //Rotas para o controlador exemplo
-routes.post("/api/imagens",UPLOAD, ImagensController.create);
-routes.get("/api/imagens/paginate", ImagensController.findAllWithPagination);
-routes.get("/api/imagens/:id", ImagensController.findByPk);
-routes.get("/api/imagens", ImagensController.findAll);
+routes.post("/api/imagens",AUTH, UPLOAD, ImagensController.create);
+routes.get("/api/imagens/paginate",AUTH, ImagensController.findAllWithPagination);
+routes.get("/api/imagens/:id", AUTH,ImagensController.findByPk);
+routes.get("/api/imagens",AUTH, ImagensController.findAll);
 routes.put("/api/imagens/:id", ImagensController.update);
 routes.delete("/api/imagens/:id", ImagensController.delete);
 
 
 //Rotas para o controlador exemplo
-routes.post("/api/estadia", EstadiaController.create);
-routes.get("/api/estadia/paginate", EstadiaController.findAllWithPagination);
-routes.get("/api/estadia", EstadiaController.findAll);
-routes.get("/api/estadia/:id", EstadiaController.findByPk);
-routes.put("/api/estadia/:id", EstadiaController.update);
-routes.delete("/api/estadia/:id", EstadiaController.delete);
+routes.post("/api/estadia",AUTH, EstadiaController.create);
+routes.get("/api/estadia/paginate",AUTH, EstadiaController.findAllWithPagination);
+routes.get("/api/estadia",AUTH, EstadiaController.findAll);
+routes.get("/api/estadia/:id",AUTH, EstadiaController.findByPk);
+routes.put("/api/estadia/:id",AUTH, EstadiaController.update);
+routes.delete("/api/estadia/:id",AUTH, EstadiaController.delete);
 
+
+//Rotas para o controlador exemplo
+routes.post("/api/abrigado",AUTH, AbrigadoController.create);
+routes.get("/api/abrigado/paginate",AUTH, AbrigadoController.findAllWithPagination);
+routes.get("/api/abrigado",AUTH, AbrigadoController.findAll);
+routes.get("/api/abrigado/:id",AUTH, AbrigadoController.findByPk);
+routes.put("/api/abrigado/:id",AUTH, AbrigadoController.update);
+routes.delete("/api/abrigado/:id",AUTH, AbrigadoController.delete);
 
 
 // //Rotas para o controlador exemplo

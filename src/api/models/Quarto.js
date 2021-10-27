@@ -7,7 +7,6 @@ class Quarto extends Model {
         nome: DataTypes.STRING,
         descricao: DataTypes.STRING,
         capacidade: DataTypes.INTEGER,
-        vagasPreenchidas: DataTypes.INTEGER,
         abrigo_id: DataTypes.INTEGER
     },{
       sequelize,
