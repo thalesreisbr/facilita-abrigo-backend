@@ -4,6 +4,7 @@ const AbrigosDAO = require('../DAO/AbrigoDAO');
 const entity = require("../models/Abrigo");
 const UsuarioService = require("../services/UsuarioService");
 const Role = require('../../helpers/enums/Role');
+const Abrigo = require("../models/Abrigo");
 
 exports.create = async (model, object) => {  
     return GenericDAO.create(model,object);
@@ -49,15 +50,17 @@ exports.findAbrigos = async(limit, page, filter) =>{
     return AbrigosDAO.findAbrigos(limit, page, filter);
 }
 
-exports.aprovarCriacao = async (id, role_id) => {  
+exports.aprovarCriacao = async (id) => {  
     try {
-        if(role_id == Role.ADM){
-            abrigo = await GenericDAO.findByPk(entity, id);
+        
+            let abrigo = await AbrigosDAO.findByPk(id);
+
+
+            let user_owner = abrigo.funcionarios[0];
+            await UsuarioService.setRole(user_owner.id, Role.OWNER);
 
 		    return await AbrigosDAO.aprovar(id, !abrigo.aprovado);
-        }else
-            throw {status:status.NOT_FOUND, msg:"Crendencias Invalidas"};
-		
+        
 		
 	} catch (error) {
         console.log(error);

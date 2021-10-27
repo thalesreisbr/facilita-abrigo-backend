@@ -72,6 +72,14 @@ exports.findByPk = async (id) => {
 };
 exports.filtrar = async (data_inicial) => {
     let quartosDisponiveis = await QuartoDAO.findByDisponibilidade(data_inicial);
-    console.log(quartosDisponiveis);
-    
+
+    let quartos = [];
+
+    for(let i =0; i<quartosDisponiveis.length; i++){
+        quartos.push(await QuartoDAO.findByPk(quartosDisponiveis[i].id));
+    }
+    quartos  = quartos.filter( function(){
+        
+    });
+    return quartos;
 };

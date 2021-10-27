@@ -4,6 +4,7 @@ const Instituicao = require('../models/Instituicao');
 const UsuarioService = require('../services/UsuarioService');
 const entity = require("../models/Instituicao");
 const Role = require('../../helpers/enums/Role');
+const Usuario = require('../models/Usuario');
 
 exports.findInstituicoesNotAprove = async() =>{
     return InstituicaoDAO.findInstituicoesNotAprove();
@@ -20,9 +21,7 @@ exports.aprovar = async (id) => {
 		let instituicao = await InstituicaoDAO.findByPk(id);
 
         let user_owner = instituicao.funcionarios[0];
-
-        user_owner.role = Role.OWNER;
-        let usuario_aprovado = await UsuarioService.setInstituicao( user_owner.id,instituicao.id);
+        await UsuarioService.setRole(user_owner.id, Role.OWNER);
 
 
 		await InstituicaoDAO.aprovar(id, !instituicao.aprovado)

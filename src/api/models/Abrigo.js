@@ -18,7 +18,7 @@ class Abrigo extends Model {
 
   }
   static associate(models){
-      
+    this.hasMany(models.Quarto, {foreignKey:"abrigo_id", as :"quartos"});  
     this.hasMany(models.Usuario, {foreignKey:"abrigo_id", as :"funcionarios"});
   }
 }

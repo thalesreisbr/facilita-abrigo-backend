@@ -183,6 +183,24 @@ exports.setInstituicao = async (usuario_id, instituicao_id) => {
 		throw error;
 	}
 };
+exports.setRole = async (usuario_id, role) => {
+	try {
+
+		const instancia = await Usuario.findByPk(usuario_id);
+		if(instancia){
+			await Usuario.update({"role":role}, { where: { id: instancia.id }});
+				return { updated_id: instancia.id }
+		
+		}else{
+			return null;
+		}
+
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
+};
+
 exports.atualizarSenha = async (id, senha) => {
 	try {
 

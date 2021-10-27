@@ -118,6 +118,11 @@ exports.setInstituicao = async (usuario_id, abrigo_id) => {
     return await UsuarioDAO.setInstituicao(usuario_id, abrigo_id);
     
 };
+exports.setRole = async (usuario_id, abrigo_id) => {
+    
+    return await UsuarioDAO.setRole(usuario_id, abrigo_id);
+    
+};
 exports.delete = async (id) => {
     return GenericDAO.destroy(Usuario,id);
     
