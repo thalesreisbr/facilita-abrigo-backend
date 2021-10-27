@@ -33,7 +33,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\":\"Thales Augusto Reis\",\n    \"email\":\"tales.reis@unifei.edu\",\n    \"senha\": \"senha123\",\n    \"sexo\": \"masculino\",\n    \"cpf\": \"133.730.856-08\",    \n    \"data_de_nascimento\": \"2021-09-01 01:24:55.90\"\n}",
+							"raw": "{\n    \"nome\":\"Thales Augusto Reis\",\n    \"email\":\"tales.reis@unifei.edu\",\n    \"senha\": \"senha123\",\n    \"telefone\": \"3521-8683\",\n    \"sexo\": \"masculino\",\n    \"cpf\": \"651.033.920-03\",    \n    \"data_de_nascimento\": \"2021-09-01 01:24:55.90\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -80,7 +80,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\":\"ownerAbrigo@email.com\",\n    \"senha\": \"senha123\"\n}",
+							"raw": "{\n    \"email\":\"adm@email.com\",\n    \"senha\": \"senha123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -155,7 +155,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\":\"Thales Augusto Reis\",\n    \"email\":\"tales.reis@unifei.edu\",\n    \"sexo\": \"masculino\",\n    \"cpf\": \"133.730.856-08\",\n    \"data_de_nascimento\": \"2021-09-01 01:24:55.90\"\n}\n",
+							"raw": "{\n    \"nome\":\"Thales Augusto Reis\",\n    \"email\":\"tales.reis@unifei.edu\",\n    \"telefone\": \"3521-8683\",\n    \"sexo\": \"masculino\",\n    \"cpf\": \"133.730.856-08\",\n    \"data_de_nascimento\": \"2021-09-01 01:24:55.90\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -195,7 +195,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\":\"CMTA Itajuba\",\n    \"descricao\": \"Abrigo para morador de rua\",\n    \"cep\": \"37500200\",\n    \"bairro\": \"BPS\",\n    \"rua\": \"Bps\",\n    \"numero\":1\n}",
+							"raw": "{\n    \"nome\":\"CMTA Itajuba\",\n    \"descricao\": \"Abrigo para morador de rua\",\n    \"telefone\": \"3521-8683\",\n    \"cep\": \"37500200\",\n    \"bairro\": \"BPS\",\n    \"rua\": \"Bps\",\n    \"numero\":1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -316,7 +316,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"abrigo_id\":1\n       \n}",
+							"raw": "{\n    \"abrigo_id\":4\n       \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -421,7 +421,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\":\"ACMTA Itajuba\",\n    \"descricao\": \"Abrigo para morador de rua\",\n    \"cep\": \"37500200\",\n    \"bairro\": \"BPS\",\n    \"rua\": \"Bps\",\n    \"numero\":1\n}",
+							"raw": "{\n    \"nome\":\"ACMTA Itajuba\",\n    \"descricao\": \"Abrigo para morador de rua\",\n    \"telefone\": \"3521-8683\",\n    \"cep\": \"37500200\",\n    \"bairro\": \"BPS\",\n    \"rua\": \"Bps\",\n    \"numero\":1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -487,7 +487,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\":\"Hospital escola\",\n    \"cep\": \"37500200\",\n    \"bairro\": \"BPS\",\n    \"rua\": \"Bps\",\n    \"numero\":1\n}",
+							"raw": "{\n    \"nome\":\"Hospital escola\",\n    \"telefone\": \"3521-8683\",\n    \"cep\": \"37500200\",\n    \"bairro\": \"BPS\",\n    \"rua\": \"Bps\",\n    \"numero\":1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -782,7 +782,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\":\"Quarto\",\n    \"descricao\": \"Quarto para homem\",\n    \"capacidade\":10,\n    \"vagasPreenchidas\": 1,\n    \"abrigo_id\":1\n}",
+							"raw": "{\n    \"nome\":\"Quarto\",\n    \"descricao\": \"Quarto para homem\",\n    \"capacidade\":4,\n    \"abrigo_id\": 1\n    \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -815,7 +815,7 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:3001/api/quartos/1",
+							"raw": "localhost:3001/api/quartos/3",
 							"host": [
 								"localhost"
 							],
@@ -823,7 +823,7 @@
 							"path": [
 								"api",
 								"quartos",
-								"1"
+								"3"
 							]
 						}
 					},
@@ -949,7 +949,7 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:3001/api/quartos/filtrar?data_inicial=2021-11-28 18:25:20.239-0",
+							"raw": "localhost:3001/api/quartos/filtrar?data_inicial=2022-11-28 18:25:20.239-0",
 							"host": [
 								"localhost"
 							],
@@ -967,7 +967,7 @@
 								},
 								{
 									"key": "data_inicial",
-									"value": "2021-11-28 18:25:20.239-0"
+									"value": "2022-11-28 18:25:20.239-0"
 								}
 							]
 						}
@@ -1066,7 +1066,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\":\"Tuberculose\",\n    \"descricao\":\"carrocinha\"\n}",
+							"raw": "{\n    \"nome\":\"Tuberculose\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1215,7 +1215,7 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:3001/api/caracteristica/1?=",
+							"raw": "localhost:3001/api/caracteristica/1",
 							"host": [
 								"localhost"
 							],
@@ -1224,12 +1224,6 @@
 								"api",
 								"caracteristica",
 								"1"
-							],
-							"query": [
-								{
-									"key": "",
-									"value": ""
-								}
 							]
 						}
 					},
@@ -1424,7 +1418,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"data_inicio\":\"2021-09-25 18:25:20.239-03\",\n    \"data_saida\":\"2021-10-25 18:25:20.239-03\",\n    \"status\": \"em espera\",\n    \"abrigado_id\": 1,\n    \"instituicao_id\": 1,\n    \"quarto_id\": 1\n}",
+							"raw": "{\n    \"data_inicio\":\"2021-01-25 18:25:20.239-03\",\n    \"data_saida\":\"2021-10-25 18:25:20.239-03\",\n    \"status\": \"em espera\",\n    \"abrigado_id\": 1,\n    \"instituicao_id\": 1,\n    \"quarto_id\": 2\n    \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1483,14 +1477,15 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:3001/api/estadia?limit=5&page=0",
+							"raw": "localhost:3001/api/estadia/paginate?limit=5&page=0",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
 								"api",
-								"estadia"
+								"estadia",
+								"paginate"
 							],
 							"query": [
 								{
@@ -1518,14 +1513,14 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:3000/api/ex",
+							"raw": "localhost:3001/api/estadia",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3001",
 							"path": [
 								"api",
-								"ex"
+								"estadia"
 							]
 						}
 					},
@@ -1578,14 +1573,207 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:3000/api/estadia/3",
+							"raw": "localhost:3001/api/estadia/2",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3001",
 							"path": [
 								"api",
 								"estadia",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Abrigado",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\":\"Joao\",\n    \"documento\":\"133.730.856-08\",\n    \"telefone\": \"35218689\",\n    \"sexo\": \"masculino\",\n    \"data_de_nascimento\": \"2021-09-01 01:24:55.90\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/api/abrigado",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"abrigado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find by pk",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:3001/api/abrigado/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"abrigado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find all paginate",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3001/api/abrigado/paginate?limit=5&page=0",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"abrigado",
+								"paginate"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3001/api/abrigado",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"abrigado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\":\"Pomada\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/api/abrigado/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"abrigado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3001/api/abrigado/3",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"abrigado",
 								"3"
 							]
 						}
