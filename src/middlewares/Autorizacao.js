@@ -60,7 +60,8 @@ exports.REFRESH = async (request, response, next) => {
         return next();
     } catch (error) {
         request.refresh_token = undefined;
-        return next();
+        return response.status(status.UNAUTHORIZED).send({ msg: 'Refresh Token Invalido!', error });
+        // return next();
     }
 };
 //Realiza a checagem da validade do refresh_token, caso ele exista

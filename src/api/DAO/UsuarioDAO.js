@@ -11,7 +11,7 @@ exports.cadastrar = async (credenciais) => {
 		return ((instancia) ? instancia : null);
 
 	} catch (error) {
-		console.err(error); 
+		console.log(error); 
 		throw error; 
 	}
 };
@@ -24,7 +24,7 @@ exports.buscarCredenciais = async (email) => {
 		return (instancia ? instancia : null);
 
 	} catch (error) { 
-		console.err(error);
+		console.log(error);
 		throw error;
 	}
 };
@@ -53,7 +53,7 @@ exports.atualizarRefreshToken = async (id, token_refresh) => {
 		}
 
 	} catch (error) {
-		console.err(error);
+		console.log(error);
 		throw error;
 	}
 };
@@ -69,7 +69,7 @@ exports.findByPk = async (id) => {
 		return (instancia ? instancia : null);
 
 	} catch (error) { 
-		console.err(error);
+		console.log(error);
 		throw error;
 	}
 };
@@ -81,7 +81,7 @@ exports.buscarPeloEmail = async (email) => {
 		return (instancia ? instancia : null);
 
 	} catch (error) { 
-		console.err(error);
+		console.log(error);
 		throw error;
 	}
 };
@@ -111,7 +111,7 @@ exports.buscarTudo = async (limite, pagina) => {
 		return { total, pagina, totalPaginas, limite, offset, instancias };
 
 	} catch (error) {
-		console.err(error);
+		console.log(error);
 		throw error;
 	}
 };

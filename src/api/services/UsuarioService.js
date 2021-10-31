@@ -76,7 +76,7 @@ exports.login = async (request, response) => {
 
 		const token = await new SignJWT(payload)
 		.setProtectedHeader({alg: 'ES256'})
-		.setExpirationTime('1h')
+		.setExpirationTime('45m')
 		.sign(privateKey);
 
         refresh_token = await new SignJWT({})

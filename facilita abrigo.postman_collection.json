@@ -74,13 +74,12 @@
 							{
 								"key": "authorization",
 								"type": "text",
-								"value": "Bearer {{refresh_token_usuario}}",
-								"disabled": true
+								"value": "Bearer {{refresh_token_usuario}}"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\":\"adm@email.com\",\n    \"senha\": \"senha123\"\n}",
+							"raw": "{\n\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -100,7 +99,7 @@
 							],
 							"query": [
 								{
-									"key": "refresh_token",
+									"key": "",
 									"value": null,
 									"disabled": true
 								}
