@@ -21,6 +21,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
+      cidade :{
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
       bairro: {
         allowNull: true,
         type: Sequelize.STRING,

@@ -7,6 +7,7 @@ class Instituicao extends Model {
         nome: DataTypes.STRING,
         telefone: DataTypes.STRING,
         cep: DataTypes.STRING,
+        cidade: DataTypes.STRING,
         bairro: DataTypes.STRING,
         rua: DataTypes.STRING,
         numero: DataTypes.INTEGER,

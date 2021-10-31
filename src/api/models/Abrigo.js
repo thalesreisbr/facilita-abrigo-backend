@@ -9,6 +9,7 @@ class Abrigo extends Model {
         aprovado: DataTypes.BOOLEAN,
         telefone: DataTypes.STRING,
         cep: DataTypes.STRING,
+        cidade: DataTypes.STRING,
         bairro: DataTypes.STRING,
         rua: DataTypes.STRING,
         numero: DataTypes.INTEGER
