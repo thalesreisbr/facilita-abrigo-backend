@@ -67,10 +67,10 @@ exports.findAllWithPagination = async (request, response, next) => {
 };
 //Busca todas as instancias da entidade.
 exports.filtrar = async (request, response, next) => {
-	let { limit, data_inicial } = request.query;
+	let { limit, data_inicial, cidade } = request.query;
 
 	try {
-		const instancias = await QuartoServices.filtrar(data_inicial);
+		const instancias = await QuartoServices.filtrar(data_inicial, cidade);
 		
 		return response.status(status.OK).send(instancias);
 	} catch (error) {

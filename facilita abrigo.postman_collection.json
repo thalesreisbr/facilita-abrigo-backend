@@ -74,12 +74,13 @@
 							{
 								"key": "authorization",
 								"type": "text",
-								"value": "Bearer {{refresh_token_usuario}}"
+								"value": "Bearer {{refresh_token_usuario}}",
+								"disabled": true
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\n}",
+							"raw": "{\n    \"email\":\"adm@email.com\",\n    \"senha\":\"senha123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -194,7 +195,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\":\"CMTA Itajuba\",\n    \"descricao\": \"Abrigo para morador de rua\",\n    \"telefone\": \"3521-8683\",\n    \"cep\": \"37500200\",\n    \"bairro\": \"BPS\",\n    \"rua\": \"Bps\",\n    \"numero\":1\n}",
+							"raw": "{\n    \"nome\":\"CMTA Itajuba\",\n    \"descricao\": \"Abrigo para morador de rua\",\n    \"telefone\": \"3521-8683\",\n    \"cep\": \"37500200\",\n    \"cidade\": \"itajuba\",\n    \"bairro\": \"BPS\",\n    \"rua\": \"Bps\",\n    \"numero\":1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -420,7 +421,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\":\"ACMTA Itajuba\",\n    \"descricao\": \"Abrigo para morador de rua\",\n    \"telefone\": \"3521-8683\",\n    \"cep\": \"37500200\",\n    \"bairro\": \"BPS\",\n    \"rua\": \"Bps\",\n    \"numero\":1\n}",
+							"raw": "{\n    \"nome\":\"CMTA Itajuba\",\n    \"descricao\": \"Abrigo para morador de rua\",\n    \"telefone\": \"3521-8683\",\n    \"cep\": \"37500200\",\n    \"cidade\": \"itajuba\",\n    \"bairro\": \"BPS\",\n    \"rua\": \"Bps\",\n    \"numero\":1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -486,7 +487,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\":\"Hospital escola\",\n    \"telefone\": \"3521-8683\",\n    \"cep\": \"37500200\",\n    \"bairro\": \"BPS\",\n    \"rua\": \"Bps\",\n    \"numero\":1\n}",
+							"raw": "{\n    \"nome\":\"Hospital escola\",\n    \"telefone\": \"3521-8683\",\n    \"cep\": \"37500200\",\n    \"cidade\":\"passos\",\n    \"bairro\": \"BPS\",\n    \"rua\": \"Bps\",\n    \"numero\":1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -730,7 +731,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\":\"Hospital Qscola\",\n    \"cep\": \"37500200\",\n    \"bairro\": \"BPS\",\n    \"rua\": \"Bps\",\n    \"numero\":1\n}",
+							"raw": "{\n    \"nome\":\"Hospital escola\",\n    \"telefone\": \"3521-8683\",\n    \"cep\": \"37500200\",\n    \"cidade\":\"passos\",\n    \"bairro\": \"BPS\",\n    \"rua\": \"Bps\",\n    \"numero\":1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -781,7 +782,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\":\"Quarto\",\n    \"descricao\": \"Quarto para homem\",\n    \"capacidade\":4,\n    \"abrigo_id\": 1\n    \n}",
+							"raw": "{\n    \"nome\":\"Quarto\",\n    \"descricao\": \"Quarto para homem\",\n    \"capacidade\":4,\n    \"abrigo_id\": 3\n    \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -948,7 +949,7 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:3001/api/quartos/filtrar?data_inicial=2022-11-28 18:25:20.239-0",
+							"raw": "localhost:3001/api/quartos/filtrar?data_inicial=2021-10-25 18:25:20.239-0&cidade=itajuba",
 							"host": [
 								"localhost"
 							],
@@ -966,7 +967,11 @@
 								},
 								{
 									"key": "data_inicial",
-									"value": "2022-11-28 18:25:20.239-0"
+									"value": "2021-10-25 18:25:20.239-0"
+								},
+								{
+									"key": "cidade",
+									"value": "itajuba"
 								}
 							]
 						}
@@ -1417,7 +1422,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"data_inicio\":\"2021-01-25 18:25:20.239-03\",\n    \"data_saida\":\"2021-10-25 18:25:20.239-03\",\n    \"status\": \"em espera\",\n    \"abrigado_id\": 1,\n    \"instituicao_id\": 1,\n    \"quarto_id\": 2\n    \n}",
+							"raw": "{\n    \"data_inicio\":\"2021-01-25 18:25:20.239-03\",\n    \"data_saida\":\"2021-10-25 18:25:20.239-03\",\n    \"status\": \"em espera\",\n    \"abrigado_id\": 4,\n    \"instituicao_id\": 2,\n    \"quarto_id\": 1\n    \n}",
 							"options": {
 								"raw": {
 									"language": "json"
