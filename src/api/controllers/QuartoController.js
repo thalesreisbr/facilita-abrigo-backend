@@ -43,7 +43,7 @@ exports.deleteCaracteristica = async (request, response, next) => {
 	try {
 
 		const instancia = await QuartoServices.deleteCaracteristica(request.usuario_id, request.params.id, request.body.caracteristica_id);
-		return (instancia ? response.status(status.OK).send(instancia) : response.status(status.NOT_FOUND).send());
+		return (instancia ? response.status(status.OK).send({deleted_id:request.params.id}) : response.status(status.NOT_FOUND).send());
 
 	} catch (error) { 
 		next(error);
@@ -67,10 +67,10 @@ exports.findAllWithPagination = async (request, response, next) => {
 };
 //Busca todas as instancias da entidade.
 exports.filtrar = async (request, response, next) => {
-	let { limit, data_inicial, cidade } = request.query;
-
+	let { data_inicial, cidade, caracteristicas } = request.query;
+	caracteristicas = caracteristicas.split(',');
 	try {
-		const instancias = await QuartoServices.filtrar(data_inicial, cidade);
+		const instancias = await QuartoServices.filtrar(data_inicial, cidade, caracteristicas);
 		
 		return response.status(status.OK).send(instancias);
 	} catch (error) {

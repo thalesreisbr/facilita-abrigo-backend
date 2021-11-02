@@ -20,6 +20,7 @@ exports.findByPk = async (id) => {
 			include: 
 				[{
 					model: Caracteristica,
+					as: "caracteristicas" 
 				},
 				{
 					model: Abrigo,
@@ -39,7 +40,7 @@ exports.findByPk = async (id) => {
 		throw error;
 	}
 };
-exports.findByDisponibilidade = async (dataInicial) => {
+exports.findByDisponibilidadeAndCidade = async (dataInicial, cidade) => {
 	try {
 	// 	const sql = `
 	// 	SELECT q.*, a.*, cq.*  FROM "Quarto" as q 
@@ -50,7 +51,8 @@ exports.findByDisponibilidade = async (dataInicial) => {
 	const sql = `
 		SELECT q.*  quarto, a.nome nome_abrigo, a.cep  FROM "Quarto" as q
 		INNER JOIN "Abrigo" as a ON q.abrigo_id = a.id
-		WHERE (SELECT COUNT(id) FROM "Estadia" as e WHERE  e.data_saida >  '${dataInicial}' AND e.quarto_id = q.id ) < q.capacidade;
+		WHERE (SELECT COUNT(id) FROM "Estadia" as e WHERE  e.data_saida >  '${dataInicial}' AND e.quarto_id = q.id ) < q.capacidade
+		AND a.cidade ~*'${cidade}';
 	`
 		return await sequelize.query(sql, {
 			type: sequelize.QueryTypes.SELECT

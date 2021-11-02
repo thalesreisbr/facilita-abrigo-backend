@@ -850,7 +850,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3001/api/quartos/1/caracteristica",
+							"raw": "localhost:3001/api/quartos/3/caracteristica",
 							"host": [
 								"localhost"
 							],
@@ -858,7 +858,7 @@
 							"path": [
 								"api",
 								"quartos",
-								"1",
+								"3",
 								"caracteristica"
 							]
 						}
@@ -949,7 +949,7 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:3001/api/quartos/filtrar?data_inicial=2021-10-25 18:25:20.239-0&cidade=itajuba",
+							"raw": "localhost:3001/api/quartos/filtrar?data_inicial=2021-10-25 18:25:20.239-0&cidade=itajuba&caracteristicas=1,2,3,4,5",
 							"host": [
 								"localhost"
 							],
@@ -972,6 +972,10 @@
 								{
 									"key": "cidade",
 									"value": "itajuba"
+								},
+								{
+									"key": "caracteristicas",
+									"value": "1,2,3,4,5"
 								}
 							]
 						}
