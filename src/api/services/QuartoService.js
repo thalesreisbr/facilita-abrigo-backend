@@ -6,6 +6,11 @@ const UsuarioService = require("../services/UsuarioService");
 
 const Role = require('../../helpers/enums/Role');
 
+
+exports.findAll = async () => {
+    return await QuartoDAO.findAll();
+}
+
 exports.addCaracteristica = async (usuario_id, quarto_id, caracteristicas_ids) => {
     try{
         let usuario = await UsuarioService.findByPk(usuario_id);

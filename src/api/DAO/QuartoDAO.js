@@ -40,6 +40,33 @@ exports.findByPk = async (id) => {
 		throw error;
 	}
 };
+exports.findAll = async (id) => {
+	try {
+
+		const instancia = await entity.findAll({
+			include: 
+				[{
+					model: Caracteristica,
+					as: "caracteristicas" 
+				},
+				{
+					model: Abrigo,
+					as: "abrigo",
+				},
+				{
+					model: Imagens,
+					as: "imagens",
+				},
+			]
+			
+		});
+		return (instancia ? instancia : null);
+
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
+};
 exports.findByDisponibilidadeAndCidade = async (dataInicial, cidade) => {
 	try {
 	// 	const sql = `

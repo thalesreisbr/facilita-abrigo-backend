@@ -43,8 +43,8 @@ routes.post("/api/quartos/:id/caracteristica", AUTH, QuartoController.addCaracte
 routes.delete("/api/quartos/:id/caracteristica", AUTH, QuartoController.deleteCaracteristica);
 routes.get("/api/quartos/paginate", AUTH, QuartoController.findAllWithPagination);
 routes.get("/api/quartos/filtrar", AUTH, QuartoController.filtrar);
-routes.get("/api/quartos/:id", AUTH, QuartoController.findByPk);
 routes.get("/api/quartos", AUTH, QuartoController.findAll);
+routes.get("/api/quartos/:id", AUTH, QuartoController.findByPk);
 routes.put("/api/quartos/:id", QuartoController.update);
 routes.delete("/api/quartos/:id", QuartoController.delete);
 
