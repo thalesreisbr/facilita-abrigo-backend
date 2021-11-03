@@ -22,23 +22,24 @@ exports.addCaracteristica = async (usuario_id, quarto_id, caracteristicas_ids) =
                 || (usuario.role  == Role.ADM))){
             throw {status:status.INTERNAL_SERVER_ERROR, msg:"sem permissao"};
         }
+        let trow = false;
         if(quarto.caracteristicas.length!=0){
-            await quarto.Caracteristicas.map(function(item){
-                caracteristicas_ids.map(async function(caract){
+            caracteristicas_ids.map(async function(caract){
+                await quarto.caracteristicas.map(function(item){
                     if(item.id == caract){
-                        throw {status:status.INTERNAL_SERVER_ERROR, msg:"Já existe essa caracteristica de id "+ caract+"cadastrada neste quarto"};
-                    }else{
-                        await QuartoDAO.addCaracteristica(quarto_id, caract);
+                        trow =  {status:status.INTERNAL_SERVER_ERROR, msg:"Já existe essa caracteristica de id "+ caract+"cadastrada neste quarto"};
                     }
-                });    
-                
+                });
+                if(!trow)    
+                    await QuartoDAO.addCaracteristica(quarto_id, caract);
              });
         }else{
             caracteristicas_ids.map(async function(caract){
                     await QuartoDAO.addCaracteristica(quarto_id, caract);
             });    
         }
-        
+        if(trow)
+            throw trow;
 
         return await caracteristicas_ids;
         
