@@ -5,6 +5,7 @@ const { Op } = require("sequelize");
 const database = require("../../config/database");
 const entity = require("../models/Abrigo");
 const Quarto = require('../models/Quarto');
+const Imagens = require('../models/Imagens')
 const Usuario = require('../models/Usuario');
 const Role = require("../../helpers/enums/Role");
 //Busca por uma instancia da entidade.
@@ -15,7 +16,11 @@ exports.findByPk = async (id) => {
 			include: 
 				[{
 					model: Quarto,
-					as:"quartos"
+					as:"quartos",
+					include:{
+						model: Imagens,
+						as: "imagens",
+					},
 				},
 				{
 					model: Usuario,
