@@ -5,6 +5,8 @@ const Quarto = require('../models/Quarto');
 const Usuario = require('../models/Usuario');
 const Role = require("../../helpers/enums/Role");
 const Estadia = require("../models/Estadia");
+const Imagens = require('../models/Imagens');
+const Abrigo = require("../models/Abrigo");
 
 exports.findByPk = async (id) => {
 	try {
@@ -13,7 +15,20 @@ exports.findByPk = async (id) => {
 			include: 
 				[{
 					model: Estadia,
-					as: "estadias"
+					as: "estadias",
+					include: 
+						[
+							{
+							model: Quarto,
+							as:"quarto",
+							include:[
+								{
+									model: Abrigo,
+									as: "abrigo",
+								},
+							],
+						},
+						]
 				},
 			]
 			
