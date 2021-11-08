@@ -17,10 +17,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      status: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
       abrigado_id: {
         type: Sequelize.INTEGER,
         allowNull: true,
