@@ -35,3 +35,14 @@ npm start
 
 nodemon src/index.js
 ```
+
+---
+## Atualizar o Banco de Dados
+
+```
+// Derrubar o banco
+npx sequelize-cli db:migrate:undo:all
+
+// Subir o banco
+npx sequelize-cli db:migrate
+```
