@@ -12,6 +12,7 @@ const Abrigo = require("../models/Abrigo");
 const Imagens = require("../models/Imagens")
 const sequelize = require("../../config/database");
 const Instituicao = require("../models/Instituicao");
+const Abrigado = require("../models/Abrigado");
 
 exports.findByPk = async (id) => {
 	try {
@@ -27,7 +28,7 @@ exports.findByPk = async (id) => {
 					as: "insituicao",
 				},
 				{
-					model: Usuario,
+					model: Abrigado,
 					as: "abrigado",
 				},
 			]
