@@ -44,7 +44,7 @@ exports.findAllWithPagination = async (request, response, next) => {
 exports.findAll = async (request, response, next) => {
 	try {
 
-		const instancias = await GenericServices.findAll(entity);
+		const instancias = await EstadiaService.findAll();
 		return response.status(status.OK).send(instancias);
 
 	} catch (error) {

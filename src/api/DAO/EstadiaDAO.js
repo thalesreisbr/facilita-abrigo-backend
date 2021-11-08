@@ -41,3 +41,31 @@ exports.findByPk = async (id) => {
 		throw error;
 	}
 };
+
+exports.findAll = async (id) => {
+	try {
+
+		const instancia = await entity.findAll({
+			include: 
+				[{
+					model: Quarto,
+					as: "quarto"
+				},
+				{
+					model: Instituicao,
+					as: "insituicao",
+				},
+				{
+					model: Abrigado,
+					as: "abrigado",
+				},
+			]
+			
+		});
+		return (instancia ? instancia : null);
+
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
+};

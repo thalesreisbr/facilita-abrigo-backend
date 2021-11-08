@@ -10,3 +10,7 @@ exports.findByPk = async (id) => {
     return EstadiaDAO.findByPk(id);
     
 };
+exports.findAll = async () => {
+    return EstadiaDAO.findAll();
+    
+};
