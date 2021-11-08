@@ -41,15 +41,118 @@ exports.findByPk = async (id) => {
 		throw error;
 	}
 };
+exports.findAll = async (abrigo_id, instituicao_id) => {
+	try {
 
-exports.findAll = async (id) => {
+		const instancia = await entity.findAll({
+			// where : [	
+			// 	{
+			// 		"instituicao_id":instituicao_id
+			// 	},
+			// ],
+			include: 
+				[{
+					model: Quarto,
+					as: "quarto",
+
+				},
+				{
+					model: Instituicao,
+					as: "insituicao",
+				},
+				{
+					model: Abrigado,
+					as: "abrigado",
+				},
+			]
+			
+		});
+		return (instancia ? instancia : null);
+
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
+};
+exports.findByAbrigoAndInsituicao = async (abrigo_id, instituicao_id) => {
+	try {
+
+		const instancia = await entity.findAll({
+			where : [	
+				{
+					"instituicao_id":instituicao_id
+				},
+			],
+			include: 
+				[{
+					model: Quarto,
+					as: "quarto",
+					where: {
+						"abrigo_id":abrigo_id,
+					}
+
+				},
+				{
+					model: Instituicao,
+					as: "insituicao",
+				},
+				{
+					model: Abrigado,
+					as: "abrigado",
+				},
+			]
+			
+		});
+		return (instancia ? instancia : null);
+
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
+};
+exports.findByAbrigo = async (abrigo_id) => {
 	try {
 
 		const instancia = await entity.findAll({
 			include: 
 				[{
 					model: Quarto,
-					as: "quarto"
+					as: "quarto",
+					where: {
+						"abrigo_id":abrigo_id,
+					}
+				},
+				{
+					model: Instituicao,
+					as: "insituicao",
+				},
+				{
+					model: Abrigado,
+					as: "abrigado",
+				},
+			]
+			
+		});
+		return (instancia ? instancia : null);
+
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
+};
+exports.findByInsituicao = async (instituicao_id) => {
+	try {
+
+		const instancia = await entity.findAll({
+			where : [	
+				{
+					"instituicao_id":instituicao_id
+				},
+			],
+			include: 
+				[{
+					model: Quarto,
+					as: "quarto",
 				},
 				{
 					model: Instituicao,
