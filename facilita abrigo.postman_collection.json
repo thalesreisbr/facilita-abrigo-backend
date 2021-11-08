@@ -782,7 +782,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\":\"Quarto\",\n    \"descricao\": \"Quarto para homem\",\n    \"capacidade\":4,\n    \"abrigo_id\": 3\n    \n}",
+							"raw": "{\n    \"nome\":\"Quarto\",\n    \"descricao\": \"Quarto para homem\",\n    \"capacidade\":4,\n    \"abrigo_id\": 1\n    \n    \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -815,7 +815,7 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:3001/api/quartos/3",
+							"raw": "localhost:3001/api/quartos/1",
 							"host": [
 								"localhost"
 							],
@@ -823,7 +823,7 @@
 							"path": [
 								"api",
 								"quartos",
-								"3"
+								"1"
 							]
 						}
 					},
@@ -842,7 +842,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"caracteristicas_ids\": [1,2]\n}",
+							"raw": "{\n    \"caracteristicas_ids\": [3,4]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -850,7 +850,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3001/api/quartos/3/caracteristica",
+							"raw": "localhost:3001/api/quartos/2/caracteristica",
 							"host": [
 								"localhost"
 							],
@@ -858,7 +858,7 @@
 							"path": [
 								"api",
 								"quartos",
-								"3",
+								"2",
 								"caracteristica"
 							]
 						}
@@ -878,7 +878,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"caracteristica_id\": 2\n}",
+							"raw": "{\n    \"caracteristica_id\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -886,7 +886,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3001/api/quartos/1/caracteristica",
+							"raw": "localhost:3001/api/quartos/2/caracteristica",
 							"host": [
 								"localhost"
 							],
@@ -894,7 +894,7 @@
 							"path": [
 								"api",
 								"quartos",
-								"1",
+								"2",
 								"caracteristica"
 							]
 						}
@@ -949,7 +949,7 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:3001/api/quartos/filtrar?data_inicial=2021-10-25 18:25:20.239-0&cidade=itajuba&caracteristicas=1,2,3,4,5",
+							"raw": "localhost:3001/api/quartos/filtrar?data_inicial=2021-10-25 18:25:20.239-0&cidade=itajuba&caracteristicas=1,2",
 							"host": [
 								"localhost"
 							],
@@ -975,7 +975,7 @@
 								},
 								{
 									"key": "caracteristicas",
-									"value": "1,2,3,4,5"
+									"value": "1,2"
 								}
 							]
 						}
@@ -986,13 +986,19 @@
 					"name": "find all",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "localhost:3000/api/quartos",
+							"raw": "localhost:3001/api/quartos",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3001",
 							"path": [
 								"api",
 								"quartos"
@@ -1249,7 +1255,7 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "Bearer {{token_operador}}",
+								"value": "Bearer {{token_usuario}}",
 								"type": "text"
 							}
 						],
@@ -1426,7 +1432,41 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"data_inicio\":\"2021-01-25 18:25:20.239-03\",\n    \"data_saida\":\"2021-10-25 18:25:20.239-03\",\n    \"status\": \"em espera\",\n    \"abrigado_id\": 4,\n    \"instituicao_id\": 2,\n    \"quarto_id\": 1\n    \n}",
+							"raw": "{\n    \"data_inicio\":\"2021-01-25 18:25:20.239-03\",\n    \"data_saida\":\"2021-10-25 18:25:20.239-03\",\n    \"abrigado_id\": 1,\n    \"instituicao_id\": 1,\n    \"quarto_id\": 2\n    \n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/api/estadia",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"estadia"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create evento",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"data_inicio\":\"2021-01-25 18:25:20.239-03\",\n    \"data_saida\":\"2021-10-25 18:25:20.239-03\",\n    \"abrigado_id\": 1,\n    \"instituicao_id\": 1,\n    \"quarto_id\": 2\n    \n    \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1451,9 +1491,15 @@
 					"name": "find by pk",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "localhost:3001/api/estadia/1?=Bearer {{token_usuario}}",
+							"raw": "localhost:3001/api/estadia/1",
 							"host": [
 								"localhost"
 							],
@@ -1465,8 +1511,9 @@
 							],
 							"query": [
 								{
-									"key": null,
-									"value": "Bearer {{token_usuario}}"
+									"key": "",
+									"value": "",
+									"disabled": true
 								}
 							]
 						}
@@ -1521,7 +1568,7 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:3001/api/estadia",
+							"raw": "localhost:3001/api/estadia?abrigo_id=3",
 							"host": [
 								"localhost"
 							],
@@ -1529,6 +1576,12 @@
 							"path": [
 								"api",
 								"estadia"
+							],
+							"query": [
+								{
+									"key": "abrigo_id",
+									"value": "3"
+								}
 							]
 						}
 					},
@@ -1581,7 +1634,7 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:3001/api/estadia/2",
+							"raw": "localhost:3001/api/estadia/12",
 							"host": [
 								"localhost"
 							],
@@ -1589,7 +1642,33 @@
 							"path": [
 								"api",
 								"estadia",
-								"2"
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete evento",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token_usuario}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3001/api/estadia/12",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"estadia",
+								"12"
 							]
 						}
 					},

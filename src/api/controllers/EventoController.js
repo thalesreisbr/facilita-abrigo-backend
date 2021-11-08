@@ -1,8 +1,6 @@
 const status = require("http-status");
 const GenericServices = require('../services/GenericService');
-const entity = require("../models/Estadia");
-const EstadiaService = require("../services/EstadiaService")
-const Evento = require('../models/Evento');
+const entity = require("../models/Evento");
 
 //Adiciona uma nova instancia da entidade.
 exports.create = async (request, response, next) => {
@@ -15,25 +13,12 @@ exports.create = async (request, response, next) => {
 		next(error);  
 	}
 };
-exports.createEvento = async (request, response, next) => {
-	try {
-		let body = {
-			estadia_id : request.params.id,
-			descricao: request.body.descricao
-		}
-		const instancia = await GenericServices.create(Evento, body);
-		return (instancia ? response.status(status.CREATED).send(instancia) : response.status(status.BAD_REQUEST).send());
-
-	} catch (error) { 
-		next(error);  
-	}
-};
 
 //Busca por uma instancia da entidade.
 exports.findByPk = async (request, response, next) => {
 	try {
 
-		const instancia = await EstadiaService.findByPk(request.params.id)
+		const instancia = await GenericServices.findByPk(entity,request.params.id)
 		return (instancia ? response.status(status.OK).send(instancia) : response.status(status.NOT_FOUND).send());
 
 	} catch (error) { 
@@ -58,8 +43,7 @@ exports.findAllWithPagination = async (request, response, next) => {
 exports.findAll = async (request, response, next) => {
 	try {
 
-		let {abrigo_id, instituicao_id} = request.query;
-		const instancias = await EstadiaService.findAll(abrigo_id, instituicao_id);
+		const instancias = await GenericServices.findAll(entity);
 		return response.status(status.OK).send(instancias);
 
 	} catch (error) {
@@ -83,17 +67,7 @@ exports.update = async (request, response, next) => {
 exports.delete = async (request, response, next) => {
 	try {
 
-		const result = await GenericServices.delete(entity,request.params.id)
-		return (result ? response.status(status.OK).send( {deleted_id:result} ) : response.status(status.NOT_FOUND).send());
-		
-	} catch (error) {
-		next(error);
-	}
-};
-exports.deleteEvento = async (request, response, next) => {
-	try {
-
-		const result = await GenericServices.delete(Evento,request.params.id)
+		const result = await GenericServices.excluir(request.params.id)
 		return (result ? response.status(status.OK).send( {deleted_id:result} ) : response.status(status.NOT_FOUND).send());
 		
 	} catch (error) {

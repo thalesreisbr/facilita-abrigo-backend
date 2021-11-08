@@ -16,6 +16,7 @@ const Caracteristica_Quartos = require('../api/models/Caracteristica_Quartos');
 const Imagens = require('../api/models/Imagens');
 const Estadia = require('../api/models/Estadia');
 const Abrigado = require('../api/models/Abrigado');
+const Evento = require('../api/models/Evento');
 
 Exemplo.init(connection);
 Instituicao.init(connection);
@@ -27,6 +28,7 @@ Caracteristica_Quartos.init(connection);
 Imagens.init(connection);
 Estadia.init(connection);
 Abrigado.init(connection);
+Evento.init(connection);
 
 Exemplo.associate(connection.models);
 Abrigo.associate(connection.models);
@@ -37,5 +39,6 @@ Caracteristica.associate(connection.models);
 Imagens.associate(connection.models);
 Estadia.associate(connection.models);
 Abrigado.associate(connection.models);
+Evento.associate(connection);
 
 module.exports = connection;

@@ -71,8 +71,11 @@ routes.post("/api/estadia",AUTH, EstadiaController.create);
 routes.get("/api/estadia/paginate",AUTH, EstadiaController.findAllWithPagination);
 routes.get("/api/estadia",AUTH, EstadiaController.findAll);
 routes.get("/api/estadia/:id",AUTH, EstadiaController.findByPk);
+routes.post("/api/estadia/:id/evento",AUTH, EstadiaController.createEvento);
 routes.put("/api/estadia/:id",AUTH, EstadiaController.update);
+routes.delete("/api/estadia/evento/:id",AUTH, EstadiaController.deleteEvento);
 routes.delete("/api/estadia/:id",AUTH, EstadiaController.delete);
+
 
 
 //Rotas para o controlador exemplo
