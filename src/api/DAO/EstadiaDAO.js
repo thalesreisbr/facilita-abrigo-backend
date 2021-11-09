@@ -105,6 +105,9 @@ exports.findByAbrigoAndInsituicao = async (abrigo_id, instituicao_id) => {
 					model: Abrigado,
 					as: "abrigado",
 				},
+			],
+			order: [
+				["data_inicio","DESC"]
 			]
 			
 		});
@@ -135,6 +138,9 @@ exports.findByAbrigo = async (abrigo_id) => {
 					model: Abrigado,
 					as: "abrigado",
 				},
+			],
+			order: [
+				["data_inicio","DESC"]
 			]
 			
 		});
@@ -167,6 +173,9 @@ exports.findByInsituicao = async (instituicao_id) => {
 					model: Abrigado,
 					as: "abrigado",
 				},
+			],
+			order: [
+				["data_inicio","DESC"]
 			]
 			
 		});
