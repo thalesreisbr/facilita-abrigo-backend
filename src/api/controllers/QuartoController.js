@@ -68,7 +68,8 @@ exports.findAllWithPagination = async (request, response, next) => {
 //Busca todas as instancias da entidade.
 exports.filtrar = async (request, response, next) => {
 	let { data_inicial, cidade, caracteristicas } = request.query;
-	caracteristicas = caracteristicas.split(',');
+	if(caracteristicas)
+		caracteristicas = caracteristicas.split(',');
 	try {
 		const instancias = await QuartoServices.filtrar(data_inicial, cidade, caracteristicas);
 		

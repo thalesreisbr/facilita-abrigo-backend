@@ -67,18 +67,19 @@ exports.findAll = async (id) => {
 		throw error;
 	}
 };
-exports.findByDisponibilidadeAndCidade = async (dataInicial, cidade) => {
+exports.findByDisponibilidadeAndCidade = async (data_inicio, cidade) => {
 	try {
 	// 	const sql = `
 	// 	SELECT q.*, a.*, cq.*  FROM "Quarto" as q 
 	// 	INNER JOIN "Abrigo" as a ON q.abrigo_id = a.id
 	// 	INNER JOIN "Caracteristica_Quartos" as cq ON cq.quarto_id = q.id
-	// 	WHERE (SELECT COUNT(id) FROM "Estadia" as e WHERE  e.data_saida >  '${dataInicial}' AND e.quarto_id = q.id ) < q.capacidade;
+	// 	WHERE (SELECT COUNT(id) FROM "Estadia" as e WHERE  e.data_saida >  '${data_inicio}' AND e.quarto_id = q.id ) < q.capacidade;
 	// `
 	const sql = `
 		SELECT q.*  quarto, a.nome nome_abrigo, a.cep  FROM "Quarto" as q
 		INNER JOIN "Abrigo" as a ON q.abrigo_id = a.id
-		WHERE (SELECT COUNT(id) FROM "Estadia" as e WHERE  e.data_saida >  '${dataInicial}' AND e.quarto_id = q.id ) < q.capacidade
+		WHERE (SELECT COUNT(id) FROM "Estadia" as e WHERE  e.data_saida >  '${data_inicio}' AND e.data_inicio < '${data_inicio}' 
+			AND e.quarto_id = q.id ) < q.capacidade
 		AND a.cidade ~*'${cidade}';
 	`
 		return await sequelize.query(sql, {

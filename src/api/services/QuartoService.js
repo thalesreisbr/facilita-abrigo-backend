@@ -86,39 +86,49 @@ exports.findByPk = async (id) => {
     return QuartoDAO.findByPk(id);
     
 };
-exports.filtrar = async (data_inicial, cidade, caracteristicas) => {
-    let quartosDisponiveis = await QuartoDAO.findByDisponibilidadeAndCidade(data_inicial, cidade);
+exports.filtrar = async (data_inicio, cidade, caracteristicas) => {
+    try{
+        let quartosDisponiveis = await QuartoDAO.findByDisponibilidadeAndCidade(data_inicio, cidade);
 
-    let quartos = [];
+        let quartos = [];
 
-    let quartoParaVerificar;
+        let quartoParaVerificar;
 
-    let aux;
-    for(let i =0; i<quartosDisponiveis.length; i++){
-        quartoParaVerificar = await QuartoDAO.findByPk(quartosDisponiveis[i].id);
-        aux = true;
-        caracteristicas.map( function(caracAdd){
-        
-            if(aux.length == 0){
-               
-            }else{
-
-                aux = quartoParaVerificar.caracteristicas.filter( function(item){
-                    return item.id == caracAdd;
-                });
-            }
+        let aux;
+        for(let i =0; i<quartosDisponiveis.length; i++){
+            quartoParaVerificar = await QuartoDAO.findByPk(quartosDisponiveis[i].id);
+            aux = true;
+            if(caracteristicas){
+                caracteristicas.map( function(caracAdd){
             
-        })
-       
-        if(aux.length!=0){
-            quartos.push(quartoParaVerificar);
-        }
+                    if(aux.length == 0){
+                    
+                    }else{
+        
+                        aux = quartoParaVerificar.caracteristicas.filter( function(item){
+                            return item.id == caracAdd;
+                        });
+                    }
+                    
+                })
+            }
+        
+            if(aux.length!=0){
+                quartos.push(quartoParaVerificar);
+            }
 
+        }
+        if(cidade){
+            quartos  = await quartos.filter( function(item){
+                return (item.abrigo.cidade = cidade);
+            });
+        }
+        
+    return quartos;
+    }catch (error) {
+        console.log(error)
+        throw error;
     }
 
-
-    quartos  = await quartos.filter( function(item){
-        return (item.abrigo.cidade = cidade);
-    });
-    return quartos;
+    
 };

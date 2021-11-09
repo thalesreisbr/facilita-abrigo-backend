@@ -782,7 +782,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\":\"Quarto\",\n    \"descricao\": \"Quarto para homem\",\n    \"capacidade\":4,\n    \"abrigo_id\": 1\n    \n    \n}",
+							"raw": "{\n    \"nome\":\"Quarto\",\n    \"descricao\": \"Quarto para homem\",\n    \"capacidade\":5,\n    \"abrigo_id\": 1\n    \n    \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -949,7 +949,7 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:3001/api/quartos/filtrar?data_inicial=2021-10-25 18:25:20.239-0&cidade=itajuba&caracteristicas=1,2",
+							"raw": "localhost:3001/api/quartos/filtrar?data_inicial=2021-01-10 18:25:20.239-0&cidade=itajuba",
 							"host": [
 								"localhost"
 							],
@@ -967,7 +967,7 @@
 								},
 								{
 									"key": "data_inicial",
-									"value": "2021-10-25 18:25:20.239-0"
+									"value": "2021-01-10 18:25:20.239-0"
 								},
 								{
 									"key": "cidade",
@@ -975,7 +975,8 @@
 								},
 								{
 									"key": "caracteristicas",
-									"value": "1,2"
+									"value": "1,2",
+									"disabled": true
 								}
 							]
 						}
@@ -1432,7 +1433,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"data_inicio\":\"2021-01-25 18:25:20.239-03\",\n    \"data_saida\":\"2021-10-25 18:25:20.239-03\",\n    \"abrigado_id\": 1,\n    \"instituicao_id\": 1,\n    \"quarto_id\": 2\n    \n    \n}",
+							"raw": "{\n    \"data_inicio\":\"2020-05-25 18:25:20.239-03\",\n    \"data_saida\":\"2021-10-25 18:25:20.239-03\",\n    \"abrigado_id\": 1,\n    \"instituicao_id\": 1,\n    \"quarto_id\": 2\n\n    \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1466,7 +1467,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"data_inicio\":\"2021-01-25 18:25:20.239-03\",\n    \"data_saida\":\"2021-10-25 18:25:20.239-03\",\n    \"abrigado_id\": 1,\n    \"instituicao_id\": 1,\n    \"quarto_id\": 2\n    \n    \n}",
+							"raw": "{\n    \"descricao\":\"Brigou\"\n    \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1474,14 +1475,16 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3001/api/estadia",
+							"raw": "localhost:3001/api/estadia/1/evento",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
 								"api",
-								"estadia"
+								"estadia",
+								"1",
+								"evento"
 							]
 						}
 					},
@@ -1568,7 +1571,7 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:3001/api/estadia?abrigo_id=3",
+							"raw": "localhost:3001/api/estadia?abrigo_id=1&instituicao_id=1",
 							"host": [
 								"localhost"
 							],
@@ -1580,7 +1583,11 @@
 							"query": [
 								{
 									"key": "abrigo_id",
-									"value": "3"
+									"value": "1"
+								},
+								{
+									"key": "instituicao_id",
+									"value": "1"
 								}
 							]
 						}
@@ -1660,7 +1667,7 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:3001/api/estadia/12",
+							"raw": "localhost:3001/api/estadia/evento/2",
 							"host": [
 								"localhost"
 							],
@@ -1668,7 +1675,8 @@
 							"path": [
 								"api",
 								"estadia",
-								"12"
+								"evento",
+								"2"
 							]
 						}
 					},
@@ -1692,7 +1700,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\":\"Joao\",\n    \"documento\":\"133.730.856-08\",\n    \"telefone\": \"35218689\",\n    \"sexo\": \"masculino\",\n    \"data_de_nascimento\": \"2021-09-01 01:24:55.90\"\n\n}",
+							"raw": "{\n    \"nome\":\"Thales\",\n    \"documento\":\"133.730.856-08\",\n    \"telefone\": \"35218689\",\n    \"sexo\": \"masculino\",\n    \"data_de_nascimento\": \"2021-09-01 01:24:55.90\"\n\n}",
 							"options": {
 								"raw": {
 									"language": "json"
