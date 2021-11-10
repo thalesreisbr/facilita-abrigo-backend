@@ -22,11 +22,15 @@ exports.findByPk = async (id) => {
 			include: 
 				[{
 					model: Quarto,
-					as: "quarto"
+					as: "quarto",
+					include: {
+						model: Abrigo,
+						as: "abrigo"
+					}
 				},
 				{
 					model: Instituicao,
-					as: "insituicao",
+					as: "instituicao",
 				},
 				{
 					model: Abrigado,
@@ -59,11 +63,15 @@ exports.findAll = async (abrigo_id, instituicao_id) => {
 				[{
 					model: Quarto,
 					as: "quarto",
+					include: {
+						model: Abrigo,
+						as: "abrigo"
+					}
 
 				},
 				{
 					model: Instituicao,
-					as: "insituicao",
+					as: "instituicao",
 				},
 				{
 					model: Abrigado,
@@ -94,12 +102,16 @@ exports.findByAbrigoAndInsituicao = async (abrigo_id, instituicao_id) => {
 					as: "quarto",
 					where: {
 						"abrigo_id":abrigo_id,
+					},
+					include: {
+						model: Abrigo,
+						as: "abrigo"
 					}
 
 				},
 				{
 					model: Instituicao,
-					as: "insituicao",
+					as: "instituicao",
 				},
 				{
 					model: Abrigado,
@@ -128,11 +140,15 @@ exports.findByAbrigo = async (abrigo_id) => {
 					as: "quarto",
 					where: {
 						"abrigo_id":abrigo_id,
+					},
+					include: {
+						model: Abrigo,
+						as: "abrigo"
 					}
 				},
 				{
 					model: Instituicao,
-					as: "insituicao",
+					as: "instituicao",
 				},
 				{
 					model: Abrigado,
@@ -164,10 +180,14 @@ exports.findByInsituicao = async (instituicao_id) => {
 				[{
 					model: Quarto,
 					as: "quarto",
+					include: {
+						model: Abrigo,
+						as: "abrigo"
+					}
 				},
 				{
 					model: Instituicao,
-					as: "insituicao",
+					as: "instituicao",
 				},
 				{
 					model: Abrigado,
@@ -185,4 +205,15 @@ exports.findByInsituicao = async (instituicao_id) => {
 		console.log(error);
 		throw error;
 	}
+};
+
+exports.findByQuartoAndDate_final = async (quarto_id, data_final) => {
+  try{
+
+  }catch (error) {
+	console.log(error);
+	throw error;
+}
+    
+    
 };

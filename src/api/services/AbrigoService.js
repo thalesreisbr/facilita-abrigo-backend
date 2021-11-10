@@ -73,7 +73,7 @@ exports.aprovarUsuario = async (usuarioAprovador_id, usuario_id) => {
         let usuarioAprovador = await UsuarioService.findByPk(usuarioAprovador_id);
 		let usuario = await UsuarioService.findByPk(usuario_id);
 
-        if(!((usuarioAprovador.role == Role.OWNER && usuarioAprovador.abrigo_id == usuario.abrigo_id) || (usuarioAprovador.role  == Role.ADM)))
+        if(!((usuarioAprovador.role == Role.OWNERn && usuarioAprovador.abrigo_id == usuario.abrigo_id) || (usuarioAprovador.role  == Role.ADM)))
             throw {status:status.INTERNAL_SERVER_ERROR, msg:"Este Usuario de nome: "+usuarioAprovador.nome+" nao pode aprovar: "+usuario.nome};
             
 

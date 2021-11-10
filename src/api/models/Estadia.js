@@ -17,7 +17,7 @@ class Estadia extends Model {
   static associate(models){
     this.hasMany(models.Evento, {foreignKey:"estadia_id", as :"eventos"});
     this.belongsTo(models.Quarto, { foreignKey:"quarto_id", as :"quarto"});
-    this.belongsTo(models.Instituicao, { foreignKey:"instituicao_id", as :"insituicao"});
+    this.belongsTo(models.Instituicao, { foreignKey:"instituicao_id", as :"instituicao"});
     this.belongsTo(models.Abrigado, { foreignKey:"abrigado_id", as :"abrigado"});
     
   }

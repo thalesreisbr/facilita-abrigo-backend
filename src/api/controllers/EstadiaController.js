@@ -8,7 +8,7 @@ const Evento = require('../models/Evento');
 exports.create = async (request, response, next) => {
 	try {
 
-		const instancia = await GenericServices.create(entity,request.body);
+		const instancia = await EstadiaService.create(request.body);
 		return (instancia ? response.status(status.CREATED).send(instancia) : response.status(status.BAD_REQUEST).send());
 
 	} catch (error) { 

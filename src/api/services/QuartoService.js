@@ -86,9 +86,9 @@ exports.findByPk = async (id) => {
     return QuartoDAO.findByPk(id);
     
 };
-exports.filtrar = async (data_inicio, cidade, caracteristicas) => {
+exports.filtrar = async (data_inicio, data_final, cidade, caracteristicas) => {
     try{
-        let quartosDisponiveis = await QuartoDAO.findByDisponibilidadeAndCidade(data_inicio, cidade);
+        let quartosDisponiveis = await QuartoDAO.findByDisponibilidadeAndCidade(data_inicio,data_final, cidade);
 
         let quartos = [];
 

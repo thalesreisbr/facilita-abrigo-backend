@@ -12,6 +12,7 @@ const Caracteristica_Quartos = require("../models/Caracteristica_Quartos");
 const Abrigo = require("../models/Abrigo");
 const Imagens = require("../models/Imagens")
 const sequelize = require("../../config/database");
+const Estadia = require("../models/Estadia");
 //Busca por uma instancia da entidade.
 exports.findByPk = async (id) => {
 	try {
@@ -67,24 +68,50 @@ exports.findAll = async (id) => {
 		throw error;
 	}
 };
-exports.findByDisponibilidadeAndCidade = async (data_inicio, cidade) => {
-	try {
-	// 	const sql = `
-	// 	SELECT q.*, a.*, cq.*  FROM "Quarto" as q 
-	// 	INNER JOIN "Abrigo" as a ON q.abrigo_id = a.id
-	// 	INNER JOIN "Caracteristica_Quartos" as cq ON cq.quarto_id = q.id
-	// 	WHERE (SELECT COUNT(id) FROM "Estadia" as e WHERE  e.data_saida >  '${data_inicio}' AND e.quarto_id = q.id ) < q.capacidade;
+exports.findByDisponibilidadeAndCidade = async (data_inicio, data_final, cidade) => {
 	// `
-	const sql = `
-		SELECT q.*  quarto, a.nome nome_abrigo, a.cep  FROM "Quarto" as q
-		INNER JOIN "Abrigo" as a ON q.abrigo_id = a.id
-		WHERE (SELECT COUNT(id) FROM "Estadia" as e WHERE  e.data_saida >  '${data_inicio}' AND e.data_inicio < '${data_inicio}' 
-			AND e.quarto_id = q.id ) < q.capacidade
-		AND a.cidade ~*'${cidade}';
-	`
+	// 	SELECT q.*  quarto, a.nome nome_abrigo, a.cep  FROM "Quarto" as q
+	// 	INNER JOIN "Abrigo" as a ON q.abrigo_id = a.id
+	// 	WHERE (SELECT COUNT(id) FROM "Estadia" as e WHERE  e.data_saida >  '${data_inicio}' AND e.data_inicio < '${data_inicio}' 
+	// 		AND e.quarto_id = q.id ) < q.capacidade
+	// 	AND a.cidade ~*'${cidade}';
+	try {
+		const sql = `
+			SELECT q.*  quarto, a.nome nome_abrigo, a.cep  FROM "Quarto" as q
+			INNER JOIN "Abrigo" as a ON q.abrigo_id = a.id
+			WHERE (SELECT COUNT(id) FROM "Estadia" as e WHERE  e.data_saida >  '${data_inicio}' AND e.data_inicio < '${data_inicio}' 
+				AND e.quarto_id = q.id ) < q.capacidade
+				AND (SELECT COUNT(id) FROM "Estadia" as e WHERE  e.data_saida <  '${data_final}' AND e.data_inicio > '${data_inicio}' 
+				AND e.quarto_id = q.id ) < q.capacidade
+			AND a.cidade ~*'${cidade}';`
+
 		return await sequelize.query(sql, {
 			type: sequelize.QueryTypes.SELECT
 		})
+
+		// return await entity.findAll({
+		// 	where:{
+
+		// 	},
+		// 	include:[
+		// 		{
+		// 			model: Estadia,
+		// 			as: "estadias",
+		// 			// where: {
+		// 			// 	data_inicio : {
+		// 			// 		[Op.gt]: data_inicio
+		// 			// 	}
+		// 			// } 
+		// 		},
+		// 		{
+		// 			model: Abrigo,
+		// 			as:"abrigo", 
+		// 			where: {
+		// 				cidade:cidade
+		// 			}
+		// 		}
+		// 	]
+		// })
 		
 
 	} catch (error) {
