@@ -22,11 +22,11 @@ exports.create = async (body) => {
             return item.id == quarto_id;
         });
 
-        if(temVaga.length){
+        // if(temVaga.length){
             return await GenericService.create(entity, body);
-        }else{
-            throw {status:status.INTERNAL_SERVER_ERROR, msg:"Quarto não esta vago para este periodo "};
-        }
+        // }else{
+        //     throw {status:status.INTERNAL_SERVER_ERROR, msg:"Quarto não esta vago para este periodo "};
+        // }
 
         
     }catch (error) {
