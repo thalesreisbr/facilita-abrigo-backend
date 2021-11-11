@@ -11,6 +11,8 @@ exports.findAll = async () => {
     return await QuartoDAO.findAll();
 }
 
+/* Metodo divido em tres partes, if de verificao se tem permissão, segunda parte exclui quais devem ser excluidas 
+e no terceiro add quais devem ser add */
 exports.addCaracteristica = async (usuario_id, quarto_id, caracteristicas_ids) => {
     try{
         let usuario = await UsuarioService.findByPk(usuario_id);
@@ -22,26 +24,48 @@ exports.addCaracteristica = async (usuario_id, quarto_id, caracteristicas_ids) =
                 || (usuario.role  == Role.ADM))){
             throw {status:status.INTERNAL_SERVER_ERROR, msg:"sem permissao"};
         }
-        let trow = false;
+
+        let caractParaApagar;
+        if(quarto.caracteristicas.length!=0){
+            await quarto.caracteristicas.map(async function(item){
+                 caractParaApagar = await caracteristicas_ids.filter(async function(caract){
+                     return item.id == caract;
+                });
+
+                //Se não existe novo vetor o usuario quis apagar
+                
+                if(caractParaApagar.length == 0){
+                    await QuartoDAO.deleteCaracteristica(quarto_id, caract);
+                }
+            });
+        }
+
+        let caractExiste = false;
         if(quarto.caracteristicas.length!=0){
             caracteristicas_ids.map(async function(caract){
                 await quarto.caracteristicas.map(function(item){
                     if(item.id == caract){
-                        trow =  {status:status.INTERNAL_SERVER_ERROR, msg:"Já existe essa caracteristica de id "+ caract+"cadastrada neste quarto"};
+                        caractExiste =  true;
                     }
                 });
-                if(!trow)    
+                if(!caractExiste){
                     await QuartoDAO.addCaracteristica(quarto_id, caract);
+                    caractExiste = false;
+                }else{
+                    caractExiste = false;
+                    // Se ela existe deve ser mandtida
+                }
+                    
              });
         }else{
-            caracteristicas_ids.map(async function(caract){
+            await caracteristicas_ids.map(async function(caract){
                     await QuartoDAO.addCaracteristica(quarto_id, caract);
             });    
         }
-        if(trow)
-            throw trow;
 
-        return await caracteristicas_ids;
+        quarto = await this.findByPk(quarto_id);
+
+        return await quarto;
         
     } catch (error) {
         console.log(error);
