@@ -8,6 +8,7 @@ const Quarto = require('../models/Quarto');
 const Imagens = require('../models/Imagens')
 const Usuario = require('../models/Usuario');
 const Role = require("../../helpers/enums/Role");
+const Caracteristica = require("../models/Caracteristica");
 //Busca por uma instancia da entidade.
 exports.findByPk = async (id) => {
 	try {
@@ -17,10 +18,17 @@ exports.findByPk = async (id) => {
 				[{
 					model: Quarto,
 					as:"quartos",
-					include:{
-						model: Imagens,
-						as: "imagens",
-					},
+					include:[
+						{
+							model: Imagens,
+							as: "imagens",
+						},
+						{
+							model: Caracteristica,
+							as: "caracteristicas",
+						},
+				],
+
 				},
 				{
 					model: Usuario,

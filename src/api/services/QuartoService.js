@@ -28,14 +28,15 @@ exports.addCaracteristica = async (usuario_id, quarto_id, caracteristicas_ids) =
         let caractParaApagar;
         if(quarto.caracteristicas.length!=0){
             await quarto.caracteristicas.map(async function(item){
-                 caractParaApagar = await caracteristicas_ids.filter(async function(caract){
-                     return item.id == caract;
-                });
+                caractParaApagar = await caracteristicas_ids.filter(carac => carac === item.id);
+                // .filter(async function(caract){
+                //      return (item.id === caract);
+                // });
 
                 //Se não existe novo vetor o usuario quis apagar
                 
                 if(caractParaApagar.length == 0){
-                    await QuartoDAO.deleteCaracteristica(quarto_id, caract);
+                    await QuartoDAO.deleteCaracteristica(quarto_id, item.id);
                 }
             });
         }
