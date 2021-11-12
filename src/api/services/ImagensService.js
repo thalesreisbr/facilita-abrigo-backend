@@ -9,7 +9,7 @@ const Imagens = require("../models/Imagens");
 
 exports.adicionarImagens = async (imagens, quarto_id) => {
     try{
-        let body =[];
+        let body = [];
         
         imagens.map((file)=>{
             body.push({

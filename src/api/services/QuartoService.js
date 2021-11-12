@@ -15,7 +15,7 @@ exports.findAll = async () => {
 e no terceiro add quais devem ser add */
 exports.addCaracteristica = async (usuario_id, quarto_id, caracteristicas_ids) => {
     try{
-        let usuario = await UsuarioService.findByPk(usuario_id);
+        let usuario =  await UsuarioService.findByPk(usuario_id);
 
         let quarto = await this.findByPk(quarto_id);
 

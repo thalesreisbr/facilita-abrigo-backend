@@ -31,6 +31,10 @@ exports.findByPk = async (id) => {
 					model: Imagens,
 					as: "imagens",
 				},
+				{
+					model: Estadia,
+					as: "estadias"
+				}
 			]
 			
 		});
@@ -58,6 +62,10 @@ exports.findAll = async (id) => {
 					model: Imagens,
 					as: "imagens",
 				},
+				{
+					model: Estadia,
+					as: "estadias"
+				}
 			]
 			
 		});
