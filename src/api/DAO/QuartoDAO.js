@@ -76,6 +76,68 @@ exports.findAll = async (id) => {
 		throw error;
 	}
 };
+exports.findByDisponibilidadeAndAbrigo_id = async (data_inicio, data_final, abrigo_id) => {
+	// `
+	// 	SELECT q.*  quarto, a.nome nome_abrigo, a.cep  FROM "Quarto" as q
+	// 	INNER JOIN "Abrigo" as a ON q.abrigo_id = a.id
+	// 	WHERE (SELECT COUNT(id) FROM "Estadia" as e WHERE  e.data_saida >  '${data_inicio}' AND e.data_inicio < '${data_inicio}' 
+	// 		AND e.quarto_id = q.id ) < q.capacidade
+	// 	AND a.cidade ~*'${cidade}';
+	try {
+		// const sql = `
+		// 	SELECT q.*  quarto, a.nome nome_abrigo, a.cep  FROM "Quarto" as q
+		// 	INNER JOIN "Abrigo" as a ON q.abrigo_id = a.id
+		// 	WHERE (SELECT COUNT(id) FROM "Estadia" as e WHERE  e.data_saida >  '${data_inicio}' AND e.data_inicio < '${data_inicio}' 
+		// 		AND e.quarto_id = q.id ) < q.capacidade
+		// 		AND (SELECT COUNT(id) FROM "Estadia" as e WHERE  e.data_saida <  '${data_final}' AND e.data_inicio > '${data_inicio}' 
+		// 		AND e.quarto_id = q.id ) < q.capacidade
+		// 	AND a.cidade ~*'${cidade}';`
+		const sql = `
+		SELECT q.*  quarto, a.nome nome_abrigo, a.cep  FROM "Quarto" as q
+		INNER JOIN "Abrigo" as a ON q.abrigo_id = a.id
+		WHERE (SELECT COUNT(id) FROM "Estadia" as e WHERE  e.data_saida >  '${data_inicio}' AND e.data_inicio < '${data_inicio}' 
+			AND e.quarto_id = q.id ) < q.capacidade
+		AND a.id ='${abrigo_id}'`;
+
+		return await sequelize.query(sql, {
+			type: sequelize.QueryTypes.SELECT
+		})
+
+		// return await entity.findAll({
+		// 	where:{
+
+		// 	},
+		// 	include:[
+		// 		{
+		// 			model: Estadia,
+		// 			as: "estadias",
+		// 			// where: {
+		// 			// 	data_inicio : {
+		// 			// 		[Op.gt]: data_inicio
+		// 			// 	}
+		// 			// } 
+		// 		},
+		// 		{
+		// 			model: Abrigo,
+		// 			as:"abrigo", 
+		// 			where: {
+		// 				cidade:cidade
+		// 			}
+		// 		}
+		// 	]
+		// })
+		
+
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
+};
+
+
+
+
+
 exports.findByDisponibilidadeAndCidade = async (data_inicio, data_final, cidade) => {
 	// `
 	// 	SELECT q.*  quarto, a.nome nome_abrigo, a.cep  FROM "Quarto" as q
