@@ -8,7 +8,7 @@ const Evento = require('../models/Evento');
 exports.create = async (request, response, next) => {
 	try {
 
-		const instancia = await EstadiaService.create(request.body);
+		const instancia = await EstadiaService.create(request.body, request.usuario_id);
 		return (instancia ? response.status(status.CREATED).send(instancia) : response.status(status.BAD_REQUEST).send());
 
 	} catch (error) { 

@@ -5,10 +5,17 @@ const GenericDAO = require("../DAO/GenericDAO");
 const GenericService = require("../services/GenericService");
 const QuartoService = require("../services/QuartoService");
 const Role = require('../../helpers/enums/Role');
+const UsuarioService = require("../models/Usuario");
 
-exports.create = async (body) => {
+exports.create = async (body, usuario_id) => {
     try{ 
         let {data_inicio, quarto_id} = body;
+
+        let usuario = await UsuarioService.findByPk(usuario_id);
+
+        if(usuario.instituicao_id && usuario.role > Role.NOTHING){
+            body.instituicao_id = usuario.instituicao_id;
+        }
 
         const quarto = await QuartoService.findByPk(quarto_id);
 

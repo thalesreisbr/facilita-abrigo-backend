@@ -1,4 +1,5 @@
 const GenericDAO = require('../DAO/GenericDAO');
+const status = require("http-status");
 const InstituicaoDAO = require('../DAO/InstituicaoDAO');
 const Instituicao = require('../models/Instituicao');
 const UsuarioService = require('../services/UsuarioService');
