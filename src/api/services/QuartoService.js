@@ -142,11 +142,14 @@ exports.filtrar = async (data_inicio, data_final, cidade, caracteristicas, abrig
                     }
                     
                 })
-            }
-        
-            if(aux.length!=0){
+                if(aux.length!=0){
+                    quartos.push(quartoParaVerificar);
+                }
+            }else{
                 quartos.push(quartoParaVerificar);
             }
+        
+            
 
         }
         if(cidade){
