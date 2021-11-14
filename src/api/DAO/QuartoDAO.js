@@ -172,21 +172,7 @@ exports.findByDisponibilidade = async (data_inicio, data_final, cidade) => {
 
 
 exports.findByDisponibilidadeAndCidade = async (data_inicio, data_final, cidade) => {
-	// `
-	// 	SELECT q.*  quarto, a.nome nome_abrigo, a.cep  FROM "Quarto" as q
-	// 	INNER JOIN "Abrigo" as a ON q.abrigo_id = a.id
-	// 	WHERE (SELECT COUNT(id) FROM "Estadia" as e WHERE  e.data_saida >  '${data_inicio}' AND e.data_inicio < '${data_inicio}' 
-	// 		AND e.quarto_id = q.id ) < q.capacidade
-	// 	AND a.cidade ~*'${cidade}';
 	try {
-		// const sql = `
-		// 	SELECT q.*  quarto, a.nome nome_abrigo, a.cep  FROM "Quarto" as q
-		// 	INNER JOIN "Abrigo" as a ON q.abrigo_id = a.id
-		// 	WHERE (SELECT COUNT(id) FROM "Estadia" as e WHERE  e.data_saida >  '${data_inicio}' AND e.data_inicio < '${data_inicio}' 
-		// 		AND e.quarto_id = q.id ) < q.capacidade
-		// 		AND (SELECT COUNT(id) FROM "Estadia" as e WHERE  e.data_saida <  '${data_final}' AND e.data_inicio > '${data_inicio}' 
-		// 		AND e.quarto_id = q.id ) < q.capacidade
-		// 	AND a.cidade ~*'${cidade}';`
 		const sql = `
 		SELECT q.*  quarto, a.nome nome_abrigo, a.cep  FROM "Quarto" as q
 		INNER JOIN "Abrigo" as a ON q.abrigo_id = a.id
@@ -197,32 +183,21 @@ exports.findByDisponibilidadeAndCidade = async (data_inicio, data_final, cidade)
 		return await sequelize.query(sql, {
 			type: sequelize.QueryTypes.SELECT
 		})
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
+};
+exports.findByCidade = async (cidade) => {
+	try {
+		const sql = `
+		SELECT q.*  quarto, a.nome nome_abrigo, a.cep  FROM "Quarto" as q
+		INNER JOIN "Abrigo" as a ON q.abrigo_id = a.id
+		WHERE  a.cidade ~*'${cidade}'`;
 
-		// return await entity.findAll({
-		// 	where:{
-
-		// 	},
-		// 	include:[
-		// 		{
-		// 			model: Estadia,
-		// 			as: "estadias",
-		// 			// where: {
-		// 			// 	data_inicio : {
-		// 			// 		[Op.gt]: data_inicio
-		// 			// 	}
-		// 			// } 
-		// 		},
-		// 		{
-		// 			model: Abrigo,
-		// 			as:"abrigo", 
-		// 			where: {
-		// 				cidade:cidade
-		// 			}
-		// 		}
-		// 	]
-		// })
-		
-
+		return await sequelize.query(sql, {
+			type: sequelize.QueryTypes.SELECT
+		})
 	} catch (error) {
 		console.log(error);
 		throw error;
