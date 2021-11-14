@@ -6,9 +6,11 @@ class Estadia extends Model {
     super.init({
         data_inicio: DataTypes.DATE,
         data_saida: DataTypes.DATE,
+        observacao: DataTypes.STRING,
         abrigado_id: DataTypes.INTEGER,
         quarto_id: DataTypes.INTEGER,
         instituicao_id: DataTypes.INTEGER,
+        
     },{
       sequelize,
     });
