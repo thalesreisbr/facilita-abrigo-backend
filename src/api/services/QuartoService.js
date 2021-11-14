@@ -117,7 +117,12 @@ exports.filtrar = async (data_inicio, data_final, cidade, caracteristicas, abrig
         if((!data_inicio || data_inicio == 'null') && cidade != 'null'){
             quartosDisponiveis = await QuartoDAO.findByCidade(cidade);
         }else if(abrigo_id && abrigo_id != 'null'){
-            quartosDisponiveis =  await QuartoDAO.findByDisponibilidadeAndAbrigo_id(data_inicio,data_final, abrigo_id);
+                if((!data_inicio || data_inicio == 'null')){
+                    quartosDisponiveis = await QuartoDAO.findByAbrigo(abrigo_id);
+                }else{
+                    quartosDisponiveis =  await QuartoDAO.findByDisponibilidadeAndAbrigo_id(data_inicio,data_final, abrigo_id);
+                }
+            
         }else{
             if(cidade && cidade!= 'null'){
                 quartosDisponiveis = await QuartoDAO.findByDisponibilidadeAndCidade(data_inicio,data_final, cidade);
