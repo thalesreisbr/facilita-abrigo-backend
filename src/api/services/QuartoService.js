@@ -123,13 +123,13 @@ exports.filtrar = async (data_inicio, data_final, cidade, caracteristicas, abrig
                     quartosDisponiveis =  await QuartoDAO.findByDisponibilidadeAndAbrigo_id(data_inicio,data_final, abrigo_id);
                 }
             
-        }else{
-            if(cidade && cidade!= 'null'){
-                quartosDisponiveis = await QuartoDAO.findByDisponibilidadeAndCidade(data_inicio,data_final, cidade);
             }else{
-                quartosDisponiveis = await QuartoDAO.findByDisponibilidade(data_inicio,data_final);
+                if(cidade && cidade!= 'null'){
+                    quartosDisponiveis = await QuartoDAO.findByDisponibilidadeAndCidade(data_inicio,data_final, cidade);
+                }else{
+                    quartosDisponiveis = await QuartoDAO.findByDisponibilidade(data_inicio,data_final);
+                }
             }
-        }
 
         let quartos = [];
 
@@ -142,10 +142,7 @@ exports.filtrar = async (data_inicio, data_final, cidade, caracteristicas, abrig
             if(caracteristicas && caracteristicas !=null){
                 caracteristicas.map( function(caracAdd){
             
-                    if(aux.length == 0){
-                    
-                    }else{
-        
+                    if(aux.length != 0){
                         aux = quartoParaVerificar.caracteristicas.filter( function(item){
                             return item.id == caracAdd;
                         });

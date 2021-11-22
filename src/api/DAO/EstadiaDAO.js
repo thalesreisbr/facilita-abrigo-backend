@@ -205,15 +205,4 @@ exports.findByInsituicao = async (instituicao_id) => {
 		console.log(error);
 		throw error;
 	}
-};
-
-exports.findByQuartoAndDate_final = async (quarto_id, data_final) => {
-  try{
-
-  }catch (error) {
-	console.log(error);
-	throw error;
-}
-    
-    
-};
+};    

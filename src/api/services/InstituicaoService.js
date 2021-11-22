@@ -39,7 +39,7 @@ exports.solicitarMembro = async(usuario_id, instituicao_id) =>{
         let usuario = await UsuarioService.findByPk(usuario_id);
 
         if(usuario.role == Role.NOTHING && usuario.instituicao_id == null && usuario.instituicao_id == null){
-            instituicao = await InstituicaoDAO.findByPk(instituicao_id);
+            let instituicao = await InstituicaoDAO.findByPk(instituicao_id);
             if(instituicao == null)
                 throw {status:status.INTERNAL_SERVER_ERROR, msg:"instituicao não existe"};
             
@@ -49,7 +49,7 @@ exports.solicitarMembro = async(usuario_id, instituicao_id) =>{
 
             usuario.instituicao_id = instituicao.id;
 
-            result  = await UsuarioService.setInstituicao(usuario.id, instituicao.id);
+            let result  = await UsuarioService.setInstituicao(usuario.id, instituicao.id);
             return result;
         }else{
             throw new Error("Não é possivel");
@@ -76,7 +76,7 @@ exports.aprovarUsuario = async (usuarioAprovador_id, usuario_id) => {
         if(usuario.role == Role.NOTHING){
             
             usuario.role = Role.MEMBER;
-            usuarioUpdate = {
+           let usuarioUpdate = {
                 role: Role.MEMBER
             }
             await UsuarioService.update(usuarioUpdate, usuario.id);

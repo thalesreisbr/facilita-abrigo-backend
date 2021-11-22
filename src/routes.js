@@ -2,7 +2,6 @@ const express = require("express");
 const routes = express.Router();
 const { AUTH,ADM,REFRESH, RECOVERY } = require('./middlewares/Autorizacao');
 const {UPLOAD} = require('./middlewares/UploadFiles');
-const Exemplo = require("./api/controllers/ExemploController");
 const Usuario = require('./api/controllers/UsuarioController');
 const InstituicaoController = require('./api/controllers/InstituicaoController');
 const Abrigo = require('./api/controllers/AbrigoController');

@@ -46,7 +46,7 @@ exports.atualizarRefreshToken = async (id, token_refresh) => {
 
 		const instancia = await Usuario.findByPk(id);
 		if(instancia){
-			const updated = await Usuario.update({token_refresh:token_refresh}, { where: { id: instancia.id }});
+			await Usuario.update({token_refresh:token_refresh}, { where: { id: instancia.id }});
 			return { updated_id: instancia.id };
 		}else{
 			return null;
@@ -154,7 +154,7 @@ exports.setAbrigo = async (usuario_id, abrigo_id) => {
 
 		const instancia = await Usuario.findByPk(usuario_id);
 		if(instancia){
-			const updated = await Usuario.update({"abrigo_id":abrigo_id}, { where: { id: instancia.id }});
+			await Usuario.update({"abrigo_id":abrigo_id}, { where: { id: instancia.id }});
 				return { updated_id: instancia.id }
 		
 		}else{

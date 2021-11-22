@@ -1,10 +1,8 @@
 const status = require("http-status");
 const GenericDAO = require('../DAO/GenericDAO');
 const AbrigosDAO = require('../DAO/AbrigoDAO');
-const entity = require("../models/Abrigo");
 const UsuarioService = require("../services/UsuarioService");
 const Role = require('../../helpers/enums/Role');
-const Abrigo = require("../models/Abrigo");
 
 exports.create = async (model, object) => {  
     return GenericDAO.create(model,object);
@@ -16,7 +14,7 @@ exports.solicitarMembro = async(usuario_id, abrigo_id) =>{
         let usuario = await UsuarioService.findByPk(usuario_id);
 
         if(usuario.role == Role.NOTHING && usuario.abrigo_id == null && usuario.instituicao_id == null){
-            abrigo = await AbrigosDAO.findByPk(abrigo_id);
+           let abrigo = await AbrigosDAO.findByPk(abrigo_id);
             if(abrigo == null)
                 throw {status:status.INTERNAL_SERVER_ERROR, msg:"Abrigo não existe"};
             
@@ -26,7 +24,7 @@ exports.solicitarMembro = async(usuario_id, abrigo_id) =>{
 
             usuario.abrigo_id = abrigo.id;
 
-            result  = await UsuarioService.setAbrigo(usuario.id, abrigo.id);
+            let result  = await UsuarioService.setAbrigo(usuario.id, abrigo.id);
             return result;
         }else{
             throw new Error("Não é possivel");
@@ -81,10 +79,10 @@ exports.aprovarUsuario = async (usuarioAprovador_id, usuario_id) => {
         if(usuario.role == Role.NOTHING){
             
             usuario.role = Role.MEMBER;
-            usuarioUpdate = {
+            let usuarioUpdate = {
                 role: Role.MEMBER
             }
-            const result = await UsuarioService.update(usuarioUpdate, usuario.id);
+           await UsuarioService.update(usuarioUpdate, usuario.id);
 
             return {"msg":usuario.nome+" foi aprovado"};
         }

@@ -1,7 +1,6 @@
 const status = require("http-status");
 const entity = require("../models/Estadia");
 const EstadiaDAO = require("../DAO/EstadiaDAO");
-const GenericDAO = require("../DAO/GenericDAO");
 const GenericService = require("../services/GenericService");
 const QuartoService = require("../services/QuartoService");
 const Role = require('../../helpers/enums/Role');
@@ -25,7 +24,7 @@ exports.create = async (body, usuario_id) => {
 
         const quartosDisponiveis = await QuartoService.filtrar(data_inicio, quarto.abrigo.cidade)
 
-        let temVaga = quartosDisponiveis.filter( function(item){
+        quartosDisponiveis.filter( function(item){
             return item.id == quarto_id;
         });
 
@@ -56,12 +55,6 @@ exports.findAll = async (abrigo_id, instituicao_id) => {
     }else{
         return EstadiaDAO.findAll();
     }
-    
-    
-};
-
-exports.findByQuartoAndDate_final = async (quarto_id, data_final) => {
-   
     
     
 };

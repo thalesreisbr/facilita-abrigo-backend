@@ -30,7 +30,7 @@ exports.create = async (request, response) => {
 
 	try {
 
-		const instancia = await GenericDAO.create(entity,credenciais);
+		await GenericDAO.create(entity,credenciais);
 
         credenciais.senha = senha;
 		return this.login(request, response);

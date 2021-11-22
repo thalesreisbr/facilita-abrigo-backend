@@ -154,7 +154,7 @@ exports.recuperarSenha =  (request, response, next) => {
 
                 await DAO.atualizarTokenRecuperacao(usuario.id,recoveryToken);
 
-                const link = "localhost:4200/recuperar-senha/?token="+recoveryToken;
+                
 
                 //E-mail para redefinição de senha
                 mailer.sendMail({
