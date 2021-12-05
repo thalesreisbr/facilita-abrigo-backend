@@ -114,7 +114,9 @@ exports.findByPk = async (id) => {
 exports.filtrar = async (data_inicio, data_final, cidade, caracteristicas, abrigo_id) => {
     try{
         let quartosDisponiveis;
-        if((!data_inicio || data_inicio == 'null') && cidade != 'null' && abrigo_id== 'null'){
+        console.log(!abrigo_id);
+        console.log((cidade != 'null'));
+        if((!data_inicio || data_inicio == 'null') && cidade!=null && cidade != 'null' && (!abrigo_id || abrigo_id== 'null')){
             quartosDisponiveis = await QuartoDAO.findByCidade(cidade);
         }else if(abrigo_id && abrigo_id != 'null'){
                 if((!data_inicio || data_inicio == 'null')){
@@ -127,7 +129,11 @@ exports.filtrar = async (data_inicio, data_final, cidade, caracteristicas, abrig
                 if(cidade && cidade!= 'null'){
                     quartosDisponiveis = await QuartoDAO.findByDisponibilidadeAndCidade(data_inicio,data_final, cidade);
                 }else{
-                    quartosDisponiveis = await QuartoDAO.findByDisponibilidade(data_inicio,data_final);
+                    if((!data_inicio && data_inicio == 'null')){
+                        quartosDisponiveis = await QuartoDAO.findByDisponibilidade(data_inicio,data_final);
+                    }else{
+                        quartosDisponiveis = await QuartoDAO.findAll();   
+                    }
                 }
             }
 
@@ -172,4 +178,4 @@ exports.filtrar = async (data_inicio, data_final, cidade, caracteristicas, abrig
     }
 
     
-};
+    };
