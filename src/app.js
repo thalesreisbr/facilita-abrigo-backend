@@ -19,11 +19,11 @@ class AppController {
         //Middlewares
         this.express.use(express.json());
         this.express.use(express.urlencoded({extended: true}));
-        // let corsOption = {
-        //     origin: ['http://localhost:4200', 'http://localhost:9000']
-        // };
+        let corsOption = {
+            origin: ['http://localhost:4200', 'http://localhost:9000']
+        };
 
-        // this.express.use(cors(corsOption));
+        this.express.use(cors(corsOption));
         //this.express.use(autorizacao.global);
         this.express.use(log);
         this.express.use(routes);
