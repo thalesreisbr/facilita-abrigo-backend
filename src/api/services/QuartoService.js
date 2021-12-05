@@ -114,7 +114,7 @@ exports.findByPk = async (id) => {
 exports.filtrar = async (data_inicio, data_final, cidade, caracteristicas, abrigo_id) => {
     try{
         let quartosDisponiveis;
-        if((!data_inicio || data_inicio == 'null') && cidade != 'null' && abrigo_id!='null' && abrigo_id){
+        if((!data_inicio || data_inicio == 'null') && cidade != 'null' && abrigo_id== null){
             quartosDisponiveis = await QuartoDAO.findByCidade(cidade);
         }else if(abrigo_id && abrigo_id != 'null'){
                 if((!data_inicio || data_inicio == 'null')){
