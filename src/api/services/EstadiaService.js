@@ -8,7 +8,7 @@ const UsuarioService = require("../models/Usuario");
 
 exports.create = async (body, usuario_id) => {
     try{ 
-        let {data_inicio, quarto_id} = body;
+        let {data_inicio, data_saida, quarto_id} = body;
 
         let usuario = await UsuarioService.findByPk(usuario_id);
 
@@ -22,17 +22,17 @@ exports.create = async (body, usuario_id) => {
             throw {status:status.INTERNAL_SERVER_ERROR, msg:"Quarto não existe"};
         }
 
-        // const quartosDisponiveis = await QuartoService.filtrar(data_inicio, quarto.abrigo.cidade)
+        const quartosDisponiveis = await QuartoService.filtrar(data_inicio, data_saida, quarto.abrigo.cidade)
 
-        // quartosDisponiveis.filter( function(item){
-        //     return item.id == quarto_id;
-        // });
+        quartosDisponiveis.filter( function(item){
+            return item.id == quarto_id;
+        });
 
-        // if(temVaga.length){
+        if(temVaga.length){
             return await GenericService.create(entity, body);
-        // }else{
-        //     throw {status:status.INTERNAL_SERVER_ERROR, msg:"Quarto não esta vago para este periodo "};
-        // }
+        }else{
+            throw {status:status.INTERNAL_SERVER_ERROR, msg:"Quarto não esta vago para este periodo "};
+        }
 
         
     }catch (error) {
