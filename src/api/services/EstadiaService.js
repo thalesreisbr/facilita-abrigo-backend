@@ -22,11 +22,11 @@ exports.create = async (body, usuario_id) => {
             throw {status:status.INTERNAL_SERVER_ERROR, msg:"Quarto não existe"};
         }
 
-        const quartosDisponiveis = await QuartoService.filtrar(data_inicio, quarto.abrigo.cidade)
+        // const quartosDisponiveis = await QuartoService.filtrar(data_inicio, quarto.abrigo.cidade)
 
-        quartosDisponiveis.filter( function(item){
-            return item.id == quarto_id;
-        });
+        // quartosDisponiveis.filter( function(item){
+        //     return item.id == quarto_id;
+        // });
 
         // if(temVaga.length){
             return await GenericService.create(entity, body);
