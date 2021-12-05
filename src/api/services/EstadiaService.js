@@ -24,7 +24,7 @@ exports.create = async (body, usuario_id) => {
 
         const quartosDisponiveis = await QuartoService.filtrar(data_inicio, data_saida, quarto.abrigo.cidade)
 
-        quartosDisponiveis.filter( function(item){
+        let temVaga = quartosDisponiveis.filter( function(item){
             return item.id == quarto_id;
         });
 
